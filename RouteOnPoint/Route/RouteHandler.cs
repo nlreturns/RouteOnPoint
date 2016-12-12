@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 /**
  * Author: Jan-Willem Dooms <janwillem.dooms@gmail.com>
@@ -11,6 +13,8 @@ using System.Threading.Tasks;
  * or near a Point of Interest.
  * 
  * Version 0.1 - Added attributes and methods. (From class diagram)
+ * Version 0.2 - Adusted SaveRouteWithState, added functionality to
+ *               SaveRouteWithState and GetRouteFromFile.
  */
 namespace RouteOnPoint.Route
 {
@@ -22,10 +26,14 @@ namespace RouteOnPoint.Route
 
         /*
          * Save a route with all info included.
+         * 
+         * Version 0.2 - removed List<POI> POI - this is saved inside Route
          */
-        private void SaveRouteWithState(Route route, List<POI> POI, String path)
-        {
-            throw new NotImplementedException();
+        private void SaveRouteWithState(Route route, String path)
+        {   
+            FileStream outFile = File.Create(path);
+            XmlSerializer formatter = new XmlSerializer(Route);
+            formatter.Serialize(outFile, route);
         }
 
         /*
@@ -34,7 +42,12 @@ namespace RouteOnPoint.Route
          */
         private Route GetRouteFromFile(String path)
         {
-            throw new NotImplementedException();
+            XmlSerializer formatter = new XmlSerializer(Route);
+            FileStream aFile = new FileStream(path, FileMode.Open);
+            byte[] buffer = new byte[aFile.Length];
+            aFile.Read(buffer, 0, (int)aFile.Length);
+            MemoryStream stream = new MemoryStream(buffer);
+            return (Route)formatter.Deserialize(stream);
         }
 
         /*
