@@ -23,19 +23,16 @@ namespace RouteOnPoint.Pages
     /// </summary>
     public sealed partial class RouteSelectionViewModel : Page
     {
+        Frame rootFrame = Window.Current.Content as Frame;
+
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
         }
-
-        private void BlindWalls_Click(object sender, RoutedEventArgs e)
+        
+        private void Click(object sender, TappedRoutedEventArgs e)
         {
-
-        }
-
-        private void Kilometer_Click(object sender, RoutedEventArgs e)
-        {
-
+            rootFrame.Navigate(typeof(RouteViewModel));
         }
     }
 }
