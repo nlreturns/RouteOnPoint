@@ -13,7 +13,7 @@ namespace RouteOnPoint.GPSHandler
     class GPSReader
     {
         public Geolocator Geolocator;
-        public Geopoint CurrentLocation;
+        public static Geopoint CurrentLocation;
 
         public GPSReader()
         {
