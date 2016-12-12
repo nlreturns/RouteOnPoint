@@ -2,7 +2,9 @@
 
 public class Route
 {
-	public Route()
+    public string Name { get; set; }
+    public Route()
 	{
+
 	}
 }
