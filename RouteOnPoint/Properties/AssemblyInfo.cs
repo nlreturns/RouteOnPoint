@@ -2,8 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
+// General INFO about an assembly is controlled through the following 
+// set of attributes. Change these attribute values to modify the INFO
 // associated with an assembly.
 [assembly: AssemblyTitle("RouteOnPoint")]
 [assembly: AssemblyDescription("")]
@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Version information for an assembly consists of the following four values:
+// Version INFO for an assembly consists of the following four values:
 //
 //      Major Version
 //      Minor Version 
