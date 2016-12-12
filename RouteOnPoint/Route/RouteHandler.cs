@@ -4,6 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/**
+ * Author: Jan-Willem Dooms <janwillem.dooms@gmail.com>
+ * RouteHandler has help methods for the Route class, including
+ * Saving, retreiving and checking if you are still on Route
+ * or near a Point of Interest.
+ * 
+ * Version 0.1 - Added attributes and methods. (From class diagram)
+ */
 namespace RouteOnPoint.Route
 {
     class RouteHandler
