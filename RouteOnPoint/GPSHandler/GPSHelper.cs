@@ -18,24 +18,21 @@ namespace RouteOnPoint.GPSHandler
         }
 
         //returns distance via the map in meters
-        public double? DistanceToPOI( /*POI point,*/ Geocoordinate coord)
+        public double? DistanceToPoi( /*POI point,*/ Geocoordinate coord)
         {
             return null;
         }
 
-        public static TimeSpan? TimeToPOI(/*POI point, Geocoordinate coord*/)
+        public static TimeSpan? TimeToPoi(/*POI point, Geocoordinate coord*/)
         {
-           // double metersToPoint = DistanceToPOI(point, coord);
-            int timeInSeconds = (int)Math.Floor((20.0 / 1.39));
-            Debug.WriteLine(timeInSeconds);
-            
-
-
-
-            // s/v = t
-            //5 km per uur
-            return new TimeSpan();
-
+//            double metersToPoint = DistanceToPOI(point, coord);
+//            int timeInSeconds = (int)Math.Floor((metersToPoint / coord.Speed));
+//            Debug.WriteLine(timeInSeconds);
+//
+//            int minutes = timeInSeconds/60;
+//            int hours = minutes/60;
+//            return new TimeSpan(hours,minutes,timeInSeconds);
+            return null;
         }
     }
 }
