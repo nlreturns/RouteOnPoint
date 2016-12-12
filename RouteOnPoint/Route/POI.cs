@@ -7,7 +7,6 @@ using Windows.Devices.Geolocation;
 
 namespace RouteOnPoint.Route
 {
-    
     class POI
     {
         private string _name { get; set; }
