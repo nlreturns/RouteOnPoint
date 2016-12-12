@@ -57,7 +57,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        public void SetupGeoFence(Geopoint point, string name, double radius)
+        public void SetupGeoFence(Geopoint point, string name)
         {
             // Set the fence ID.
             string fenceId = name;
@@ -67,6 +67,7 @@ namespace RouteOnPoint.GPSHandler
             position.Latitude = point.Position.Latitude;
             position.Longitude = point.Position.Longitude;
             position.Altitude = point.Position.Altitude;
+            int radius = 20;
 
             // Set the circular region for geofence.
             Geocircle geocircle = new Geocircle(position, radius);
