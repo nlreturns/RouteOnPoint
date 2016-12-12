@@ -246,12 +246,12 @@ namespace RouteOnPoint.LanguageUtil
 
             string[] names = new string[9];
 
-            names[0] = "P_ANTONIUSKERKINFO_INFO";
-            names[1] = "P_BIBLIOTHEEKINFO_INFO";
-            names[2] = "P_KASTEELINFO_INFO";
-            names[3] = "P_KLOOSTERKAZERNEINFO_INFO";
-            names[4] = "P_NASSAUMONUMENTINFO_INFO";
-            names[5] = "P_STADHUISINFO_INFO";
+            names[0] = "P_ANTONIUSVANPADUAKERK_INFO";
+            names[1] = "P_BIBLIOTHEEK_INFO";
+            names[2] = "P_KASTEELVANBREDA_INFO";
+            names[3] = "P_KLOOSTERKAZERNE_INFO";
+            names[4] = "P_NASSAUBARONIEMONUMENT_INFO";
+            names[5] = "P_STADHUIS_INFO";
             names[6] = "P_TORENSTRAATINFO_INFO";
             names[7] = "P_VALKENBERGINFO_INFO";
             names[8] = "P_VISHALINFO_INFO";
