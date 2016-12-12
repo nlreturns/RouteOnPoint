@@ -102,6 +102,7 @@
     <Compile Include="Route\POI.cs" />
     <Compile Include="Route\Route.cs" />
     <Compile Include="Route\RouteHandler.cs" />
+    <Compile Include="Route\RouteHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
