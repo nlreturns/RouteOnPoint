@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using static RouteOnPoint.LanguageUtil.MultiLang;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,7 +24,6 @@ namespace RouteOnPoint.Pages
     public sealed partial class LanguageViewModel : Page
     {
         Frame rootFrame = Window.Current.Content as Frame;
-        string language;
 
         public LanguageViewModel()
         {
@@ -33,7 +33,7 @@ namespace RouteOnPoint.Pages
         private void Language_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-            language = button.Name.ToString();
+            LanguageUtil.MultiLang.Language = (LanguageEnum) Enum.Parse(typeof(LanguageEnum), button.Name.ToString());
             rootFrame.Navigate(typeof(RouteSelectionViewModel));
         }
     }
