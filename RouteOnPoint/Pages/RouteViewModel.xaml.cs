@@ -20,9 +20,9 @@ namespace RouteOnPoint.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LanguagePage : Page
+    public sealed partial class RouteViewModel : Page
     {
-        public LanguagePage()
+        public RouteViewModel()
         {
             this.InitializeComponent();
         }
