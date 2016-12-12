@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RouteOnPoint.LanguageUtil;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -20,11 +21,18 @@ namespace RouteOnPoint.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RoutePage : Page
+    public sealed partial class RouteSelectionViewModel : Page
     {
-        public RoutePage()
+        Frame rootFrame = Window.Current.Content as Frame;
+
+        public RouteSelectionViewModel()
         {
             this.InitializeComponent();
+        }
+        
+        private void Click(object sender, TappedRoutedEventArgs e)
+        {
+            rootFrame.Navigate(typeof(RouteViewModel));
         }
     }
 }
