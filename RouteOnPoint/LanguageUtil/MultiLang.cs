@@ -13,21 +13,30 @@ namespace RouteOnPoint.LanguageUtil
         private static Dictionary<string, string> _English;
         private static Dictionary<string, string> _Dutch;
 
-        public enum LanguageEnum { Englisch, Dutch};
+        public enum LanguageEnum { English, Dutch};
 
-        public static LanguageEnum Language { get; set; }
+        private static LanguageEnum Language;
             
-        public MultiLang()
+        public static void setLanguage(LanguageEnum lang)
         {
-            _Dutch = new Dictionary<string, string>();
-            LoadPageTextDutch();
-            LoadHistorischeKilometerDutch();
-            LoadBlindWallsDutch();
+            Language = lang;
 
-            _English = new Dictionary<string, string>();
-            LoadPageTextEnglish();
-            LoadHistorischeKilometerEnglish();
-            LoadBlindWallsEnglish();
+            if (Language == LanguageEnum.Dutch)
+            {
+                _Dutch = new Dictionary<string, string>();
+                LoadPageTextDutch();
+                LoadHistorischeKilometerDutch();
+                LoadBlindWallsDutch();
+            }
+
+            if (Language == LanguageEnum.English)
+            {
+                _English = new Dictionary<string, string>();
+                LoadPageTextEnglish();
+                LoadHistorischeKilometerEnglish();
+                LoadBlindWallsEnglish();
+            }
+
         }
 
         public static string GetContent(string key)
@@ -37,11 +46,10 @@ namespace RouteOnPoint.LanguageUtil
 
             if (Language == LanguageEnum.Dutch)
             {
-                bool hh = _Dutch.ContainsKey(key);
                 _Dutch.TryGetValue(key, out value);
             }
 
-            if (Language == LanguageEnum.Englisch)
+            if (Language == LanguageEnum.English)
             {
                 _English.TryGetValue(key, out value);
             }
@@ -50,7 +58,7 @@ namespace RouteOnPoint.LanguageUtil
         }
 
         //DUTCH
-        private async void LoadHistorischeKilometerDutch()
+        private static async void LoadHistorischeKilometerDutch()
         {
             string[] paths = new string[9];
 
@@ -99,7 +107,7 @@ namespace RouteOnPoint.LanguageUtil
                 position++;
             }
 
-            _Dutch.Add("R_HISTORISCHEKILOMTER_NAME", "Historische Kilometer");
+            _Dutch.Add("R_HISTORISCHEKILOMETER_NAME", "Historische Kilometer");
 
             _Dutch.Add("P_VVV_NAME", "VVV");
             _Dutch.Add("P_LIEFDESZUSTER_NAME", "Liefdeszuster");
@@ -128,13 +136,14 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("P_BEGIJNENHOF_NAME", "Begijnenhof");
         }
 
-        private void LoadPageTextDutch()
+        private static void LoadPageTextDutch()
         {
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Selecteer Route");
         }
 
-        private void LoadBlindWallsDutch()
+        private static void LoadBlindWallsDutch()
         {
+            _Dutch.Add("R_BLINDWALLS_NAME", "Blind Walls");
             _Dutch.Add("P_ZENKONEGODEVAERT_NAME", "Zenk One Godevaert");
             _Dutch.Add("P_ZENKONEGODEVAERT_INFO", "Robin Nas aka Zenkone groeit op in creatieve familie en start op jonge leeftijd met graffiti. Hij raakt bekend om zijn realistische portretten die hij later mixt met een meer grafische stijl. Inmiddels reist hij de wereld over om metershoge muurschilderingen te maken in zijn kenmerkte stijl. Vanuit zijn studio in Breda werkt hij als illustrator voor internationale opdrachtgevers.\r\n\r\nDe muurschildering is een ode aan Godevaart Montens, burgemeester van Breda van 1580-1581 en 1596-1602. Hij staat bekend vanwege zijn vermeend heldhaftig gedrag op 28 juni 1581. Tijdens de furie van Houtepen voerde hij een groep Bredase burgersoldaten aan in de strijd tegen de Spaanse troepen. Deze troepen hebben hevig huisgehouden, geplunderd, gemoord en gebrandschat. Vrijwilligers moesten de stoffelijke overschotten van 400 à 500 dode burgers opruimen.");
             _Dutch.Add("P_STAYNICELUNETTUNNEL_NAME", "Staynice Lunettunnel");
@@ -221,7 +230,7 @@ namespace RouteOnPoint.LanguageUtil
         }
 
         //ENGLISH
-        private async void LoadHistorischeKilometerEnglish()
+        private static async void LoadHistorischeKilometerEnglish()
         {
             string[] paths = new string[9];
 
@@ -270,7 +279,7 @@ namespace RouteOnPoint.LanguageUtil
                 position++;
             }
 
-            _English.Add("R_HISTORISCHEKILOMTER_NAME", "Historic kilometer");
+            _English.Add("R_HISTORISCHEKILOMETER_NAME", "Historic kilometer");
 
             _English.Add("P_VVV_NAME", "VVV");
             _English.Add("P_LIEFDESZUSTER_NAME", "Liefdeszuster");
@@ -300,14 +309,15 @@ namespace RouteOnPoint.LanguageUtil
 
         }
 
-        private void LoadPageTextEnglish()
+        private static void LoadPageTextEnglish()
         {
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
         }
 
         //Hier staan nog de nederlandse vertalingen in
-        private void LoadBlindWallsEnglish()
+        private static void LoadBlindWallsEnglish()
         {
+            _English.Add("R_BLINDWALLS_NAME", "Blind Walls");
             _English.Add("P_ZENKONEGODEVAERT_NAME", "Zenk One Godevaert");
             _English.Add("P_ZENKONEGODEVAERT_INFO", "Robin Nas aka Zenkone groeit op in creatieve familie en start op jonge leeftijd met graffiti. Hij raakt bekend om zijn realistische portretten die hij later mixt met een meer grafische stijl. Inmiddels reist hij de wereld over om metershoge muurschilderingen te maken in zijn kenmerkte stijl. Vanuit zijn studio in Breda werkt hij als illustrator voor internationale opdrachtgevers.\r\n\r\nDe muurschildering is een ode aan Godevaart Montens, burgemeester van Breda van 1580-1581 en 1596-1602. Hij staat bekend vanwege zijn vermeend heldhaftig gedrag op 28 juni 1581. Tijdens de furie van Houtepen voerde hij een groep Bredase burgersoldaten aan in de strijd tegen de Spaanse troepen. Deze troepen hebben hevig huisgehouden, geplunderd, gemoord en gebrandschat. Vrijwilligers moesten de stoffelijke overschotten van 400 à 500 dode burgers opruimen.");
             _English.Add("P_STAYNICELUNETTUNNEL_NAME", "Staynice Lunettunnel");
