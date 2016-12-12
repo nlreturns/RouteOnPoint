@@ -31,13 +31,7 @@
 
 
         <ScrollViewer Grid.Row="2" Margin="5,5,5,5">
-            <StackPanel>
-                <TextBlock TextWrapping="WrapWholeWords" Text="De Liniestraat vormt de buitengrens van het Liniekwartier. Op het verzoek van de bewoners is de wijk niet gesloopt, maar herontwikkeld door AlleeWonen in samenwerking met de bewoners. Er zijn klushuizen, een wijksalon en diverse culturele evenementen in samenwerking met Electron."/>
-                <TextBlock/>
-                <TextBlock TextWrapping="WrapWholeWords" Text="Belgische kunstenaar DZIA is uitgenodigd om het creatieve karakter van de wijk te visualiseren. Zijn echte naam blijft onbekend, ook is hij niet herkenbaar op foto's. Hij kiest ervoor zijn werk te laten spreken. Al jaren schildert hij dieren in zijn karakteristieke stijl op muren over de hele wereld."/>
-                <TextBlock/>
-                <TextBlock TextWrapping="WrapWholeWords" Text="De flamingo verbeeldt het kleurrijke karakter van de wijk. Vroeger was dit gebied een ​​polder waar veel vogels broedden. Tijdens het aanbrengen van de witte onderschildering kreeg DZIA al veel reacties uit de buurt. Men vond zijn 'zwaan' te gek! Na de toekan was de inspiratie voor de laatste vogel snel gevonden. Samen verbeelden de drie vogels het creatieve, kleurrijke en diverse karakter van de wijk, met een kleine knipoog naar het verleden."/>
-            </StackPanel>
+            <TextBlock Name="Info" Text="De Liniestraat vormt de buitengrens van het Liniekwartier. Op het verzoek van de bewoners is de wijk niet gesloopt, maar herontwikkeld door AlleeWonen in samenwerking met de bewoners. Er zijn klushuizen, een wijksalon en diverse culturele evenementen in samenwerking met Electron." TextWrapping="WrapWholeWords"/>
         </ScrollViewer>
     </Grid>
 </Page>
