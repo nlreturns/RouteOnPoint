@@ -21,8 +21,7 @@ namespace RouteOnPoint
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
-            new UnitTest();
+            this.Suspending += OnSuspending;   
         }
 
         /// <summary>
