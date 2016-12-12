@@ -33,9 +33,8 @@ namespace RouteOnPoint.Pages
         private void Language_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
-
-            rootFrame.Navigate(typeof(RouteSelectionViewModel));
             language = button.Name.ToString();
+            rootFrame.Navigate(typeof(RouteSelectionViewModel));
         }
     }
 }
