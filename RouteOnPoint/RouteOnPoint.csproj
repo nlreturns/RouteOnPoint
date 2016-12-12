@@ -98,6 +98,7 @@
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Notification.cs" />
     <Compile Include="Pages\POIViewModel.xaml.cs">
       <DependentUpon>POIViewModel.xaml</DependentUpon>
     </Compile>
