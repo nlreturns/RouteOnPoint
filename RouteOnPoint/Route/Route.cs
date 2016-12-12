@@ -13,7 +13,7 @@ namespace RouteOnPoint.Route
 
         public Route(string _name, List<POI> _points)
         {
-            this_name = _name;
+            this._name = _name;
             this._points = _points;
         }
 
