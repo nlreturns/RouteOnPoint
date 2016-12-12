@@ -21,13 +21,13 @@
         <StackPanel Grid.Row="3">
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="BlindWalls_Click">
                 <Grid>
-                    <Image Source="/Assets/BlindWalls.png" Stretch="Fill"/>
+                    <Image Source="/Assets/Routes/BlindWalls.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Blind walls"/>
                 </Grid>
             </Button>
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Kilometer_Click">
                 <Grid>
-                    <Image Source="/Assets/HistorischeKilometer.png" Stretch="Fill"/>
+                    <Image Source="/Assets/Routes/HistorischeKilometer.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Historische kilometer"/>
                 </Grid>
             </Button>
