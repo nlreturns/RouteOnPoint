@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.Devices.Geolocation;
 
 public class PointOfInterest
 {
@@ -6,9 +7,9 @@ public class PointOfInterest
     public string Information { get; set; }
     public string Path { get; set; }
     public bool Visited { get; set; }
-    public GeoCoordinate Coordinate { get; set; }
+    public Geocoordinate Coordinate { get; set; }
 
-    public PointOfInterest(string name, string information, GeoCoordinate coordinate, string path, bool visited)
+    public PointOfInterest(string name, string information, Geocoordinate coordinate, string path, bool visited)
 	{
         this.Name = name;
         this.Information = information;
