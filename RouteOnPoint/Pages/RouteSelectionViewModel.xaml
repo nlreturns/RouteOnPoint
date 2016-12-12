@@ -16,7 +16,7 @@
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="1">
-            <TextBlock Margin="5,5,5,5" HorizontalAlignment="Center" FontSize="26" Text="Selecteer route"/>
+            <TextBlock Margin="5,5,5,5" HorizontalAlignment="Center" FontSize="26" Name="select"/>
         </StackPanel>
         <StackPanel Grid.Row="3">
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
@@ -28,7 +28,7 @@
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
                 <Grid Tapped="Click">
                     <Image Source="/Assets/Routes/HistorischeKilometer.png" Stretch="Fill"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Historische kilometer"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="kilometer"/>
                 </Grid>
             </Button>
         </StackPanel>
