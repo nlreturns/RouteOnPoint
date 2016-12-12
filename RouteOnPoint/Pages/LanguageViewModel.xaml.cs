@@ -23,20 +23,19 @@ namespace RouteOnPoint.Pages
     public sealed partial class LanguageViewModel : Page
     {
         Frame rootFrame = Window.Current.Content as Frame;
+        string language;
 
         public LanguageViewModel()
         {
             this.InitializeComponent();
         }
 
-        private void Dutch_Click(object sender, RoutedEventArgs e)
+        private void Language_Click(object sender, RoutedEventArgs e)
         {
-            rootFrame.Navigate(typeof(RouteSelectionViewModel));
-        }
+            Button button = (Button)sender;
 
-        private void English_Click(object sender, RoutedEventArgs e)
-        {
             rootFrame.Navigate(typeof(RouteSelectionViewModel));
+            language = button.Name.ToString();
         }
     }
 }

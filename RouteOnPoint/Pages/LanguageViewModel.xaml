@@ -20,10 +20,10 @@
             <TextBlock Margin="5,5,5,5" Text="Select language" HorizontalAlignment="Center" FontSize="26"/>
         </StackPanel>
         <StackPanel Grid.Row="3">
-            <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Dutch_Click">
+            <Button Name="Dutch" Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
                 <Image Source="/Assets/Flags/DutchFlag.png" Stretch="Fill"/>
             </Button>
-            <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="English_Click">
+            <Button Name="English" Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
                 <Image Source="/Assets/Flags/EnglishFlag.png" Stretch="Fill"/>
             </Button>
         </StackPanel>
