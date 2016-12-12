@@ -15,7 +15,7 @@ namespace RouteOnPoint.LanguageUtil
 
         public enum LanguageEnum { English, Dutch};
 
-        private static LanguageEnum Language;
+        public static LanguageEnum Language;
             
         public static void setLanguage(LanguageEnum lang)
         {

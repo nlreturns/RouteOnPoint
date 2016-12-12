@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace RouteOnPoint.Route
 {
@@ -12,7 +13,7 @@ namespace RouteOnPoint.Route
 
         public UnitTest()
         {
-            RouteHandler = new RouteHandler();
+            handler = new RouteHandler();
 
             Route r = new Route("Unit testje");
             r.addPOI(new POI()

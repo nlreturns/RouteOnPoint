@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -95,10 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
-=======
     <Compile Include="LanguageUtil\MultiLang.cs" />
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
@@ -113,7 +111,6 @@
     <Compile Include="Pages\RouteViewModel.xaml.cs">
       <DependentUpon>RouteViewModel.xaml</DependentUpon>
     </Compile>
->>>>>>> refs/remotes/origin/RickBranch
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route\POI.cs" />
     <Compile Include="Route\Route.cs" />
@@ -128,7 +125,6 @@
     <None Include="RouteOnPoint_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="Assets\1.jpg" />
     <Content Include="Assets\10.jpg" />
     <Content Include="Assets\11.jpg" />
@@ -157,7 +153,6 @@
     <Content Include="Assets\9.jpg" />
     <Content Include="Assets\DutchFlag.png" />
     <Content Include="Assets\EnglishFlag.png" />
-=======
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\POI\Muur.PNG" />
@@ -184,7 +179,6 @@
     <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
     <Content Include="Assets\Text\English\valkenbergInfo.txt" />
     <Content Include="Assets\Text\English\vishalInfo.txt" />
->>>>>>> refs/remotes/origin/RickBranch
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -200,12 +194,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
