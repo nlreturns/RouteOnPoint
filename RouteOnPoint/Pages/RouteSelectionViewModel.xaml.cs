@@ -25,6 +25,7 @@ namespace RouteOnPoint.Pages
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
+            Notification.OffRouteMessage(this);
         }
 
         private void BlindWalls_Click(object sender, RoutedEventArgs e)
