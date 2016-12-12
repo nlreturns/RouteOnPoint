@@ -104,6 +104,9 @@
     <Compile Include="Pages\RouteSelectionViewModel.xaml.cs">
       <DependentUpon>RouteSelectionViewModel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\RouteViewModel.xaml.cs">
+      <DependentUpon>RouteViewModel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +142,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RouteSelectionViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\RouteViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
