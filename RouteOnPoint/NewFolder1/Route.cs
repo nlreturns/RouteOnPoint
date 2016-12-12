@@ -1,0 +1,11 @@
+﻿using System;
+
+public class Route
+{
+    public string Name { get; set; }
+    public List<PointOfInterest> points { get; set; }
+    public Route()
+	{
+
+	}
+}
