@@ -28,6 +28,9 @@ namespace RouteOnPoint.Pages
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
+
+            select.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT");
+            kilometer.Text = MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME");
         }
         
         private void Click(object sender, TappedRoutedEventArgs e)
