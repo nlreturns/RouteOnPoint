@@ -25,9 +25,6 @@ namespace RouteOnPoint
         public MainPage()
         {
             this.InitializeComponent();
-            
         }
-
-
     }
 }
