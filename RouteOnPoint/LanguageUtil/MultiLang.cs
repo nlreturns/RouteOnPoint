@@ -74,12 +74,12 @@ namespace RouteOnPoint.LanguageUtil
 
             string[] names = new string[9];
 
-            names[0] = "P_ANTONIUSKERKINFO_INFO";
-            names[1] = "P_BIBLIOTHEEKINFO_INFO";
-            names[2] = "P_KASTEELINFO_INFO";
-            names[3] = "P_KLOOSTERKAZERNEINFO_INFO";
-            names[4] = "P_NASSAUMONUMENTINFO_INFO";
-            names[5] = "P_STADHUISINFO_INFO";
+            names[0] = "P_ANTONIUSVANPADUAKERK_INFO";
+            names[1] = "P_BIBLIOTHEEK_INFO";
+            names[2] = "P_KASTEELVANBREDA_INFO";
+            names[3] = "P_KLOOSTERKAZERNE_INFO";
+            names[4] = "P_NASSAUBARONIEMONUMENT_INFO";
+            names[5] = "P_STADHUIS_INFO";
             names[6] = "P_TORENSTRAATINFO_INFO";
             names[7] = "P_VALKENBERGINFO_INFO";
             names[8] = "P_VISHALINFO_INFO";
@@ -111,7 +111,7 @@ namespace RouteOnPoint.LanguageUtil
 
             _Dutch.Add("P_VVV_NAME", "VVV");
             _Dutch.Add("P_LIEFDESZUSTER_NAME", "Liefdeszuster");
-            _Dutch.Add("P_NASSABARONIEMONUMENT_NAME", "Nassau Baronie Monument");
+            _Dutch.Add("P_NASSAUBARONIEMONUMENT_NAME", "Nassau Baronie Monument");
             _Dutch.Add("P_THELIGHTHOUSE_NAME", "The Light House");
             _Dutch.Add("P_KASTEELVANBREDA_NAME", "Kasteel van Breda");
             _Dutch.Add("P_STADHOUDERSPOORT_NAME", "Stadhouderspoort");
