@@ -20,23 +20,11 @@ namespace RouteOnPoint.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LanguageViewModel : Page
+    public sealed partial class POIViewModel : Page
     {
-        Frame rootFrame = Window.Current.Content as Frame;
-
-        public LanguageViewModel()
+        public POIViewModel()
         {
             this.InitializeComponent();
-        }
-
-        private void Dutch_Click(object sender, RoutedEventArgs e)
-        {
-            rootFrame.Navigate(typeof(RouteSelectionViewModel));
-        }
-
-        private void English_Click(object sender, RoutedEventArgs e)
-        {
-            rootFrame.Navigate(typeof(RouteSelectionViewModel));
         }
     }
 }
