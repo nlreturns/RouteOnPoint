@@ -29,7 +29,7 @@ namespace RouteOnPoint.Route
          * 
          * Version 0.2 - removed List<POI> POI - this is saved inside Route
          */
-        private void SaveRouteWithState(Route route, String path)
+        public void SaveRouteWithState(Route route, String path)
         {   
             FileStream outFile = File.Create(path);
             XmlSerializer formatter = new XmlSerializer(typeof(Route));
