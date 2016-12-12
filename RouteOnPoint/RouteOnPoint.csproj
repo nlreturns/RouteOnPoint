@@ -105,6 +105,7 @@
     <Compile Include="Route\Route.cs" />
     <Compile Include="Route\RouteHandler.cs" />
     <Compile Include="Route\RouteHelper.cs" />
+    <Compile Include="Route\UnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -113,6 +114,32 @@
     <None Include="RouteOnPoint_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\1.jpg" />
+    <Content Include="Assets\10.jpg" />
+    <Content Include="Assets\11.jpg" />
+    <Content Include="Assets\12.jpg" />
+    <Content Include="Assets\13.jpg" />
+    <Content Include="Assets\14.jpg" />
+    <Content Include="Assets\15.jpg" />
+    <Content Include="Assets\16.jpg" />
+    <Content Include="Assets\17.jpg" />
+    <Content Include="Assets\18.jpg" />
+    <Content Include="Assets\19.jpg" />
+    <Content Include="Assets\2.jpg" />
+    <Content Include="Assets\20.jpg" />
+    <Content Include="Assets\21.jpg" />
+    <Content Include="Assets\22.jpg" />
+    <Content Include="Assets\23.jpg" />
+    <Content Include="Assets\24.jpg" />
+    <Content Include="Assets\25.jpg" />
+    <Content Include="Assets\26.jpg" />
+    <Content Include="Assets\3.jpg" />
+    <Content Include="Assets\4.jpg" />
+    <Content Include="Assets\5.jpg" />
+    <Content Include="Assets\6.jpg" />
+    <Content Include="Assets\7.jpg" />
+    <Content Include="Assets\8.jpg" />
+    <Content Include="Assets\9.jpg" />
     <Content Include="Assets\DutchFlag.png" />
     <Content Include="Assets\EnglishFlag.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -134,14 +161,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Pages\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
   </ItemGroup>
-
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

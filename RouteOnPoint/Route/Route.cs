@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Geolocation;
 
 namespace RouteOnPoint.Route
 {
@@ -53,6 +54,10 @@ namespace RouteOnPoint.Route
         {
             if (!_points.Contains(p))
                 _points.Insert(plekInLijst,p);
+        }
+        public void addPoint(string name, string INFO, string path, BasicGeoposition coordinate, bool visited = false)
+        {
+            addPOI(new POI(name, INFO, path, visited, coordinate));
         }
 
         /*
