@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using RouteOnPoint.Pages;
+using RouteOnPoint.Route;
+using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace RouteOnPoint
@@ -29,7 +21,7 @@ namespace RouteOnPoint
         public App()
         {
             this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            this.Suspending += OnSuspending;   
         }
 
         /// <summary>
@@ -72,7 +64,7 @@ namespace RouteOnPoint
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required INFO as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    rootFrame.Navigate(typeof(LanguageViewModel), e.Arguments);
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();

@@ -10,7 +10,7 @@ namespace RouteOnPoint.Route
     class Route
     {
         private string _name;
-        private List<POI> _points;
+        public List<POI> _points { get; set; }
 
         /**
          * Constructor containing name and list of POIs.
@@ -30,6 +30,7 @@ namespace RouteOnPoint.Route
         public Route(string _name)
         {
             this._name = _name;
+            _points = new List<POI>();
         }
 
         /*
@@ -39,7 +40,7 @@ namespace RouteOnPoint.Route
          */
         public void addPOI(POI p)
         {
-            if (!_points.Contains(p))
+          if(!_points.Contains(p))
                 _points.Add(p);
         }
 

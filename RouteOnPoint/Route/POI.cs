@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RouteOnPoint.LanguageUtil;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,10 @@ namespace RouteOnPoint.Route
             this._path = path;
             this._visited = visited;
             this._coordinate = coordinate;
+        }
+        public override string ToString()
+        {
+            return MultiLang.GetContent(_name) + " " + MultiLang.GetContent(_INFO);
         }
     }
 }

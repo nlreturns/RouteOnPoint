@@ -95,10 +95,19 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GPSHandler\GPSHelper.cs" />
-    <Compile Include="GPSHandler\GPSReader.cs" />
-    <Compile Include="MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="LanguageUtil\MultiLang.cs" />
+    <Compile Include="Pages\LanguageViewModel.xaml.cs">
+      <DependentUpon>LanguageViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Notification.cs" />
+    <Compile Include="Pages\POIViewModel.xaml.cs">
+      <DependentUpon>POIViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RouteSelectionViewModel.xaml.cs">
+      <DependentUpon>RouteSelectionViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\RouteViewModel.xaml.cs">
+      <DependentUpon>RouteViewModel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Route\POI.cs" />
@@ -140,8 +149,34 @@
     <Content Include="Assets\7.jpg" />
     <Content Include="Assets\8.jpg" />
     <Content Include="Assets\9.jpg" />
+    <Content Include="Assets\Buttons\Back.png" />
+    <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\DutchFlag.png" />
     <Content Include="Assets\EnglishFlag.png" />
+    <Content Include="Assets\Flags\DutchFlag.png" />
+    <Content Include="Assets\Flags\EnglishFlag.png" />
+    <Content Include="Assets\POI\Muur.PNG" />
+    <Content Include="Assets\Routes\BlindWalls.PNG" />
+    <Content Include="Assets\Routes\HistorischeKilometer.png" />
+    <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Text\Dutch\AntoniusKerkInfo.txt" />
+    <Content Include="Assets\Text\Dutch\bibliotheekInfo.txt" />
+    <Content Include="Assets\Text\Dutch\kasteelInfo.txt" />
+    <Content Include="Assets\Text\Dutch\kloosterKazerneInfo.txt" />
+    <Content Include="Assets\Text\Dutch\NassauMonumentInfo.txt" />
+    <Content Include="Assets\Text\Dutch\stadhuisInfo.txt" />
+    <Content Include="Assets\Text\Dutch\TorenstraatInfo.txt" />
+    <Content Include="Assets\Text\Dutch\valkenbergInfo.txt" />
+    <Content Include="Assets\Text\Dutch\vishalInfo.txt" />
+    <Content Include="Assets\Text\English\AntoniusKerkInfo.txt" />
+    <Content Include="Assets\Text\English\bibliotheekInfo.txt" />
+    <Content Include="Assets\Text\English\kasteelInfo.txt" />
+    <Content Include="Assets\Text\English\kloosterKazerneInfo.txt" />
+    <Content Include="Assets\Text\English\NassauMonumentInfo.txt" />
+    <Content Include="Assets\Text\English\stadhuisInfo.txt" />
+    <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
+    <Content Include="Assets\Text\English\valkenbergInfo.txt" />
+    <Content Include="Assets\Text\English\vishalInfo.txt" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -156,16 +191,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Pages\" />
+    <Folder Include="GPSHandler\" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Pages\LanguageViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\POIViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\RouteSelectionViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\RouteViewModel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
