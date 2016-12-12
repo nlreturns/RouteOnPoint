@@ -17,10 +17,10 @@ namespace RouteOnPoint.GPSHandler
 
         public GPSReader()
         {
-            
+            SetupGPS();
         }
 
-        private async void GetGps()
+        private async void SetupGPS()
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
@@ -57,7 +57,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        private void SetupGeoFence(Geopoint point, string name, double radius)
+        public void SetupGeoFence(Geopoint point, string name, double radius)
         {
             // Set the fence ID.
             string fenceId = name;
