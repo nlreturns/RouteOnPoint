@@ -137,7 +137,6 @@ namespace RouteOnPoint.GPSHandler
                     //No state
                     case GeofenceState.None:
                         break;
-
                 }
             }
         }
