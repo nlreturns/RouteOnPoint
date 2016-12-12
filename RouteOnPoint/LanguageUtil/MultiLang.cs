@@ -13,7 +13,7 @@ namespace RouteOnPoint.LanguageUtil
         private static Dictionary<string, string> _English;
         private static Dictionary<string, string> _Dutch;
 
-        public enum LanguageEnum { Englisch, Dutch};
+        public enum LanguageEnum { English, Dutch};
 
         public static LanguageEnum Language { get; set; }
             
@@ -41,7 +41,7 @@ namespace RouteOnPoint.LanguageUtil
                 _Dutch.TryGetValue(key, out value);
             }
 
-            if (Language == LanguageEnum.Englisch)
+            if (Language == LanguageEnum.English)
             {
                 _English.TryGetValue(key, out value);
             }
