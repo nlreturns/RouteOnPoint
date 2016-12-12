@@ -18,7 +18,7 @@ namespace RouteOnPoint.Route
     {
         private Boolean _paused;
         private Route _route;
-        private gpsreader _gpsreader;
+        //private GPSreader _gpsreader;
 
         /*
          * Save a route with all info included.
