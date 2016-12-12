@@ -1,5 +1,7 @@
-﻿using System;
+﻿using RouteOnPoint.LanguageUtil;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,10 +15,12 @@ namespace RouteOnPoint.Route
 
         public UnitTest()
         {
-            RouteHandler test = new RouteHandler();
-            RouteHelper helper = new RouteHelper();
-            Route r = helper.createHistoriscRoute();           
-            handler.SaveRouteWithState(r, "C:/Mooi/");
+            MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
+            Route r = new RouteHelper().createHistoriscRoute();
+            foreach (POI p in r._points)
+            {
+                Debug.WriteLine(p.ToString());
+            }
         }
 
     }

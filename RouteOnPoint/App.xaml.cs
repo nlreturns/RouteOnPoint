@@ -1,4 +1,5 @@
 ﻿using RouteOnPoint.Pages;
+using RouteOnPoint.Route;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -21,6 +22,7 @@ namespace RouteOnPoint
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            new UnitTest();
         }
 
         /// <summary>
