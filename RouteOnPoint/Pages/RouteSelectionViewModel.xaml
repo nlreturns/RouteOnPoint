@@ -21,14 +21,14 @@
         <StackPanel Grid.Row="3">
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="BlindWalls_Click">
                 <Grid>
-                    <Image Source="/Assets/DutchFlag.png" Stretch="Fill"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Text="Blind walls"/>
+                    <Image Source="/Assets/BlindWalls.png" Stretch="Fill"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Blind walls"/>
                 </Grid>
             </Button>
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Kilometer_Click">
                 <Grid>
-                    <Image Source="/Assets/DutchFlag.png" Stretch="Fill"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontWeight="Bold" Text="Historische kilometer"/>
+                    <Image Source="/Assets/HistorischeKilometer.png" Stretch="Fill"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Historische kilometer"/>
                 </Grid>
             </Button>
         </StackPanel>
