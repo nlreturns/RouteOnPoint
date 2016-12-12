@@ -17,20 +17,25 @@ namespace RouteOnPoint.LanguageUtil
 
         public static LanguageEnum Language { get; set; }
 
+        private bool load = false;
+
         public MultiLang()
         {
             _Dutch = new Dictionary<string, string>();
             LoadHistorischeKilometerDutch();
+            LoadBlindWallsDutch();
             _English = new Dictionary<string, string>();
             LoadHistorischeKilometerEnglish();
         }
 
         public static string GetContent(string key)
         {
+
             string value = "";
 
             if (Language == LanguageEnum.Dutch)
             {
+                bool hh = _Dutch.ContainsKey(key);
                 _Dutch.TryGetValue(key, out value);
             }
 
@@ -59,21 +64,21 @@ namespace RouteOnPoint.LanguageUtil
 
             string[] names = new string[9];
 
-            paths[0] = "P_ANTONIUSKERKINFO_INFO";
-            paths[1] = "P_BIBLIOTHEEKINFO_INFO";
-            paths[2] = "P_KASTEELINFO_INFO";
-            paths[3] = "P_KLOOSTERKAZERNEINFO_INFO";
-            paths[4] = "P_NASSAUMONUMENTINFO_INFO";
-            paths[5] = "P_STADHUISINFO_INFO";
-            paths[6] = "P_TORENSTRAATINFO_INFO";
-            paths[7] = "P_VALKENBERGINFO_INFO";
-            paths[8] = "P_VISHALINFO_INFO";
+            names[0] = "P_ANTONIUSKERKINFO_INFO";
+            names[1] = "P_BIBLIOTHEEKINFO_INFO";
+            names[2] = "P_KASTEELINFO_INFO";
+            names[3] = "P_KLOOSTERKAZERNEINFO_INFO";
+            names[4] = "P_NASSAUMONUMENTINFO_INFO";
+            names[5] = "P_STADHUISINFO_INFO";
+            names[6] = "P_TORENSTRAATINFO_INFO";
+            names[7] = "P_VALKENBERGINFO_INFO";
+            names[8] = "P_VISHALINFO_INFO";
 
             int position = 0;
             foreach (string path in paths)
             {
                 string text = "";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///"+path));
                 using (var inputStream = await file.OpenReadAsync())
                 using (var classicStream = inputStream.AsStreamForRead())
                 using (var streamReader = new StreamReader(classicStream))
@@ -201,12 +206,12 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("P_ANTIHELD_INFO", "Illustrator Sjoerd Jansen aka Anti-held geniet van het maken van semi-realistische expressieve illustraties geïnspireerd op de wereld waarin we leven. Hij gebruikt hierbij zijn eigen metaforen en symboliek. Hij heeft een fascinatie voor analoge technieken als tekenen, schilderen, zeefdruk, houtsnede en etsen.\r\n\r\nMet deze muurschildering reflecteert hij op het nachtleven dat zich afspeelt in deze smalle steeg.");
             _Dutch.Add("P_JORENJOSHUA_NAME", "Joren Joshua");
             _Dutch.Add("P_JORENJOSHUA_INFO", "Dit werk werd speciaal gemaakt om de Potkanstraat visueel te verbeteren (zoals 4, 5 & 7). Qua kleur verwijst de schildering naar water van de haven. Het feestende duo, met een drankje en bitterbal in de hand, brengt een ode aan het Bredase uitgaans­ leven. De speelse illustraties van Joren Joshua (Rotterdam) zijn beïnvloed door graffiti en grafiek. Met zijn slungelige figuren reflecteert hij op alledaagse gebeurtenissen, altijd met humor.");
-            _Dutch.Add("P_RUTGERTERMOHLEN_NAME", "Rutger Termohlen");
-            _Dutch.Add("P_RUTGERTERMOHLEN_INFO", "Net als Antiheld, Joren Joshua en Daniel van de Haterd nam Termohlen een muur in de Potkanstraat onder­ handen. Zijn schildering is een ode aan de haven en het uitgaansleven om de hoek, te zien in zijn mooie dame die wordt omgeven door waterplanten en een octopus. Bredase kunstenaar, illustrator en tattoo artist Rutger Termohlen tekent mensen, dieren en vaak een combinatie ervan. Dynamisch en contrastrijk in kleur en thema: van liefde tot dood, van licht tot duisternis.");
+            _Dutch.Add("P_RUTGERTERMOHLEN2_NAME", "Rutger Termohlen");
+            _Dutch.Add("P_RUTGERTERMOHLEN2_INFO", "Net als Antiheld, Joren Joshua en Daniel van de Haterd nam Termohlen een muur in de Potkanstraat onder­ handen. Zijn schildering is een ode aan de haven en het uitgaansleven om de hoek, te zien in zijn mooie dame die wordt omgeven door waterplanten en een octopus. Bredase kunstenaar, illustrator en tattoo artist Rutger Termohlen tekent mensen, dieren en vaak een combinatie ervan. Dynamisch en contrastrijk in kleur en thema: van liefde tot dood, van licht tot duisternis.");
             _Dutch.Add("P_IWANSMIT_NAME", "Iwan Smit");
             _Dutch.Add("P_IWANSMIT_INFO", "Het op de muur achtergebleven logo van studenten dispuut Phileas Fogg, tevens gevestigd in de School­ straat, was het startpunt voor deze schildering. Smit reageert met zijn vraag “Who’s got the power?” op de traditie van de verschillende logo’s op deze muur. Hij stelt de vraag aan passanten en nodigt andere disputen uit tot reactie. Iwan Smit (Rotterdam) illustreert, ontwerpt, schildert en maakt. Zijn werken zijn energiek, soms donker en vaak speelt mythologie een belangrijke rol.");
-            _Dutch.Add("P_HEDOF_NAME", "Hedof");
-            _Dutch.Add("P_HEDOF_INFO", "Op de muren van het sanitairhuisje in de nieuwe Passantenhaven toont Hedof de ‘hoofd­ rolspelers’ uit de buurt: zeelieden, recreanten en passerende gezinnen. Het decor van zijn schildering verwijst naar de gebouwen in de stad. Hedof is Rick Berkelmans, een illustrator uit Breda. Een mix van sterke vormen, cartooneske figuren en een uitgesproken kleurpalet typeert zijn werk.");
+            _Dutch.Add("P_HEDOF2_NAME", "Hedof");
+            _Dutch.Add("P_HEDOF2_INFO", "Op de muren van het sanitairhuisje in de nieuwe Passantenhaven toont Hedof de ‘hoofd­ rolspelers’ uit de buurt: zeelieden, recreanten en passerende gezinnen. Het decor van zijn schildering verwijst naar de gebouwen in de stad. Hedof is Rick Berkelmans, een illustrator uit Breda. Een mix van sterke vormen, cartooneske figuren en een uitgesproken kleurpalet typeert zijn werk.");
             _Dutch.Add("P_STAYNICE_NAME", "Staynice");
             _Dutch.Add("P_STAYNICE_INFO", "De bouwschutting naast Station Breda leent zich goed voor een beeldverhaal. Een steeds terug­ kerende serie van tien illustraties visualiseert een dynamische dag in het leven van de treinreiziger.");
             _Dutch.Add("P_TECKELKMA_NAME", "Teckel KMA");
@@ -230,21 +235,21 @@ namespace RouteOnPoint.LanguageUtil
 
             string[] names = new string[9];
 
-            paths[0] = "P_ANTONIUSKERKINFO_INFO";
-            paths[1] = "P_BIBLIOTHEEKINFO_INFO";
-            paths[2] = "P_KASTEELINFO_INFO";
-            paths[3] = "P_KLOOSTERKAZERNEINFO_INFO";
-            paths[4] = "P_NASSAUMONUMENTINFO_INFO";
-            paths[5] = "P_STADHUISINFO_INFO";
-            paths[6] = "P_TORENSTRAATINFO_INFO";
-            paths[7] = "P_VALKENBERGINFO_INFO";
-            paths[8] = "P_VISHALINFO_INFO";
+            names[0] = "P_ANTONIUSKERKINFO_INFO";
+            names[1] = "P_BIBLIOTHEEKINFO_INFO";
+            names[2] = "P_KASTEELINFO_INFO";
+            names[3] = "P_KLOOSTERKAZERNEINFO_INFO";
+            names[4] = "P_NASSAUMONUMENTINFO_INFO";
+            names[5] = "P_STADHUISINFO_INFO";
+            names[6] = "P_TORENSTRAATINFO_INFO";
+            names[7] = "P_VALKENBERGINFO_INFO";
+            names[8] = "P_VISHALINFO_INFO";
 
             int position = 0;
             foreach (string path in paths)
             {
                 string text = "";
-                StorageFile file = await StorageFile.GetFileFromPathAsync(path);
+                StorageFile file = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///"+path));
                 using (var inputStream = await file.OpenReadAsync())
                 using (var classicStream = inputStream.AsStreamForRead())
                 using (var streamReader = new StreamReader(classicStream))
