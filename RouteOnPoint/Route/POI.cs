@@ -11,11 +11,11 @@ namespace RouteOnPoint.Route
     {
         private string _name { get; set; }
         private string _information { get; set; }
-        private Geocoordinate _coordinate { get; set; }
+        private BasicGeoposition _coordinate { get; set; }
         private string _path { get; set; }
         private bool _visited { get; set; }
 
-        public POI(string name, string information, string path, bool visited, Geocoordinate coordinate)
+        public POI(string name, string information, string path, bool visited, BasicGeoposition coordinate)
         {
             this._name = name;
             this._information = information;

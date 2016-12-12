@@ -55,7 +55,7 @@ namespace RouteOnPoint.Route
             if (!_points.Contains(p))
                 _points.Insert(plekInLijst,p);
         }
-        public void addPoint(string name, string information, string path, Geocoordinate coordinate, bool visited = false)
+        public void addPoint(string name, string information, string path, BasicGeoposition coordinate, bool visited = false)
         {
             addPOI(new POI(name, information, path, visited, coordinate));
         }
