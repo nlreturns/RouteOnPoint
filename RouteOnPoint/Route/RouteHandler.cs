@@ -32,7 +32,7 @@ namespace RouteOnPoint.Route
         private void SaveRouteWithState(Route route, String path)
         {   
             FileStream outFile = File.Create(path);
-            XmlSerializer formatter = new XmlSerializer(Route);
+            XmlSerializer formatter = new XmlSerializer(typeof(Route));
             formatter.Serialize(outFile, route);
         }
 
@@ -42,7 +42,7 @@ namespace RouteOnPoint.Route
          */
         private Route GetRouteFromFile(String path)
         {
-            XmlSerializer formatter = new XmlSerializer(Route);
+            XmlSerializer formatter = new XmlSerializer(typeof(Route));
             FileStream aFile = new FileStream(path, FileMode.Open);
             byte[] buffer = new byte[aFile.Length];
             aFile.Read(buffer, 0, (int)aFile.Length);
