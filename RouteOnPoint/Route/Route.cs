@@ -10,29 +10,30 @@ namespace RouteOnPoint.Route
     {
         private string _name;
         private List<POI> _points;
-        public Route(string name, List<POI> _points)
+
+        public Route(string _name, List<POI> _points)
         {
-            this._name = name;
+            this_name = _name;
             this._points = _points;
         }
-        public Route(string name)
+
+        public Route(string _name)
         {
-            this._name = name;
-         }
+            this._name = _name;
+        }
 
         public void addPOI(POI p)
         {
-            if (!_points.Contains(p)) {
+            if (!_points.Contains(p))
                 _points.Add(p);
-            }
         }
+
         public void addPOI(POI p, int plekInLijst)
         {
             if (!_points.Contains(p))
-            {
                 _points.Insert(plekInLijst,p);
-            }
         }
+
         public void setPOIList(List<POI> points)
         {
             _points = points;
