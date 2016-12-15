@@ -95,7 +95,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
     <Compile Include="LanguageUtil\MultiLang.cs" />
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
@@ -195,9 +194,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-  </ItemGroup>
   <ItemGroup>
     <Page Include="Pages\LanguageViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>

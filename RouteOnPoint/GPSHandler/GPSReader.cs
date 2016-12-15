@@ -31,7 +31,7 @@ namespace RouteOnPoint.GPSHandler
                 //Allowed acces
                 case GeolocationAccessStatus.Allowed:
                     //Initaliases the GPS with custom parameters
-                    Geolocator = new Geolocator { DesiredAccuracyInMeters = 5, ReportInterval = 2000 };
+                    Geolocator = new Geolocator { DesiredAccuracyInMeters = 20, ReportInterval = 2000 };
                     
                     //Activates GPS and gets first location
                     Geoposition pos = await Geolocator.GetGeopositionAsync();
@@ -140,6 +140,21 @@ namespace RouteOnPoint.GPSHandler
                         break;
                 }
             }
+        }
+
+        public async Task GoToUserLocationAsync(bool justdoit)
+        {
+//            if (justdoit && UserLocation != null)
+//                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+//                    CoreDispatcherPriority.High, (() =>
+//                    {
+//                        _map.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(UserLocation.Location, 1000));
+//                    }));
+//            else
+//            {
+//                MessageDialog dialog = new MessageDialog("No GPS, Please wait", "No GPS");
+//                dialog.ShowAsync();
+//            }
         }
 
         public Geopoint GetCurrentLocation()
