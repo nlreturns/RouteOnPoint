@@ -10,10 +10,10 @@ namespace RouteOnPoint.Route
 {
     class POI
     {
-        private string _name { get; set; }
-        private string _INFO { get; set; }
+        public string _name { get; set; }
+        public string _INFO { get; set; }
         public BasicGeoposition _coordinate { get; set; }
-        private string _path { get; set; }
+        public string _path { get; set; }
         private bool _visited { get; set; }
 
         public POI(string name, string INFO, string path, bool visited, BasicGeoposition coordinate)
