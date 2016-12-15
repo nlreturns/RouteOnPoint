@@ -24,6 +24,7 @@ namespace RouteOnPoint.Pages
     /// </summary>
     public sealed partial class RouteViewModel : Page
     {
+        Frame rootFrame = Window.Current.Content as Frame;
 
         public GPSReader Gps;
 
@@ -41,16 +42,19 @@ namespace RouteOnPoint.Pages
 //            Gps.SetupRoute(points);
         }
 
-        private void CenterLocationButton_Click(object sender, RoutedEventArgs e)
+        //Button to center the screen on the users location
+        private async void CenterLocationButton_Click(object sender, RoutedEventArgs e)
         {
-
+            await Gps.GoToUserLocationAsync(true);
         }
 
+        //Button to show the help page
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //rootFrame.Navigate(typeof(AssisViewModel));
         }
 
+        //Button to play or pause the route session
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
             if (Gps.IsPaused)

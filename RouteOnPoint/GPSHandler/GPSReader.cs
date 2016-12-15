@@ -54,7 +54,7 @@ namespace RouteOnPoint.GPSHandler
 
                     //Adds the event when the position changes
                     Geolocator.PositionChanged += OnPositionChangedAsync;
-
+                    GoToUserLocationAsync(true);
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
