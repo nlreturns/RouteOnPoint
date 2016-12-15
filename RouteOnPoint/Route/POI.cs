@@ -14,14 +14,14 @@ namespace RouteOnPoint.Route
         private string _INFO { get; set; }
         public BasicGeoposition Coordinate { get; set; }
         private string _path { get; set; }
-        private bool _visited { get; set; }
+        public bool Visited { get; set; }
 
         public POI(string name, string INFO, string path, bool visited, BasicGeoposition coordinate)
         {
             this.Name = name;
             this._INFO = INFO;
             this._path = path;
-            this._visited = visited;
+            this.Visited = visited;
             this.Coordinate = coordinate;
         }
         public override string ToString()

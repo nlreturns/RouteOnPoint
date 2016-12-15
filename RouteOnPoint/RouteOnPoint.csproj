@@ -178,6 +178,9 @@
     <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
     <Content Include="Assets\Text\English\valkenbergInfo.txt" />
     <Content Include="Assets\Text\English\vishalInfo.txt" />
+    <Content Include="Icons\Blackdot.png" />
+    <Content Include="Icons\BlueIcon.png" />
+    <Content Include="Icons\GreenIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
