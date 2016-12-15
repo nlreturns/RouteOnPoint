@@ -13,6 +13,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
+using Windows.UI.Xaml.Controls.Maps;
+using Windows.Devices.Geolocation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -29,6 +31,22 @@ namespace RouteOnPoint.Pages
         public RouteViewModel()
         {
             this.InitializeComponent();
+
+        }
+
+        private void CenterLocationButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+
 
         }
     }
