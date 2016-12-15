@@ -20,15 +20,21 @@
         </StackPanel>
         <StackPanel Grid.Row="3">
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <Grid Tapped="Click">
+                <Grid Tapped="Click" Name="Blind">
                     <Image Source="/Assets/Routes/BlindWalls.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Blind walls"/>
                 </Grid>
             </Button>
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <Grid Tapped="Click">
+                <Grid Tapped="Click" Name="Kilo">
                     <Image Source="/Assets/Routes/HistorischeKilometer.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="Kilometer"/>
+                </Grid>
+            </Button>
+            <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
+                <Grid Tapped="Click">
+                    <Image Source="/Assets/Routes/Resume.png" Stretch="Fill"/>
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="Hervat"/>
                 </Grid>
             </Button>
         </StackPanel>

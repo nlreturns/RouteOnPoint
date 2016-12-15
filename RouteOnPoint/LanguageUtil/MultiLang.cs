@@ -141,6 +141,7 @@ namespace RouteOnPoint.LanguageUtil
         private static void LoadPageTextDutch()
         {
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Selecteer Route");
+            _Dutch.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Hervat route");
         }
 
         private static void LoadBlindWallsDutch()
@@ -314,6 +315,7 @@ namespace RouteOnPoint.LanguageUtil
         private static void LoadPageTextEnglish()
         {
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
+            _English.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Resume route");
         }
 
         //Hier staan nog de nederlandse vertalingen in

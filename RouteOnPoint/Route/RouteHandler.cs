@@ -63,6 +63,26 @@ namespace RouteOnPoint.Route
             // select folder and file
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFile file = await folder.GetFileAsync(path);
+<<<<<<< HEAD
+
+            // open stream and get size
+            var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+            ulong size = stream.Size;
+
+            // read stream
+            using (var inputStream = stream.GetInputStreamAt(0))
+            {
+                using (var dataReader = new Windows.Storage.Streams.DataReader(inputStream))
+                {
+                    uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
+                    string text = dataReader.ReadString(numBytesLoaded);
+                    // convert to Route object and return
+                    return text;
+                }
+            }
+        }
+=======
+>>>>>>> origin/master
 
             // open stream and get size
             var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
