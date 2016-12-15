@@ -128,15 +128,15 @@ namespace RouteOnPoint.GPSHandler
         {
             foreach (var poi in Points)
             {
-                if (poi.Name != null)
+                if (poi._name != null)
                 {
                     var pushpin = new MapIcon();
 
                     // assign pushpin geoposition
-                    pushpin.Location = new Geopoint(poi.Coordinate);
+                    pushpin.Location = new Geopoint(poi._coordinate);
 
                     // assign pushpin title
-                    pushpin.Title = poi.Name;
+                    pushpin.Title = poi._name;
 
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
@@ -146,7 +146,7 @@ namespace RouteOnPoint.GPSHandler
 
 
                     // set custom image to pushpin
-                    if (poi.Visited)
+                    if (poi._visited)
                     {
                         var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
                         pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
