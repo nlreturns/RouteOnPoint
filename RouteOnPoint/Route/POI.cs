@@ -11,6 +11,7 @@ namespace RouteOnPoint.Route
 {
     class POI
     {
+<<<<<<< HEAD
         [JsonProperty]
         private string _name { get; set; }
         [JsonProperty]
@@ -19,6 +20,17 @@ namespace RouteOnPoint.Route
         private BasicGeoposition _coordinate { get; set; }
         private string _path { get; set; }
         [JsonProperty]
+=======
+        //Key Value of the Name dicionary
+        private string _name { get; set; }
+        //Key Value of the Info dictionary
+        private string _INFO { get; set; }
+        //GEO Posistion of the point
+        public BasicGeoposition _coordinate { get; set; }
+        //Location of the image (should be in assets)
+        private string _path { get; set; }
+        //Boolean visited if true than the user has already been here.
+>>>>>>> origin/master
         private bool _visited { get; set; }
 
         public POI(string name, string INFO, string path, bool visited, BasicGeoposition coordinate)
