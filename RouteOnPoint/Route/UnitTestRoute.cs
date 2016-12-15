@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Newtonsoft.Json;
+using RouteOnPoint.GPSHandler;
 
 namespace RouteOnPoint.Route
 {
