@@ -53,8 +53,14 @@ namespace RouteOnPoint.Pages
 
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-
-
+            if (Gps.IsPaused)
+            {
+                Gps.IsPaused = false;
+            }
+            else
+            {
+                Gps.IsPaused = true;
+            }
         }
     }
 }

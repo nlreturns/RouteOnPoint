@@ -11,9 +11,10 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <Maps:MapControl x:Name="myMap" MapServiceToken="qfAEoI0knTTAkdBtC4o2~KXFw5aREPHyJFinfVZ6ccw~AlmbJ28CLMhWNMHW1zJmabGGztsqmL6I8tJYrlWABARWY5DzcJ4gI69Js2Eh2TUw"/>
+        
         <Button Name="CenterLocationButton" HorizontalAlignment="Left" VerticalAlignment="Bottom" Width="50" Height="50" Content="&#xE81D;" FontFamily="Segoe MDL2 Assets" Click="CenterLocationButton_Click" FontSize="22" Background="Transparent"/>
         <Button Name="HelpButton" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="50" Height="50" Content="&#xE897;" FontFamily="Segoe MDL2 Assets" Click="HelpButton_Click" FontSize="22" Background="Transparent"/>
-        <Button Name="PlayPauseButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="50" Content="&#xE769;" FontFamily="Segoe MDL2 Assets" Click="PlayPauseButton_Click" FontSize="22" Background="Transparent"/>
+        <Button Name="PlayPauseButton" HorizontalAlignment="Right" VerticalAlignment="Top" Width="50" Height="50" Content="&#xE101;" FontFamily="Segoe MDL2 Assets" Click="PlayPauseButton_Click" FontSize="22" Background="Transparent"/>
 
     </Grid>
 </Page>

@@ -20,6 +20,7 @@ namespace RouteOnPoint.GPSHandler
         public Geolocator Geolocator;
         public static Geopoint CurrentLocation;
         public MapControl Map;
+        public bool IsPaused = false;
 
         public GPSReader(MapControl map)
         {
