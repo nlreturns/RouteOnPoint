@@ -14,7 +14,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
-using RouteOnPoint.Route;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -25,6 +24,7 @@ namespace RouteOnPoint.Pages
     /// </summary>
     public sealed partial class RouteViewModel : Page
     {
+        Frame rootFrame = Window.Current.Content as Frame;
 
         public GPSReader Gps;
 
@@ -40,6 +40,31 @@ namespace RouteOnPoint.Pages
             points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
             points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
             Gps.SetupRoute(points);
+        }
+
+        //Button to center the screen on the users location
+        private async void CenterLocationButton_Click(object sender, RoutedEventArgs e)
+        {
+            await Gps.GoToUserLocationAsync(true);
+        }
+
+        //Button to show the help page
+        private void HelpButton_Click(object sender, RoutedEventArgs e)
+        {
+            //rootFrame.Navigate(typeof(AssisViewModel));
+        }
+
+        //Button to play or pause the route session
+        private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Gps.IsPaused)
+            {
+                Gps.IsPaused = false;
+            }
+            else
+            {
+                Gps.IsPaused = true;
+            }
         }
     }
 }

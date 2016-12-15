@@ -24,6 +24,7 @@ namespace RouteOnPoint.GPSHandler
         public static MapIcon UserLocation;
         public MapControl Map;
         public List<POI> Points;
+        public bool IsPaused = false;
 
         public GPSReader(MapControl map)
         {
@@ -74,7 +75,6 @@ namespace RouteOnPoint.GPSHandler
                     //Adds the event when the position changes
                     Geolocator.PositionChanged += OnPositionChangedAsync;
                     GoToUserLocationAsync(true);
-
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
