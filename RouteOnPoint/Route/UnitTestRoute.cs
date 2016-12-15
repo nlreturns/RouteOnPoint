@@ -42,9 +42,9 @@ namespace RouteOnPoint.Route
 
         private void GetRoute(string path)
         {
-            Task<string> r2 = null;
+            Task<Route> r2 = null;
             Task.Run(() => r2 = _handler.GetRouteFromFile(path)).Wait();
-            _route = JsonConvert.DeserializeObject<Route>(r2.Result);
+            _route = r2.Result;
         }
 
     }

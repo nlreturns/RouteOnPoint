@@ -87,7 +87,12 @@ namespace RouteOnPoint
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            //@TODO GET ACTIVE ROUTE
+            RouteHandler save = new RouteHandler();
+            Route.Route route = new Route.Route("Mooi");
+            save.SaveRouteWithState(route, "RouteData.json");
+
+
             deferral.Complete();
         }
     }
