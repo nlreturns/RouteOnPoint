@@ -138,12 +138,15 @@ namespace RouteOnPoint.GPSHandler
                     // assign pushpin title
                     pushpin.Title = poi.Name;
 
+                    
+
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
 
                     // set pushpin bottom center over geoposition
                     pushpin.NormalizedAnchorPoint = new Point(0.5, 1.0);
 
+                    
 
                     // set custom image to pushpin
                     if (poi.Visited)
