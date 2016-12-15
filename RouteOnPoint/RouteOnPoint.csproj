@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -95,8 +95,13 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
     <Compile Include="LanguageUtil\MultiLang.cs" />
+    <Compile Include="Pages\AssistViewModel.xaml.cs">
+      <DependentUpon>AssistViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LanguageUtil\TestMultiLang.cs" />
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
     </Compile>
@@ -115,7 +120,7 @@
     <Compile Include="Route\Route.cs" />
     <Compile Include="Route\RouteHandler.cs" />
     <Compile Include="Route\RouteHelper.cs" />
-    <Compile Include="Route\UnitTest.cs" />
+    <Compile Include="Route\UnitTestRoute.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -150,6 +155,18 @@
     <Content Include="Assets\7.jpg" />
     <Content Include="Assets\8.jpg" />
     <Content Include="Assets\9.jpg" />
+    <Content Include="Assets\B1.jpg" />
+    <Content Include="Assets\B10.jpg" />
+    <Content Include="Assets\B2.jpg" />
+    <Content Include="Assets\B3.jpg" />
+    <Content Include="Assets\B4.jpg" />
+    <Content Include="Assets\B5.jpg" />
+    <Content Include="Assets\B6.jpg" />
+    <Content Include="Assets\B7.jpg" />
+    <Content Include="Assets\B8.html" />
+    <Content Include="Assets\B8.jpeg" />
+    <Content Include="Assets\B8.jpg" />
+    <Content Include="Assets\B9.jpg" />
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\DutchFlag.png" />
@@ -178,6 +195,9 @@
     <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
     <Content Include="Assets\Text\English\valkenbergInfo.txt" />
     <Content Include="Assets\Text\English\vishalInfo.txt" />
+    <Content Include="Assets\Icons\Blackdot.png" />
+    <Content Include="Assets\Icons\BlueIcon.png" />
+    <Content Include="Assets\Icons\GreenIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -195,6 +215,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Page Include="Pages\AssistViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\LanguageViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

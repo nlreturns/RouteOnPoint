@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
+using Windows.Foundation;
 using Windows.Services.Maps;
+using Windows.Storage.Streams;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -19,7 +21,9 @@ namespace RouteOnPoint.GPSHandler
     {
         public Geolocator Geolocator;
         public static Geopoint CurrentLocation;
+        public static MapIcon UserLocation;
         public MapControl Map;
+        public List<POI> Points;
         public bool IsPaused = false;
 
         public GPSReader(MapControl map)
@@ -52,6 +56,24 @@ namespace RouteOnPoint.GPSHandler
 
                     });
 
+                    //set usericon
+                    var myImageUri = new Uri("ms-appx:///Assets/Icons/Blackdot.png");
+                    UserLocation = new MapIcon()
+                    {
+                        Location = new Geopoint(new BasicGeoposition()
+                        {
+                            Latitude = pos.Coordinate.Latitude,
+                            Longitude = pos.Coordinate.Longitude
+
+                        }),
+                        NormalizedAnchorPoint = new Point(0.5, 1.0),
+                        Title = "My Location",
+                        ZIndex = 0,
+                        Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
+                    };
+
+                    Map.MapElements.Add(UserLocation);
+
                     //Adds the event when the position changes
                     Geolocator.PositionChanged += OnPositionChangedAsync;
                     GoToUserLocationAsync(true);
@@ -62,16 +84,17 @@ namespace RouteOnPoint.GPSHandler
                 //Unspecified
                 case GeolocationAccessStatus.Unspecified:
                     break;
-            }
+                }
         }
 
         public async void SetupRoute(List<POI> points)
         {
+            Points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            waypoints.Add(CurrentLocation);
+            //waypoints.Add(CurrentLocation);
             foreach (var point in points)
             {
-                waypoints.Add(new Geopoint(point.Coordinate));
+                waypoints.Add(new Geopoint(point._coordinate));
             }
 
             SetupGeoFence(points);
@@ -92,10 +115,51 @@ namespace RouteOnPoint.GPSHandler
                       result.Route.BoundingBox,
                       null,
                       Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+                DrawIcons();
             }
             else
             {
                 Debug.WriteLine("error with route");
+            }
+
+        }
+
+        public void DrawIcons()
+        {
+            foreach (var poi in Points)
+            {
+                if (poi._name != null)
+                {
+                    var pushpin = new MapIcon();
+
+                    // assign pushpin geoposition
+                    pushpin.Location = new Geopoint(poi._coordinate);
+
+                    // assign pushpin title
+                    pushpin.Title = poi._name;
+
+                    //  make sure pushpin always appears
+                    pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
+
+                    // set pushpin bottom center over geoposition
+                    pushpin.NormalizedAnchorPoint = new Point(0.5, 1.0);
+
+
+                    // set custom image to pushpin
+                    if (poi._visited)
+                    {
+                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                        pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                    }
+                    else
+                    {
+                        var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                        pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                    }
+
+                    // put pushpin on the map
+                    Map.MapElements.Add(pushpin);
+                }
             }
 
         }
@@ -105,11 +169,11 @@ namespace RouteOnPoint.GPSHandler
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
             {
-                if (poi.Name != null)
+                if (poi._name != null)
                 {
-                    Geopoint point = new Geopoint(poi.Coordinate);
+                    Geopoint point = new Geopoint(poi._coordinate);
                     // Set the fence ID.
-                    string fenceId = poi.Name;
+                    string fenceId = poi._name;
 
                     // Define the fence location and radius.
                     BasicGeoposition position;
@@ -155,13 +219,19 @@ namespace RouteOnPoint.GPSHandler
         private async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
         {
             //Set the currentlocation to the new position when the positions changes
-                CurrentLocation = new Geopoint(new BasicGeoposition()
-                {
-                    Latitude = e.Position.Coordinate.Latitude,
-                    Longitude = e.Position.Coordinate.Longitude
-                });
-        }
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+               CoreDispatcherPriority.High, (() =>
+               {
+                   UserLocation.Location = new Geopoint(new BasicGeoposition()
+                   {
+                       Latitude = e.Position.Coordinate.Latitude,
+                       Longitude = e.Position.Coordinate.Longitude
 
+                   });
+                   GoToUserLocationAsync(false);
+               }));
+        }
+        
         public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
