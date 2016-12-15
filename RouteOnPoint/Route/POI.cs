@@ -8,25 +8,25 @@ using Windows.Devices.Geolocation;
 
 namespace RouteOnPoint.Route
 {
-    class POI
+    public class POI
     {
-        private string _name { get; set; }
+        public string Name { get; set; }
         private string _INFO { get; set; }
-        private BasicGeoposition _coordinate { get; set; }
+        public BasicGeoposition Coordinate { get; set; }
         private string _path { get; set; }
         private bool _visited { get; set; }
 
         public POI(string name, string INFO, string path, bool visited, BasicGeoposition coordinate)
         {
-            this._name = name;
+            this.Name = name;
             this._INFO = INFO;
             this._path = path;
             this._visited = visited;
-            this._coordinate = coordinate;
+            this.Coordinate = coordinate;
         }
         public override string ToString()
         {
-            return MultiLang.GetContent(_name) + " " + MultiLang.GetContent(_INFO);
+            return MultiLang.GetContent(Name) + " " + MultiLang.GetContent(_INFO);
         }
     }
 }

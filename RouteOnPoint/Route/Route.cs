@@ -14,7 +14,7 @@ namespace RouteOnPoint.Route
 
         /**
          * Constructor containing name and list of POIs.
-         * string _name - The name of the route.
+         * string Name - The name of the route.
          * List<POI> _points - the list with Point of Interests.
          */
         public Route(string _name, List<POI> _points)
@@ -25,7 +25,7 @@ namespace RouteOnPoint.Route
 
         /**
          * Constructor containing name.
-         * string _name - The name of the route.
+         * string Name - The name of the route.
          */
         public Route(string _name)
         {
