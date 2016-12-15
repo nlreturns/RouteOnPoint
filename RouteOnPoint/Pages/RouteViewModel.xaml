@@ -15,22 +15,25 @@
         <Button Name="CenterLocationButton" 
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Bottom" 
-                Width="70" Height="70" 
+                Width="73" Height="70" 
                 Content="&#xE81D;" 
                 FontFamily="Segoe MDL2 Assets" 
                 Click="CenterLocationButton_Click" 
-                FontSize="35" 
-                Background="Transparent"/>
+                FontSize="55" 
+                Background="Transparent"
+                Foreground="Gray"/>
         
         <Button Name="HelpButton" 
                 HorizontalAlignment="Right" 
                 VerticalAlignment="Bottom" 
-                Width="70" Height="70" 
+                Width="70" Height="72" 
                 Content="&#xE897;" 
                 FontFamily="Segoe MDL2 Assets" 
                 Click="HelpButton_Click" 
-                FontSize="35" 
-                Background="Transparent"/>
+                FontSize="50" 
+                FontWeight="Bold"
+                Background="Transparent"
+                Foreground="OrangeRed"/>
         
         <Button Name="PlayPauseButton" 
                 HorizontalAlignment="Right" 
@@ -39,8 +42,9 @@
                 Content="&#xE101;" 
                 FontFamily="Segoe MDL2 Assets" 
                 Click="PlayPauseButton_Click" 
-                FontSize="35" 
-                Background="Transparent"/>
+                FontSize="55" 
+                Background="Transparent"
+                Foreground="Gray"/>
 
     </Grid>
 </Page>

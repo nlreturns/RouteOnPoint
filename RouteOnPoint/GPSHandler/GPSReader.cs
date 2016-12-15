@@ -94,7 +94,7 @@ namespace RouteOnPoint.GPSHandler
             //waypoints.Add(CurrentLocation);
             foreach (var point in points)
             {
-                waypoints.Add(new Geopoint(point.Coordinate));
+                waypoints.Add(new Geopoint(point._coordinate));
             }
 
             SetupGeoFence(points);
@@ -128,15 +128,15 @@ namespace RouteOnPoint.GPSHandler
         {
             foreach (var poi in Points)
             {
-                if (poi.Name != null)
+                if (poi._name != null)
                 {
                     var pushpin = new MapIcon();
 
                     // assign pushpin geoposition
-                    pushpin.Location = new Geopoint(poi.Coordinate);
+                    pushpin.Location = new Geopoint(poi._coordinate);
 
                     // assign pushpin title
-                    pushpin.Title = poi.Name;
+                    pushpin.Title = poi._name;
 
                     
 
@@ -149,7 +149,7 @@ namespace RouteOnPoint.GPSHandler
                     
 
                     // set custom image to pushpin
-                    if (poi.Visited)
+                    if (poi._visited)
                     {
                         var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
                         pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
@@ -172,11 +172,11 @@ namespace RouteOnPoint.GPSHandler
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
             {
-                if (poi.Name != null)
+                if (poi._name != null)
                 {
-                    Geopoint point = new Geopoint(poi.Coordinate);
+                    Geopoint point = new Geopoint(poi._coordinate);
                     // Set the fence ID.
-                    string fenceId = poi.Name;
+                    string fenceId = poi._name;
 
                     // Define the fence location and radius.
                     BasicGeoposition position;

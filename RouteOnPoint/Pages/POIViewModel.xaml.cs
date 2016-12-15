@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
+using Windows.UI.Core;
+using RouteOnPoint.Route;
+using Windows.UI.Xaml.Media.Imaging;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -23,9 +26,32 @@ namespace RouteOnPoint.Pages
     /// </summary>
     public sealed partial class POIViewModel : Page
     {
+        Frame rootFrame = Window.Current.Content as Frame;
+        POI POI;
+
         public POIViewModel()
         {
             this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs args)
+        {
+            var POIGot = (POI)args.Parameter;
+            POI = POIGot;
+
+            FillContent();
+        }
+
+        private void FillContent()
+        {
+            POIInfo.Text = POI._INFO;
+            POIName.Text = POI._name;
+            Image.Source = new BitmapImage(new Uri(POI._path));
+        }
+
+        private void Close(object sender, RoutedEventArgs e)
+        {
+            rootFrame.GoBack();
         }
     }
 }

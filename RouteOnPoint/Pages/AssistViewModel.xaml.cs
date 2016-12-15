@@ -22,36 +22,11 @@ namespace RouteOnPoint.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class RouteSelectionViewModel : Page
+    public sealed partial class AssistViewModel : Page
     {
-        Frame rootFrame = Window.Current.Content as Frame;
-
-        public RouteSelectionViewModel()
+        public AssistViewModel()
         {
             this.InitializeComponent();
-
-            Kilometer.Text = MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME");
-            Selecteer.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT");
-            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
-        }
-        
-        private void Click(object sender, TappedRoutedEventArgs e)
-        {
-            rootFrame.Navigate(typeof(RouteViewModel));
-        }
-
-        public void App_BackRequested(object sender, BackRequestedEventArgs e)
-        {
-            if (rootFrame == null)
-                return;
-
-            // Navigate back if possible, and if the event has not 
-            // already been handled .
-            if (rootFrame.CanGoBack && e.Handled == false)
-            {
-                e.Handled = true;
-                rootFrame.GoBack();
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

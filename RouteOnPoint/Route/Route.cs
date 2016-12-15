@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,9 @@ namespace RouteOnPoint.Route
 {
     class Route
     {
+        [JsonProperty]
         private string _name;
+        [JsonProperty]
         public List<POI> _points { get; set; }
 
         /**
@@ -17,6 +20,7 @@ namespace RouteOnPoint.Route
          * string Name - The name of the route.
          * List<POI> _points - the list with Point of Interests.
          */
+        [JsonConstructor]
         public Route(string _name, List<POI> _points)
         {
             this._name = _name;
