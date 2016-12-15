@@ -58,12 +58,11 @@ namespace RouteOnPoint.Route
          * Get a Route from excisting file.
          * Returns Route with excisting data.
          */
-        public async Task<string> GetRouteFromFile(String path)
+        public async Task<Route> GetRouteFromFile(String path)
         {
             // select folder and file
             StorageFolder folder = ApplicationData.Current.LocalFolder;
             StorageFile file = await folder.GetFileAsync(path);
-<<<<<<< HEAD
 
             // open stream and get size
             var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
@@ -77,26 +76,8 @@ namespace RouteOnPoint.Route
                     uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
                     string text = dataReader.ReadString(numBytesLoaded);
                     // convert to Route object and return
-                    return text;
-                }
-            }
-        }
-=======
->>>>>>> origin/master
-
-            // open stream and get size
-            var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
-            ulong size = stream.Size;
-
-            // read stream
-            using (var inputStream = stream.GetInputStreamAt(0))
-            {
-                using (var dataReader = new Windows.Storage.Streams.DataReader(inputStream))
-                {
-                    uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
-                    string text = dataReader.ReadString(numBytesLoaded);
-                    // convert to Route object and return
-                    return text;
+                    Route obj = JsonConvert.DeserializeObject<Route>(text);
+                    return obj;
                 }
             }
         }

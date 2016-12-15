@@ -7,10 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Newtonsoft.Json;
-<<<<<<< HEAD
-=======
 using RouteOnPoint.GPSHandler;
->>>>>>> origin/master
 
 namespace RouteOnPoint.Route
 {
@@ -23,7 +20,7 @@ namespace RouteOnPoint.Route
         {
             MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
             _handler = new RouteHandler();
-            
+
             /*
              * er kan maar 1 tegelijk uitgevoerd worden omdat beide methodes hetzelfde
              * file gebruiken. Commentarieër 1 methode om de andere te testen.
@@ -33,7 +30,7 @@ namespace RouteOnPoint.Route
 
             /* eventuele breakpoint line om te kijken of alle data in de juiste
              * variabelen zit.
-             */ 
+             */
             //string breakpoint = "Ik wil hier een breakpoint";
         }
 
@@ -45,9 +42,9 @@ namespace RouteOnPoint.Route
 
         private void GetRoute(string path)
         {
-            Task<string> r2 = null;
+            Task<Route> r2 = null;
             Task.Run(() => r2 = _handler.GetRouteFromFile(path)).Wait();
-            _route = JsonConvert.DeserializeObject<Route>(r2.Result);
+            _route = r2.Result;
         }
 
     }
