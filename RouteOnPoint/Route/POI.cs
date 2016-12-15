@@ -12,7 +12,7 @@ namespace RouteOnPoint.Route
     {
         private string _name { get; set; }
         private string _INFO { get; set; }
-        private BasicGeoposition _coordinate { get; set; }
+        public BasicGeoposition _coordinate { get; set; }
         private string _path { get; set; }
         private bool _visited { get; set; }
 
