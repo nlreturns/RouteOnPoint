@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Windows.Storage;
+using Newtonsoft.Json;
 
 /**
  * Author: Jan-Willem Dooms <janwillem.dooms@gmail.com>
@@ -29,25 +31,54 @@ namespace RouteOnPoint.Route
          * 
          * Version 0.2 - removed List<POI> POI - this is saved inside Route
          */
-        public void SaveRouteWithState(Route route, String path)
-        {   
-            FileStream outFile = File.Create(path);
-            XmlSerializer formatter = new XmlSerializer(typeof(Route));
-            formatter.Serialize(outFile, route);
+        public async void SaveRouteWithState(Route route, string path)
+        {
+            // create json string
+            string jsonString = JsonConvert.SerializeObject(route);
+            // select the current folder and file, create if necessary.
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.CreateFileAsync(path, CreationCollisionOption.ReplaceExisting);
+
+            // write file
+            var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+            using (var outputStream = stream.GetOutputStreamAt(0))
+            {
+                using (var dataWriter = new Windows.Storage.Streams.DataWriter(outputStream))
+                {
+                    dataWriter.WriteString(jsonString);
+                    await dataWriter.StoreAsync();
+                    await outputStream.FlushAsync();
+                }
+            }
+            stream.Dispose();
+
         }
 
         /*
          * Get a Route from excisting file.
          * Returns Route with excisting data.
          */
-        private Route GetRouteFromFile(String path)
+        public async Task<string> GetRouteFromFile(String path)
         {
-            XmlSerializer formatter = new XmlSerializer(typeof(Route));
-            FileStream aFile = new FileStream(path, FileMode.Open);
-            byte[] buffer = new byte[aFile.Length];
-            aFile.Read(buffer, 0, (int)aFile.Length);
-            MemoryStream stream = new MemoryStream(buffer);
-            return (Route)formatter.Deserialize(stream);
+            // select folder and file
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.GetFileAsync(path);
+
+            // open stream and get size
+            var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+            ulong size = stream.Size;
+
+            // read stream
+            using (var inputStream = stream.GetInputStreamAt(0))
+            {
+                using (var dataReader = new Windows.Storage.Streams.DataReader(inputStream))
+                {
+                    uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
+                    string text = dataReader.ReadString(numBytesLoaded);
+                    // convert to Route object and return
+                    return text;
+                }
+            }
         }
 
         /*
