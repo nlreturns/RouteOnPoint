@@ -45,8 +45,6 @@ namespace RouteOnPoint.Route
             Task<string> r2 = null;
             Task.Run(() => r2 = _handler.GetRouteFromFile(path)).Wait();
             _route = JsonConvert.DeserializeObject<Route>(r2.Result);
-            GPSReader gpsreader = new GPSReader();
-            gpsreader.SetupGeoFence(_route._points);
         }
 
     }
