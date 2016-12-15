@@ -196,9 +196,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Reference Include="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Pages\LanguageViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
