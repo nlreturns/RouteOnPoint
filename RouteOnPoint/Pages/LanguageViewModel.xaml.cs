@@ -1,4 +1,5 @@
-﻿using RouteOnPoint.LanguageUtil;
+﻿using RouteOnPoint.GPSHandler;
+using RouteOnPoint.LanguageUtil;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,8 +31,12 @@ namespace RouteOnPoint.Pages
 
         public LanguageViewModel()
         {
+            if (!GPSReader.created)
+                GPSReader.SetupGPS();
+            GPSReader.created = true;
             this.InitializeComponent();
             TestMultiLang test = new TestMultiLang();
+
         }
 
         private async void Language_Click(object sender, RoutedEventArgs e)
