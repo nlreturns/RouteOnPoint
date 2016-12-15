@@ -26,7 +26,7 @@ namespace RouteOnPoint.GPSHandler
         public List<POI> Points;
         public bool IsPaused = false;
 
-        public GPSReader(p)
+        public GPSReader()
         {
             SetupGPS();
         }
