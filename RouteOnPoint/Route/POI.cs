@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace RouteOnPoint.Route
 {
-    class POI
+    public class POI
     {
         //Key Value of the Info dictionary
         [JsonProperty]
@@ -17,7 +17,7 @@ namespace RouteOnPoint.Route
 
         //GEO Posistion of the point
         [JsonProperty]
-        private BasicGeoposition _coordinate { get; set; }
+        public BasicGeoposition _coordinate { get; set; }
 
         //Location of the image (should be in assets)
         [JsonProperty]
@@ -30,7 +30,9 @@ namespace RouteOnPoint.Route
 
         //Boolean visited if true than the user has already been here.
         [JsonProperty]
-        private bool _visited { get; set; }
+        public bool _visited { get; set; }
+
+
 
         /// <summary>
         /// Creates a complete point of interest.

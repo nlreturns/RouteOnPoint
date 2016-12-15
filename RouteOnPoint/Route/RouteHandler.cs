@@ -81,15 +81,7 @@ namespace RouteOnPoint.Route
             }
         }
 
-        /*
-         * Check if the user is near a POI
-         * returns POI - the Point of interest which u are
-         * close at.
-         */
-        private POI CheckPOIArrived(List<POI> POI)
-        {
-            throw new NotImplementedException();
-        }
+
 
         /**
          * Checks if the user has left the route

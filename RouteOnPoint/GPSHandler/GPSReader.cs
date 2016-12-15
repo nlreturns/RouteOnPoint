@@ -71,7 +71,7 @@ namespace RouteOnPoint.GPSHandler
             waypoints.Add(CurrentLocation);
             foreach (var point in points)
             {
-                waypoints.Add(new Geopoint(point.Coordinate));
+                waypoints.Add(new Geopoint(point._coordinate));
             }
 
             SetupGeoFence(points);
@@ -105,11 +105,11 @@ namespace RouteOnPoint.GPSHandler
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
             {
-                if (poi.Name != null)
+                if (poi._name != null)
                 {
-                    Geopoint point = new Geopoint(poi.Coordinate);
+                    Geopoint point = new Geopoint(poi._coordinate);
                     // Set the fence ID.
-                    string fenceId = poi.Name;
+                    string fenceId = poi._name;
 
                     // Define the fence location and radius.
                     BasicGeoposition position;
