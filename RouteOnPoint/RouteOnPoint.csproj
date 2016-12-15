@@ -177,6 +177,7 @@
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Routes\Resume.png" />
     <Content Include="Assets\Text\Dutch\AntoniusKerkInfo.txt" />
     <Content Include="Assets\Text\Dutch\bibliotheekInfo.txt" />
     <Content Include="Assets\Text\Dutch\kasteelInfo.txt" />
