@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -195,6 +195,9 @@
     <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
     <Content Include="Assets\Text\English\valkenbergInfo.txt" />
     <Content Include="Assets\Text\English\vishalInfo.txt" />
+    <Content Include="Assets\Icons\Blackdot.png" />
+    <Content Include="Assets\Icons\BlueIcon.png" />
+    <Content Include="Assets\Icons\GreenIcon.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

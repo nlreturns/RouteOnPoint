@@ -25,13 +25,13 @@ namespace RouteOnPoint.GPSHandler
 
         public static TimeSpan? TimeToPoi(/*POI point, Geocoordinate coord*/)
         {
-//            double metersToPoint = DistanceToPOI(point, coord);
-//            int timeInSeconds = (int)Math.Floor((metersToPoint / coord.Speed));
-//            Debug.WriteLine(timeInSeconds);
-//
-//            int minutes = timeInSeconds/60;
-//            int hours = minutes/60;
-//            return new TimeSpan(hours,minutes,timeInSeconds);
+            //            double metersToPoint = DistanceToPOI(point, coord);
+            //            int timeInSeconds = (int)Math.Floor((metersToPoint / coord.Speed));
+            //            Debug.WriteLine(timeInSeconds);
+            //
+            //            int minutes = timeInSeconds/60;
+            //            int hours = minutes/60;
+            //            return new TimeSpan(hours,minutes,timeInSeconds);
             return null;
         }
     }
