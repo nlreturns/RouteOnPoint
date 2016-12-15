@@ -16,8 +16,8 @@ namespace RouteOnPoint.LanguageUtil
         public enum LanguageEnum { English, Dutch};
 
         private static LanguageEnum Language;
-            
-        public static void setLanguage(LanguageEnum lang)
+
+        public static async Task setLanguage(LanguageEnum lang)
         {
             Language = lang;
 
@@ -25,7 +25,7 @@ namespace RouteOnPoint.LanguageUtil
             {
                 _Dutch = new Dictionary<string, string>();
                 LoadPageTextDutch();
-                LoadHistorischeKilometerDutch();
+                await LoadHistorischeKilometerDutch();
                 LoadBlindWallsDutch();
             }
 
@@ -33,7 +33,7 @@ namespace RouteOnPoint.LanguageUtil
             {
                 _English = new Dictionary<string, string>();
                 LoadPageTextEnglish();
-                LoadHistorischeKilometerEnglish();
+                await LoadHistorischeKilometerEnglish();
                 LoadBlindWallsEnglish();
             }
 
@@ -58,7 +58,7 @@ namespace RouteOnPoint.LanguageUtil
         }
 
         //DUTCH
-        private static async void LoadHistorischeKilometerDutch()
+        private static async Task LoadHistorischeKilometerDutch()
         {
             string[] paths = new string[9];
 
@@ -230,7 +230,7 @@ namespace RouteOnPoint.LanguageUtil
         }
 
         //ENGLISH
-        private static async void LoadHistorischeKilometerEnglish()
+        private static async Task LoadHistorischeKilometerEnglish()
         {
             string[] paths = new string[9];
 

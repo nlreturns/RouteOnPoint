@@ -96,6 +96,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="LanguageUtil\MultiLang.cs" />
+    <Compile Include="LanguageUtil\TestMultiLang.cs" />
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
     </Compile>

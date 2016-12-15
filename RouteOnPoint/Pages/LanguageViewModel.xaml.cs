@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RouteOnPoint.LanguageUtil;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -28,6 +29,7 @@ namespace RouteOnPoint.Pages
         public LanguageViewModel()
         {
             this.InitializeComponent();
+            TestMultiLang test = new TestMultiLang();
         }
 
         private void Language_Click(object sender, RoutedEventArgs e)
