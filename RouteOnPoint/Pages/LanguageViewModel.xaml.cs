@@ -34,11 +34,11 @@ namespace RouteOnPoint.Pages
             TestMultiLang test = new TestMultiLang();
         }
 
-        private void Language_Click(object sender, RoutedEventArgs e)
+        private async void Language_Click(object sender, RoutedEventArgs e)
         {
             Button button = (Button)sender;
             language = button.Name.ToString();
-            setLanguage((LanguageEnum)Enum.Parse(typeof(LanguageEnum), language));
+            await setLanguage((LanguageEnum)Enum.Parse(typeof(LanguageEnum), language));
             rootFrame.Navigate(typeof(RouteSelectionViewModel));
         }
 
