@@ -17,16 +17,32 @@ using RouteOnPoint.Route;
 
 namespace RouteOnPoint.GPSHandler
 {
-    public static class GPSReader
+    public class GPSReader
     {
-        public static Geolocator Geolocator;
+        public Geolocator Geolocator;
         public static Geopoint CurrentLocation;
         public static MapIcon UserLocation;
-        public static MapControl Map;
-        public static List<POI> Points;
-        public static bool IsPaused = false;
-        public static bool created = false;
-        public static async void SetupGPS()
+        public MapControl Map;
+        public List<POI> Points;
+        public bool IsPaused = false;
+
+        public GPSReader()
+        {
+            SetupGPS();
+        }
+
+        public void AddMap(MapControl map)
+        {
+            Map = map;
+
+            Map.MapElements.Add(UserLocation);
+            //Adds the event when the position changes
+            Geolocator.PositionChanged += OnPositionChangedAsync;
+            //centers the map to the location of the user
+            GoToUserLocationAsync(true);
+        }
+
+        private async void SetupGPS()
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
@@ -66,11 +82,6 @@ namespace RouteOnPoint.GPSHandler
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
 
-                    Map.MapElements.Add(UserLocation);
-
-                    //Adds the event when the position changes
-                    Geolocator.PositionChanged += OnPositionChangedAsync;
-                    await GoToUserLocationAsync(true);
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
@@ -81,7 +92,7 @@ namespace RouteOnPoint.GPSHandler
                 }
         }
 
-        public static async void SetupRoute(List<POI> points)
+        public async void SetupRoute(List<POI> points)
         {
             Points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
@@ -118,7 +129,7 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        public static void DrawIcons()
+        public void DrawIcons()
         {
             foreach (var poi in Points)
             {
@@ -132,12 +143,15 @@ namespace RouteOnPoint.GPSHandler
                     // assign pushpin title
                     pushpin.Title = poi._name;
 
+                    
+
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
 
                     // set pushpin bottom center over geoposition
                     pushpin.NormalizedAnchorPoint = new Point(0.5, 1.0);
 
+                    
 
                     // set custom image to pushpin
                     if (poi._visited)
@@ -158,7 +172,7 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        public static void SetupGeoFence(List<POI> points)
+        public void SetupGeoFence(List<POI> points)
         {
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
@@ -210,7 +224,7 @@ namespace RouteOnPoint.GPSHandler
         GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
         }
 
-        private static async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
+        private async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
         {
             //Set the currentlocation to the new position when the positions changes
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
@@ -226,7 +240,7 @@ namespace RouteOnPoint.GPSHandler
                }));
         }
         
-        public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
+        public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
             var reports = sender.ReadReports();
@@ -262,7 +276,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        public static async Task GoToUserLocationAsync(bool force)
+        public async Task GoToUserLocationAsync(bool force)
         {
             if (force || CurrentLocation != null)
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
@@ -277,7 +291,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        public static Geopoint GetCurrentLocation()
+        public Geopoint GetCurrentLocation()
         {
             //returns the last know location (updates every 2 seconds)
             return CurrentLocation;
