@@ -30,12 +30,7 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
 
-            try
-            {
-                Kilometer.Text = MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME");
-            }
-            catch (Exception e) { Kilometer.Text = "ERROR"; }
-
+            Kilometer.Text = MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME");
             Selecteer.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT");
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
         }

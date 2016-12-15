@@ -13,7 +13,7 @@ namespace RouteOnPoint.Route
     {
         //Key Value of the Info dictionary
         [JsonProperty]
-        private string _INFO { get; set; }
+        public string _INFO { get; set; }
 
         //GEO Posistion of the point
         [JsonProperty]
@@ -21,12 +21,12 @@ namespace RouteOnPoint.Route
 
         //Location of the image (should be in assets)
         [JsonProperty]
-        private string _path { get; set; }
+        public string _path { get; set; }
 
 
         //Key Value of the Name dicionary
         [JsonProperty]
-        private string _name { get; set; }
+        public string _name { get; set; }
         
         //Boolean visited if true than the user has already been here.
         [JsonProperty]
