@@ -42,6 +42,9 @@ namespace RouteOnPoint.Pages
 //            points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
 //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
 //            Gps.SetupRoute(points);
+            
+
+            
         }
 
         //Button to center the screen on the users location

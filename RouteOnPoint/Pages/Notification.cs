@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RouteOnPoint.Route;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,6 +28,17 @@ namespace RouteOnPoint
         public static void Pauzeer(ContentDialog content, object sender)
         {
 
+        }
+
+        public static async void POIVisit(POI poi)
+        {
+            ContentDialog dialog = new ContentDialog()
+            {
+                FontSize = 26,
+                Title = "U nadert " + poi._name,
+                PrimaryButtonText = "Ok"
+            };
+            await dialog.ShowAsync();
         }
     }
 }

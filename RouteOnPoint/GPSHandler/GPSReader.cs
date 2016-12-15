@@ -14,6 +14,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
+using RouteOnPoint.Pages;
 
 namespace RouteOnPoint.GPSHandler
 {
@@ -25,6 +26,7 @@ namespace RouteOnPoint.GPSHandler
         public MapControl Map;
         public List<POI> Points;
         public bool IsPaused = false;
+        
 
         public GPSReader(MapControl map)
         {
@@ -251,7 +253,7 @@ namespace RouteOnPoint.GPSHandler
                     case GeofenceState.Entered:
                         Debug.WriteLine("Entered geofence");
                         GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        //trigger the notification TODO
+                        handleGeoFenceEntered(geofence);
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
@@ -266,6 +268,20 @@ namespace RouteOnPoint.GPSHandler
                         break;
                 }
             }
+        }
+
+        private void handleGeoFenceEntered(Geofence geo)
+        {
+            foreach(POI poi in Points)
+            {
+                if (poi._name.Equals(geo.Id))
+                {
+                    poi._visited = true;
+                    Notification.POIVisit(poi);
+                }
+            }
+
+            //navigeren naar poiviewmodel
         }
 
         public async Task GoToUserLocationAsync(bool force)
