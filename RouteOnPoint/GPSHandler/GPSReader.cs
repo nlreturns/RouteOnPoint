@@ -28,7 +28,7 @@ namespace RouteOnPoint.GPSHandler
 
         public GPSReader(MapControl map)
         {
-            //SetupGPS();
+            SetupGPS();
             Map = map;
         }
 
@@ -57,7 +57,7 @@ namespace RouteOnPoint.GPSHandler
                     });
 
                     //set usericon
-                    var myImageUri = new Uri("ms-appx:///Assets/Blackdot.png");
+                    var myImageUri = new Uri("ms-appx:///Assets/Icons/Blackdot.png");
                     UserLocation = new MapIcon()
                     {
                         Location = new Geopoint(new BasicGeoposition()
@@ -71,6 +71,8 @@ namespace RouteOnPoint.GPSHandler
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
+
+                    Map.MapElements.Add(UserLocation);
 
                     //Adds the event when the position changes
                     Geolocator.PositionChanged += OnPositionChangedAsync;
@@ -106,7 +108,7 @@ namespace RouteOnPoint.GPSHandler
                 Map.Routes.Clear();
                 // Add the new MapRouteView to the Routes collection
                 // of the MapControl.
-                //Map.Routes.Add(viewOfRoute);
+                Map.Routes.Add(viewOfRoute);
 
                 // Fit the MapControl to the route.
                 await Map.TrySetViewBoundsAsync(
@@ -146,12 +148,12 @@ namespace RouteOnPoint.GPSHandler
                     // set custom image to pushpin
                     if (poi.Visited)
                     {
-                        var myImageUri = new Uri("ms-appx:///Assets/GreenIcon.png");
+                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
                         pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
                     }
                     else
                     {
-                        var myImageUri = new Uri("ms-appx:///Assets/BlueIcon.png");
+                        var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
                         pushpin.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
                     }
 
