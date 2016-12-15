@@ -20,7 +20,7 @@ namespace RouteOnPoint.GPSHandler
     public static class GPSReader
     {
         public static Geolocator Geolocator;
-        public static Geopoint CurrentLocation;
+        private static Geopoint _lastGeopoint;
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
@@ -36,6 +36,7 @@ namespace RouteOnPoint.GPSHandler
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user
             GoToUserLocationAsync(true);
+            //TODO enable buttons
         }
 
         public static async Task<bool> SetupGPS()
@@ -53,14 +54,6 @@ namespace RouteOnPoint.GPSHandler
                     
                     //Activates GPS and gets first location
                     Geoposition pos = await Geolocator.GetGeopositionAsync();
-
-                    //Sets CurrentLocation as the location
-                    CurrentLocation = new Geopoint(new BasicGeoposition()
-                    {
-                        Latitude = pos.Coordinate.Latitude,
-                        Longitude = pos.Coordinate.Longitude
-
-                    });
 
                     //set usericon
                     var myImageUri = new Uri("ms-appx:///Assets/Icons/Blackdot.png");
@@ -94,7 +87,7 @@ namespace RouteOnPoint.GPSHandler
         {
             Points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            //waypoints.Add(CurrentLocation);
+            waypoints.Add(UserLocation.Location);
             foreach (var point in points)
             {
                 waypoints.Add(new Geopoint(point._coordinate));
@@ -228,6 +221,7 @@ namespace RouteOnPoint.GPSHandler
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                CoreDispatcherPriority.High, (() =>
                {
+                   _lastGeopoint = UserLocation.Location;
                    UserLocation.Location = new Geopoint(new BasicGeoposition()
                    {
                        Latitude = e.Position.Coordinate.Latitude,
@@ -276,11 +270,11 @@ namespace RouteOnPoint.GPSHandler
 
         public static async Task GoToUserLocationAsync(bool force)
         {
-            if (force || CurrentLocation != null)
+            if (force || UserLocation != null)
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.High, (() =>
                     {
-                        Map.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(CurrentLocation, 1000));
+                        Map.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(UserLocation.Location, 1000));
                     }));
             else
             {
@@ -292,7 +286,7 @@ namespace RouteOnPoint.GPSHandler
         public static Geopoint GetCurrentLocation()
         {
             //returns the last know location (updates every 2 seconds)
-            return CurrentLocation;
+            return UserLocation.Location;
         }
     }
 }
