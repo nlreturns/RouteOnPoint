@@ -212,13 +212,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <Page Include="Pages\AssistViewModel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
->>>>>>> refs/remotes/origin/master
     <Page Include="Pages\LanguageViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

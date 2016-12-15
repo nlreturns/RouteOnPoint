@@ -15,13 +15,8 @@ namespace RouteOnPoint.Route
         private string _name { get; set; }
         [JsonProperty]
         private string _INFO { get; set; }
-<<<<<<< HEAD
         [JsonProperty]
         private BasicGeoposition _coordinate { get; set; }
-        [JsonProperty]
-=======
-        public BasicGeoposition _coordinate { get; set; }
->>>>>>> refs/remotes/origin/master
         private string _path { get; set; }
         [JsonProperty]
         private bool _visited { get; set; }
