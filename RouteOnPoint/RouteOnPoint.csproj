@@ -98,9 +98,13 @@
     <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
     <Compile Include="LanguageUtil\MultiLang.cs" />
+<<<<<<< HEAD
     <Compile Include="Pages\AssistViewModel.xaml.cs">
       <DependentUpon>AssistViewModel.xaml</DependentUpon>
     </Compile>
+=======
+    <Compile Include="LanguageUtil\TestMultiLang.cs" />
+>>>>>>> refs/remotes/origin/RickBranch
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
     </Compile>
