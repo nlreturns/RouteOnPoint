@@ -43,15 +43,17 @@ namespace RouteOnPoint.LanguageUtil
         {
 
             string value = "";
-
-            if (Language == LanguageEnum.Dutch)
+            if (key != null)
             {
-                _Dutch.TryGetValue(key, out value);
-            }
+                if (Language == LanguageEnum.Dutch)
+                {
+                    _Dutch.TryGetValue(key, out value);
+                }
 
-            if (Language == LanguageEnum.English)
-            {
-                _English.TryGetValue(key, out value);
+                if (Language == LanguageEnum.English)
+                {
+                    _English.TryGetValue(key, out value);
+                }
             }
 
             return value;
