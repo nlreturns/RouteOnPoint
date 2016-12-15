@@ -38,7 +38,7 @@ namespace RouteOnPoint.GPSHandler
             GoToUserLocationAsync(true);
         }
 
-        private static async void SetupGPS()
+        public static async Task<bool> SetupGPS()
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
@@ -86,6 +86,8 @@ namespace RouteOnPoint.GPSHandler
                 case GeolocationAccessStatus.Unspecified:
                     break;
                 }
+
+            return true;
         }
 
         public static async void SetupRoute(List<POI> points)
