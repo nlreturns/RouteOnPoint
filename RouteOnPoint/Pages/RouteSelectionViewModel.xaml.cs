@@ -37,6 +37,8 @@ namespace RouteOnPoint.Pages
         
         private void Click(object sender, TappedRoutedEventArgs e)
         {
+            Grid g = (Grid)sender;
+            switch (g.Name) { }
             rootFrame.Navigate(typeof(RouteViewModel));
         }
 

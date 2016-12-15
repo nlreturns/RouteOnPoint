@@ -31,9 +31,6 @@ namespace RouteOnPoint.Pages
 
         public LanguageViewModel()
         {
-            if (!GPSReader.created)
-                GPSReader.SetupGPS();
-            GPSReader.created = true;
             this.InitializeComponent();
             TestMultiLang test = new TestMultiLang();
 

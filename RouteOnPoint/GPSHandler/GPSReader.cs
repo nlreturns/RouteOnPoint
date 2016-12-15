@@ -25,7 +25,7 @@ namespace RouteOnPoint.GPSHandler
         public static MapControl Map;
         public static List<POI> Points;
         public static bool IsPaused = false;
-
+        internal static bool created;
 
         public static void AddMap(MapControl map)
         {
@@ -38,7 +38,7 @@ namespace RouteOnPoint.GPSHandler
             GoToUserLocationAsync(true);
         }
 
-        private static async void SetupGPS()
+        public  static async void SetupGPS()
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();

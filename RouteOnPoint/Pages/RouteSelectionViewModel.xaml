@@ -20,13 +20,14 @@
         </StackPanel>
         <StackPanel Grid.Row="3">
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <Grid Tapped="Click">
-                    <Image Source="/Assets/Routes/BlindWalls.png" Stretch="Fill"/>
-                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Blind walls"/>
+                
+                <Grid Tapped="Click" Name="BlindWalls">
+                    <Image Source="/Assets/Routes/BlindWalls.png" Stretch="Fill" />
+                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Text="Blind walls" SelectionChanged="TextBlock_SelectionChanged"/>
                 </Grid>
             </Button>
             <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <Grid Tapped="Click">
+                <Grid Tapped="Click" Name="HistorischeKM">
                     <Image Source="/Assets/Routes/HistorischeKilometer.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="Kilometer"/>
                 </Grid>
