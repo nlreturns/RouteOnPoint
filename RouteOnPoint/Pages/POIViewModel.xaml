@@ -16,7 +16,7 @@
         
         <Grid>
             <TextBlock FontSize="26" FontWeight="Bold" Foreground="Orange" Margin="10,5,5,5" Text="Dzia"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Right" Margin="2,2,10,2">
+            <Button Width="50" Height="50" HorizontalAlignment="Right" Margin="2,2,10,2" Click="Close">
                 <Image Source="/Assets/Buttons/Cross.png"/>
             </Button>
         </Grid>

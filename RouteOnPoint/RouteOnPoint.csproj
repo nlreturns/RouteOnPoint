@@ -98,6 +98,10 @@
     <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
     <Compile Include="LanguageUtil\MultiLang.cs" />
+    <Compile Include="Pages\AssistViewModel.xaml.cs">
+      <DependentUpon>AssistViewModel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LanguageUtil\TestMultiLang.cs" />
     <Compile Include="Pages\LanguageViewModel.xaml.cs">
       <DependentUpon>LanguageViewModel.xaml</DependentUpon>
     </Compile>
@@ -151,6 +155,18 @@
     <Content Include="Assets\7.jpg" />
     <Content Include="Assets\8.jpg" />
     <Content Include="Assets\9.jpg" />
+    <Content Include="Assets\B1.jpg" />
+    <Content Include="Assets\B10.jpg" />
+    <Content Include="Assets\B2.jpg" />
+    <Content Include="Assets\B3.jpg" />
+    <Content Include="Assets\B4.jpg" />
+    <Content Include="Assets\B5.jpg" />
+    <Content Include="Assets\B6.jpg" />
+    <Content Include="Assets\B7.jpg" />
+    <Content Include="Assets\B8.html" />
+    <Content Include="Assets\B8.jpeg" />
+    <Content Include="Assets\B8.jpg" />
+    <Content Include="Assets\B9.jpg" />
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\DutchFlag.png" />
@@ -196,6 +212,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Page Include="Pages\AssistViewModel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+>>>>>>> refs/remotes/origin/master
     <Page Include="Pages\LanguageViewModel.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
