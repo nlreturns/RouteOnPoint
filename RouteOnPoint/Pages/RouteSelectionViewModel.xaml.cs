@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -28,11 +29,40 @@ namespace RouteOnPoint.Pages
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
+
+            try
+            {
+                Kilometer.Text = MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME");
+            }
+            catch (Exception e) { Kilometer.Text = "ERROR"; }
+
+            Selecteer.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT");
+            SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
         }
         
         private void Click(object sender, TappedRoutedEventArgs e)
         {
             rootFrame.Navigate(typeof(RouteViewModel));
+        }
+
+        public void App_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (rootFrame == null)
+                return;
+
+            // Navigate back if possible, and if the event has not 
+            // already been handled .
+            if (rootFrame.CanGoBack && e.Handled == false)
+            {
+                e.Handled = true;
+                rootFrame.GoBack();
+            }
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
+                AppViewBackButtonVisibility.Visible;
         }
     }
 }
