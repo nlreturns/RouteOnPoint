@@ -26,10 +26,20 @@ namespace RouteOnPoint.GPSHandler
         public List<POI> Points;
         public bool IsPaused = false;
 
-        public GPSReader(MapControl map)
+        public GPSReader(p)
         {
             SetupGPS();
+        }
+
+        public void AddMap(MapControl map)
+        {
             Map = map;
+
+            Map.MapElements.Add(UserLocation);
+            //Adds the event when the position changes
+            Geolocator.PositionChanged += OnPositionChangedAsync;
+            //centers the map to the location of the user
+            GoToUserLocationAsync(true);
         }
 
         private async void SetupGPS()
@@ -72,11 +82,6 @@ namespace RouteOnPoint.GPSHandler
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
 
-                    Map.MapElements.Add(UserLocation);
-
-                    //Adds the event when the position changes
-                    Geolocator.PositionChanged += OnPositionChangedAsync;
-                    GoToUserLocationAsync(true);
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
