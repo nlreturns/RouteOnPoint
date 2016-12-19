@@ -22,7 +22,7 @@ namespace RouteOnPoint.GPSHandler
     {
         public static Geolocator Geolocator;
         private static Geopoint _lastGeopoint;
-        private static List<Geopoint> _walkedroute;
+        private static List<BasicGeoposition> _walkedroute = new List<BasicGeoposition>();
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
@@ -40,6 +40,7 @@ namespace RouteOnPoint.GPSHandler
             GoToUserLocationAsync(true);
             //TODO enable buttons
         }
+        
 
         public static async Task<bool> SetupGPS()
         {
@@ -89,7 +90,7 @@ namespace RouteOnPoint.GPSHandler
         {
             Points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            waypoints.Add(UserLocation.Location);
+            //waypoints.Add(UserLocation.Location);
             foreach (var point in points)
             {
                 waypoints.Add(new Geopoint(point._coordinate));
@@ -135,8 +136,6 @@ namespace RouteOnPoint.GPSHandler
 
                     // assign pushpin title
                     pushpin.Title = poi._name;
-
-                    
 
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
@@ -230,6 +229,7 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
+
                    if (!IsPaused)
                    {
                        // instantiate mappolyline
@@ -238,11 +238,12 @@ namespace RouteOnPoint.GPSHandler
                        // add geopsitions to path
                        BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
                        BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
+                       _walkedroute.Add(basicGeoposition2);
                        polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
 
                        //set appearance of connector line
                        polyline.StrokeColor = Colors.Gray;
-                       polyline.StrokeThickness = 2;
+                       polyline.StrokeThickness = 7;
                        Map.MapElements.Add(polyline);
                    }
                    GoToUserLocationAsync(false);
