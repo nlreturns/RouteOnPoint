@@ -101,8 +101,10 @@ namespace RouteOnPoint.GPSHandler
             }
 
             SetupGeoFence(points);
-
-            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            MapRouteRestrictions restrictions = new MapRouteRestrictions();
+            restrictions = MapRouteRestrictions.None;
+            MapRouteOptimization optimize = MapRouteOptimization.Distance;
+            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);

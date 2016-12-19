@@ -69,7 +69,7 @@ namespace RouteOnPoint.Pages
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                AppViewBackButtonVisibility.Collapsed;
+            AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
             if (!GPSReader.created)
             {
@@ -86,12 +86,14 @@ namespace RouteOnPoint.Pages
                 //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
                 GPSReader.SetupRoute();
                 RouteButtonsEnabler(true);
+                List<POI> points = GPSReader.route._points;
+                GPSReader.SetupRoute(points);
             }
             else
             {
                 myMap = GPSReader.Map;
             }
-            
+
         }
 
         public void RouteButtonsEnabler(bool change)
