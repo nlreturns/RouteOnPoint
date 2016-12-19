@@ -39,7 +39,9 @@ namespace RouteOnPoint.Pages
             //            points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
             //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
             //            Gps.SetupRoute(points);
-            //TODO disable buttons
+
+            RouteButtonsEnabler(false);
+
             if (!GPSReader.created)
             {
                 GPSReader.created = true;
@@ -51,6 +53,7 @@ namespace RouteOnPoint.Pages
         {
             await GPSReader.SetupGPS();
             GPSReader.AddMap(myMap);
+            RouteButtonsEnabler(true);
         }
 
         //Button to center the screen on the users location
@@ -68,13 +71,13 @@ namespace RouteOnPoint.Pages
         //Button to play or pause the route session
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (GPSReader.IsPaused)
+            if (Notification.IsPaused)
             {
-                GPSReader.IsPaused = false;
+                Notification.IsPaused = false;
             }
             else
             {
-                GPSReader.IsPaused = true;
+                Notification.IsPaused = true;
             }
         }
 
@@ -85,10 +88,21 @@ namespace RouteOnPoint.Pages
             this.Frame.BackStack.Clear();
         }
 
-        public void HideRouteButtons()
+        public void RouteButtonsEnabler(bool change)
         {
-            PlayPauseButton.IsEnabled = false;
-            CenterLocationButton.IsEnabled = false;
+            PlayPauseButton.IsEnabled = change;
+            CenterLocationButton.IsEnabled = change;
+
+            if (change == false)
+            {
+                PlayPauseButton.Visibility = Visibility.Collapsed;
+                CenterLocationButton.Visibility = Visibility.Collapsed;
+            }
+            else {
+                PlayPauseButton.Visibility = Visibility.Visible;
+                CenterLocationButton.Visibility = Visibility.Visible;
+            }
+            
         }
     }
 }

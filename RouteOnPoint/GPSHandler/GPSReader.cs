@@ -24,7 +24,7 @@ namespace RouteOnPoint.GPSHandler
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
-        public static bool IsPaused = false;
+        //public static bool IsPaused = false;
         internal static bool created = false;
 
         public static void AddMap(MapControl map)
@@ -36,7 +36,6 @@ namespace RouteOnPoint.GPSHandler
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user
             GoToUserLocationAsync(true);
-            //TODO enable buttons
         }
 
         public static async Task<bool> SetupGPS()
