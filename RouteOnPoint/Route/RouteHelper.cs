@@ -95,7 +95,8 @@ namespace RouteOnPoint.Route
             r.addPoint("P_KRATJEBEELD_NAME", "P_KRATJEBEELD_INFO", "ms-appx:///Assets/B8.jpg", new BasicGeoposition() { Latitude = 51.584043, Longitude = 4.77689 });
             r.addPoint("P_NOL_NAME", "P_NOL_INFO", "ms-appx:///Assets/B9.jpg", new BasicGeoposition() { Latitude = 51.587121, Longitude = 4.768484 });
             r.addPoint("P_THUNDER&BOLD_NAME", "P_THUNDER&BOLD_INFO", "ms-appx:///Assets/B10.jpg", new BasicGeoposition() { Latitude = 51.579412, Longitude = 4.764087 });
-
+            r.addPoint("P_BENEINE_NAME", "P_BENEINE_INFO", "ms-appx:///Assets/B11.jpg", new BasicGeoposition() { Latitude = 51.595472, Longitude = 4.771402 });
+            
             /** Points that still need a definition.
              * 
             _Dutch.Add("P_BENEINE_NAME", "Ben Eine");
