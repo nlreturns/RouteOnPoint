@@ -69,7 +69,7 @@ namespace RouteOnPoint.Pages
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                AppViewBackButtonVisibility.Collapsed;
+            AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
             if (!GPSReader.created)
             {
@@ -77,20 +77,14 @@ namespace RouteOnPoint.Pages
                 await GPSReader.SetupGPS();
                 GPSReader.AddMap(myMap);
                 RouteButtonsEnabler(true);
+                List<POI> points = GPSReader.route._points;
+                GPSReader.SetupRoute(points);
             }
             else
             {
                 myMap = GPSReader.Map;
             }
 
-            List<POI> points = new List<POI>();
-            points.Add(new POI("P_KASTEELVANBREDA_NAME", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
-            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
-            //            points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
-            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
-            //            points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
-            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
-            GPSReader.SetupRoute(points);
         }
 
         public void RouteButtonsEnabler(bool change)
