@@ -26,6 +26,7 @@ namespace RouteOnPoint.GPSHandler
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
+        public static Route.Route route;
         //public static bool IsPaused = false;
         internal static bool created = false;
 
@@ -101,7 +102,7 @@ namespace RouteOnPoint.GPSHandler
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
                 viewOfRoute.RouteColor = Colors.Orange;
-
+                
                 Map.Routes.Clear();
                 // Add the new MapRouteView to the Routes collection
                 // of the MapControl.
@@ -229,7 +230,7 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
-                   if (!IsPaused)
+                   if (!Notification.IsPaused)
                    {
                        // instantiate mappolyline
                        var polyline = new MapPolyline();
@@ -308,6 +309,11 @@ namespace RouteOnPoint.GPSHandler
         {
             //returns the last know location (updates every 2 seconds)
             return UserLocation.Location;
+        }
+
+        public static void GetDistance()
+        {
+            
         }
     }
 }
