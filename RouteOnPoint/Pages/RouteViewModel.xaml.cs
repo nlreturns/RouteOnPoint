@@ -108,7 +108,7 @@ namespace RouteOnPoint.Pages
         private void myMap_MapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
         {
             MapIcon myClickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
-            POI p = GPSReader.Points.Find(x => x._name == myClickedIcon.Title);
+            POI p = GPSReader.route._points.Find(x => x._name == myClickedIcon.Title);
             Frame.Navigate(typeof(POIViewModel), p);
         }
     }
