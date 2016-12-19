@@ -1,4 +1,5 @@
-﻿using RouteOnPoint.Route;
+﻿using RouteOnPoint.LanguageUtil;
+using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,7 @@ namespace RouteOnPoint
                         dialog = new ContentDialog()
                         {
                             FontSize = 26,
-                            Title = "U nadert " + poi._name,
+                            Title = "U nadert " + MultiLang.GetContent(poi._name),
                             PrimaryButtonText = "Ok"
                         };
                         dialog.ShowAsync();
