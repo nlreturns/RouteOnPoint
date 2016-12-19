@@ -5,8 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+using Windows.Devices.Geolocation;
+using Windows.Devices.Geolocation.Geofencing;
 using Windows.Storage;
 using Newtonsoft.Json;
+using RouteOnPoint.GPSHandler;
 
 /**
  * Author: Jan-Willem Dooms <janwillem.dooms@gmail.com>
@@ -22,9 +25,10 @@ namespace RouteOnPoint.Route
 {
     class RouteHandler
     {
-        private Boolean _paused;
+        private bool _paused;
         private Route _route;
-        //private GPSreader _gpsreader;
+        private GPSReader _gpsreader;
+        private bool _onRoute;
 
         /*
          * Save a route with all info included.
@@ -82,16 +86,83 @@ namespace RouteOnPoint.Route
             }
         }
 
-
-
         /**
          * Checks if the user has left the route
-         * returns Boolean true - User left route
-         * returns Boolean false - User is still on route
+         * returns bool true - User left route
+         * returns bool false - User is still on route
+         * 
+         * @Geopath route - The route thats currently walked on
          */
-        private Boolean RouteEscaped(Route route)
+        private bool RouteEscaped(Geopath route)
         {
-            throw new NotImplementedException();
+            // create geofence around geopath
+            string fenceId = "path";
+
+            MonitoredGeofenceStates monitoredStates =
+                        MonitoredGeofenceStates.Entered |
+                        MonitoredGeofenceStates.Exited |
+                        MonitoredGeofenceStates.Removed;
+
+            TimeSpan dwellTime = TimeSpan.FromSeconds(5);
+            TimeSpan duration = TimeSpan.FromDays(1);
+            DateTimeOffset startTime = DateTime.Now;
+
+            Geofence geofence = new Geofence(fenceId, route, monitoredStates, false, dwellTime,
+                       startTime,
+                       duration);
+
+            GeofenceMonitor.Current.Geofences.Add(geofence);
+
+            // check if left or not 
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            return !_onRoute;
+
+        }
+
+        /**
+         * Checks if the geofence states changed
+         * looks for the specific Route geofence and sets
+         * _onRoute to true or false depending on user location
+         */
+        public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
+        {
+            //Gets all state reports
+            var reports = sender.ReadReports();
+            foreach (GeofenceStateChangeReport report in reports)
+            {
+                string id = report.Geofence.Id;
+                if (id == "Route") continue;
+                //Get the state of the geofence
+                GeofenceState state = report.NewState;
+
+                //Get the Geofence which state is changed
+                Geofence geofence = report.Geofence;
+
+                //Switch case to know which state it is
+                switch (state)
+                {
+                    //Entered the geofence
+                    case GeofenceState.Entered:
+                        GeofenceMonitor.Current.Geofences.Remove(geofence);
+                        _onRoute = true;
+                        break;
+                    //Removed the geofence
+                    case GeofenceState.Removed:
+                        _onRoute = true;
+                        break;
+                    //Exited the geofence
+                    case GeofenceState.Exited:
+                        _onRoute = false;
+                        break;
+                    //No state
+                    case GeofenceState.None:
+                        _onRoute = true;
+                        break;
+                    default:
+                        _onRoute = true;
+                        break;
+                }
+            }
         }
 
     }
