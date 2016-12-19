@@ -31,16 +31,11 @@ namespace RouteOnPoint.GPSHandler
         public static bool IsPaused = false;
         public static Route.Route route;
         internal static bool created = false;
-        private Frame rootFrame;
+        public static Frame rootFrame;
 
-        public GPSReader(MapControl map, Frame rootFrame)
-        {
-            SetupGPS();
-            Map = map;
-            this.rootFrame = rootFrame;
-        }
 
-        public static void AddMap(MapControl map)
+
+        public static  async void AddMap(MapControl map)
         {
             Map = map;
 
@@ -48,7 +43,7 @@ namespace RouteOnPoint.GPSHandler
             //Adds the event when the position changes
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user
-            GoToUserLocationAsync(true);
+            await GoToUserLocationAsync(true);
         }
 
 
@@ -300,7 +295,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        private async void handleGeoFenceEntered(Geofence geo)
+        private static async void handleGeoFenceEntered(Geofence geo)
         {
             foreach(POI poi in Points)
             {
@@ -318,7 +313,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        private async void changePOIImage(POI poi)
+        private static async void changePOIImage(POI poi)
         {
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.High, (() =>
@@ -336,7 +331,7 @@ namespace RouteOnPoint.GPSHandler
            
         }
 
-        public async Task GoToUserLocationAsync(bool force)
+        public static async Task GoToUserLocationAsync(bool force)
         {
             if (force || UserLocation != null)
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
@@ -369,8 +364,8 @@ namespace RouteOnPoint.GPSHandler
             {
                 
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                DisInMeters = viewOfRoute.Route.LengthInMeters;
-                time = viewOfRoute.Route.EstimatedDuration;
+             //   DisInMeters = viewOfRoute.Route.LengthInMeters;
+             //   time = viewOfRoute.Route.EstimatedDuration;
             }
         }
     }

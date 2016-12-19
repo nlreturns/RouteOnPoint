@@ -33,7 +33,7 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
-            GPSReader.rootframe = rootFrame;
+            GPSReader.rootFrame = rootFrame;
             
             List<POI> points = new List<POI>();
             points.Add(new POI("P_KASTEELVANBREDA_NAME", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
