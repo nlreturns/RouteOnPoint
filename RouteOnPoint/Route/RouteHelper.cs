@@ -23,7 +23,6 @@ namespace RouteOnPoint.Route
             //Creates the route
             Route r = new Route("R_HISTORISCHEKILOMETER_NAME");
             //Adds points
-            r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.356467, Longitude = 4.467650 });
             r.addPoint("P_LIEFDESZUSTER_NAME", "P_LIEFDESZUSTER_INFO", "ms-appx:///Assets/3.jpg", new BasicGeoposition() { Latitude = 51.356967, Longitude = 4.467333 });
             r.addPoint("P_NASSAUBARONIEMONUMENT_NAME", "P_NASSAUBARONIEMONUMENT_INFO", "ms-appx:///Assets/4.jpg", new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467817 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467633 });
@@ -67,13 +66,7 @@ namespace RouteOnPoint.Route
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.353467, Longitude = 4.466767 });
             r.addPoint("P_BEGIJNENHOF_NAME", "P_BEGIJNENHOF_INFO", null, new BasicGeoposition() { Latitude = 51.353817, Longitude = 4.467017 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.353800, Longitude = 4.466683 });
-            //r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.356467, Longitude = 4.467650 });
             
-
-//            foreach (var POI in r)
-//            {
-//                poi
-//            }
             return r;
         }
         ///Create a Blind Wall route
@@ -90,17 +83,17 @@ namespace RouteOnPoint.Route
             Route r = new Route("R_BLINDWALLS_NAME");
 
             //Add Points
-            r.addPoint("P_ZENKONEGODEVAERT_NAME", "P_ZENKONEGODEVAERT_INFO", "ms-appx:///Assets/B1.jpg", new BasicGeoposition() { Latitude = 51.5819112, Longitude = 4.7757498 });
-            r.addPoint("P_STAYNICELUNETTUNNEL_NAME", "P_STAYNICELUNETTUNNEL_INFO", "ms-appx:///Assets/B2.jpg", new BasicGeoposition() { Latitude = 51.592311, Longitude = 4.757159 });
-            r.addPoint("P_JUKKAHAKANEN_NAME", "P_JUKKAHAKANEN_INFO", "ms-appx:///Assets/B3.jpg", new BasicGeoposition() { Latitude = 51.588161, Longitude = 4.778344 });
-            r.addPoint("P_MAIKKIRANTALA_NAME", "P_MAIKKIRANTALA_INFO", "ms-appx:///Assets/B4.jpg", new BasicGeoposition() { Latitude = 51.585579, Longitude = 4.777428 });
-            r.addPoint("P_DZIA_NAME", "P_DZIA_INFO", "ms-appx:///Assets/B5.jpg", new BasicGeoposition() { Latitude = 51.596971, Longitude = 4.788051 });
-            r.addPoint("P_DAMIENPOULAINVANCOOTHPLEIN_NAME", "P_DAMIENPOULAINVANCOOTHPLEIN_INFO", "ms-appx:///Assets/B6.jpg", new BasicGeoposition() { Latitude = 51.582854, Longitude = 4.777061 });
-            r.addPoint("P_DAMIENPOULAINBOSCHSTRAAT_NAME", "P_DAMIENPOULAINBOSCHSTRAAT_INFO", "ms-appx:///Assets/B7.jpg", new BasicGeoposition() { Latitude = 51.591129, Longitude = 4.783754 });
-            r.addPoint("P_HELL'O_NAME", "P_HELL'O_INFO", "ms-appx:///Assets/B7.jpg", new BasicGeoposition() { Latitude = 51.58523, Longitude = 4.776137 });
-            r.addPoint("P_KRATJEBEELD_NAME", "P_KRATJEBEELD_INFO", "ms-appx:///Assets/B8.jpg", new BasicGeoposition() { Latitude = 51.584043, Longitude = 4.77689 });
-            r.addPoint("P_NOL_NAME", "P_NOL_INFO", "ms-appx:///Assets/B9.jpg", new BasicGeoposition() { Latitude = 51.587121, Longitude = 4.768484 });
-            r.addPoint("P_THUNDER&BOLD_NAME", "P_THUNDER&BOLD_INFO", "ms-appx:///Assets/B10.jpg", new BasicGeoposition() { Latitude = 51.579412, Longitude = 4.764087 });
+            r.addPoint("P_ZENKONEGODEVAERT_NAME", "P_ZENKONEGODEVAERT_INFO", "ms-appx:///Assets/B1.jpg", new BasicGeoposition() { Latitude = 51.5819112, Longitude = 4.7757498 },false,false);
+            r.addPoint("P_STAYNICELUNETTUNNEL_NAME", "P_STAYNICELUNETTUNNEL_INFO", "ms-appx:///Assets/B2.jpg", new BasicGeoposition() { Latitude = 51.592311, Longitude = 4.757159 }, false, false);
+            r.addPoint("P_JUKKAHAKANEN_NAME", "P_JUKKAHAKANEN_INFO", "ms-appx:///Assets/B3.jpg", new BasicGeoposition() { Latitude = 51.588161, Longitude = 4.778344 }, false, false);
+            r.addPoint("P_MAIKKIRANTALA_NAME", "P_MAIKKIRANTALA_INFO", "ms-appx:///Assets/B4.jpg", new BasicGeoposition() { Latitude = 51.585579, Longitude = 4.777428 }, false, false);
+            r.addPoint("P_DZIA_NAME", "P_DZIA_INFO", "ms-appx:///Assets/B5.jpg", new BasicGeoposition() { Latitude = 51.596971, Longitude = 4.788051 }, false, false);
+            r.addPoint("P_DAMIENPOULAINVANCOOTHPLEIN_NAME", "P_DAMIENPOULAINVANCOOTHPLEIN_INFO", "ms-appx:///Assets/B6.jpg", new BasicGeoposition() { Latitude = 51.582854, Longitude = 4.777061 }, false, false);
+            r.addPoint("P_DAMIENPOULAINBOSCHSTRAAT_NAME", "P_DAMIENPOULAINBOSCHSTRAAT_INFO", "ms-appx:///Assets/B7.jpg", new BasicGeoposition() { Latitude = 51.591129, Longitude = 4.783754 }, false, false);
+            r.addPoint("P_HELL'O_NAME", "P_HELL'O_INFO", "ms-appx:///Assets/B7.jpg", new BasicGeoposition() { Latitude = 51.58523, Longitude = 4.776137 }, false, false);
+            r.addPoint("P_KRATJEBEELD_NAME", "P_KRATJEBEELD_INFO", "ms-appx:///Assets/B8.jpg", new BasicGeoposition() { Latitude = 51.584043, Longitude = 4.77689 }, false, false);
+            r.addPoint("P_NOL_NAME", "P_NOL_INFO", "ms-appx:///Assets/B9.jpg", new BasicGeoposition() { Latitude = 51.587121, Longitude = 4.768484 }, false, false);
+            r.addPoint("P_THUNDER&BOLD_NAME", "P_THUNDER&BOLD_INFO", "ms-appx:///Assets/B10.jpg", new BasicGeoposition() { Latitude = 51.579412, Longitude = 4.764087 }, false, false);
 
             /** Points that still need a definition.
              * 

@@ -10,7 +10,7 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-        <Maps:MapControl x:Name="myMap" MapServiceToken="qfAEoI0knTTAkdBtC4o2~KXFw5aREPHyJFinfVZ6ccw~AlmbJ28CLMhWNMHW1zJmabGGztsqmL6I8tJYrlWABARWY5DzcJ4gI69Js2Eh2TUw"/>
+        <Maps:MapControl x:Name="myMap" MapServiceToken="qfAEoI0knTTAkdBtC4o2~KXFw5aREPHyJFinfVZ6ccw~AlmbJ28CLMhWNMHW1zJmabGGztsqmL6I8tJYrlWABARWY5DzcJ4gI69Js2Eh2TUw" MapElementClick="myMap_MapElementClick"/>
 
         <Button Name="CenterLocationButton" 
                 HorizontalAlignment="Left" 

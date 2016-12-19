@@ -173,6 +173,15 @@
     <Content Include="Assets\Flags\DutchFlag.png" />
     <Content Include="Assets\Flags\EnglishFlag.png" />
     <Content Include="Assets\jingle-bells-sms.mp3" />
+    <Content Include="Assets\HelpPage\GrayRoute.png" />
+    <Content Include="Assets\HelpPage\HelpButton.png" />
+    <Content Include="Assets\HelpPage\LocationButton.png" />
+    <Content Include="Assets\HelpPage\MijnLocatie.png" />
+    <Content Include="Assets\HelpPage\MyLocation.png" />
+    <Content Include="Assets\HelpPage\OrangeRoute.png" />
+    <Content Include="Assets\HelpPage\PauseButton.png" />
+    <Content Include="Assets\HelpPage\POIBlue.png" />
+    <Content Include="Assets\HelpPage\POIGreen.png" />
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />

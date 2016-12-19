@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
 using RouteOnPoint.Route;
+using Windows.UI.Xaml.Controls.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -33,6 +34,8 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
             this.NavigationCacheMode = NavigationCacheMode.Required;
+            GPSReader.rootFrame = rootFrame;
+
 
             RouteButtonsEnabler(false);
         }
@@ -66,10 +69,10 @@ namespace RouteOnPoint.Pages
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
-                AppViewBackButtonVisibility.Collapsed;
+            AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
             if (!GPSReader.created)
-            {
+            {           
                 GPSReader.created = true;
                 await GPSReader.SetupGPS();
                 GPSReader.AddMap(myMap);
@@ -88,6 +91,7 @@ namespace RouteOnPoint.Pages
             {
                 myMap = GPSReader.Map;
             }
+
         }
 
         public void RouteButtonsEnabler(bool change)
@@ -106,6 +110,13 @@ namespace RouteOnPoint.Pages
                 CenterLocationButton.Visibility = Visibility.Visible;
             }
 
+        }
+
+        private void myMap_MapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
+        {
+            MapIcon myClickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
+            POI p = GPSReader.route._points.Find(x => x._name == myClickedIcon.Title);
+            Frame.Navigate(typeof(POIViewModel), p);
         }
     }
 }

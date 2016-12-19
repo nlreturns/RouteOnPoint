@@ -15,6 +15,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
+using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Pages;
 using Windows.UI.Xaml.Controls;
 
@@ -73,7 +74,7 @@ namespace RouteOnPoint.GPSHandler
 
                         }),
                         NormalizedAnchorPoint = new Point(0.5, 1.0),
-                        Title = "My Location",
+                        Title = MultiLang.GetContent("GPSREADER_LOCATION_TEXT"),
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
@@ -101,24 +102,32 @@ namespace RouteOnPoint.GPSHandler
             }
 
             SetupGeoFence(points);
-
-            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            MapRouteRestrictions restrictions = new MapRouteRestrictions();
+            restrictions = MapRouteRestrictions.None;
+            MapRouteOptimization optimize = MapRouteOptimization.Distance;
+            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
                 viewOfRoute.RouteColor = Colors.Orange;
-                
-                Map.Routes.Clear();
-                // Add the new MapRouteView to the Routes collection
-                // of the MapControl.
-                Map.Routes.Add(viewOfRoute);
+                try
+                {
+                    Map.Routes.Clear();
+                    // Add the new MapRouteView to the Routes collection
+                    // of the MapControl.
+                    Map.Routes.Add(viewOfRoute);
 
-                // Fit the MapControl to the route.
-                await Map.TrySetViewBoundsAsync(
-                      result.Route.BoundingBox,
-                      null,
-                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
-                DrawIcons();
+                    // Fit the MapControl to the route.
+                    await Map.TrySetViewBoundsAsync(
+                          result.Route.BoundingBox,
+                          null,
+                          Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+                    DrawIcons();
+                }
+                catch (Exception)
+                {
+
+                }
             }
             else
             {
@@ -162,6 +171,7 @@ namespace RouteOnPoint.GPSHandler
                     }
 
                     // put pushpin on the map
+                    
                     Map.MapElements.Add(pushpin);
                 }
             }
@@ -300,16 +310,19 @@ namespace RouteOnPoint.GPSHandler
         {
             foreach(POI poi in route._points)
             {
-                if (poi._name.Equals(geo.Id))
+                if (poi._name != null)
                 {
-                    poi._visited = true;
-                    Notification.POIVisit(poi);
-                    changePOIImage(poi);
-                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                    CoreDispatcherPriority.High, (() =>
+                    if (poi._name.Equals(geo.Id))
                     {
-                        rootFrame.Navigate(typeof(POIViewModel), poi);
-                    }));
+                        poi._visited = true;
+                        Notification.POIVisit(poi);
+                        changePOIImage(poi);
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        CoreDispatcherPriority.High, (() =>
+                        {
+                            rootFrame.Navigate(typeof(POIViewModel), poi);
+                        }));
+                    }
                 }
             }
         }
@@ -319,16 +332,23 @@ namespace RouteOnPoint.GPSHandler
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.High, (() =>
                     {
-                        foreach (MapIcon element in Map.MapElements)
+                        foreach (var element in Map.MapElements)
                         {
-                            if (element.Title.Equals(poi._name))
+
+                            if (element is MapIcon)
                             {
-                                var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
-                                element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                break;
+                                MapIcon icon = (MapIcon)element;
+                                if (icon.Title.Equals(poi._name))
+                                {
+                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                    break;
+                                }
                             }
                         }
-                    }));
+
+                    }
+                        ));
            
         }
 
@@ -374,28 +394,28 @@ namespace RouteOnPoint.GPSHandler
                 var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
                 if (result.Status == MapRouteFinderStatus.Success)
                 {
-
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                    foreach (var element in Map.MapElements)
-                    {
-                        if(element is MapIcon)
-                        {
-                            MapIcon icon = (MapIcon) element;
-                            char[] whitespace = new char[] { ' '};
-                            string[] splitted = icon.Title.Split(whitespace);
-                            if (splitted[0].Equals(nextPoint._name))
-                            {
-                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                CoreDispatcherPriority.High, (() =>
-                                {
-                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
-                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
-                                }));
-                            }
-                        }
-                        
-                    }
+                    MapElement[] tempList = new MapElement[Map.MapElements.Count];
+                    Map.MapElements.CopyTo(tempList,0);
+//                    foreach (var element in Map.MapElements)
+//                    {
+//                        if(element is MapIcon)
+//                        {
+//                            MapIcon icon = (MapIcon) element;
+//                            char[] whitespace = new char[] { ' '};
+//                            string[] splitted = icon.Title.Split(whitespace);
+//                            if (splitted[0].Equals(nextPoint._name))
+//                            {
+//                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+//                                CoreDispatcherPriority.High, (() =>
+//                                {
+//                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
+//                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+//                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+//                                }));
+//                            }
+//                        }
+//                    }
                 }
             }
         }

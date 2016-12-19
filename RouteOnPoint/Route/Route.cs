@@ -62,6 +62,13 @@ namespace RouteOnPoint.Route
         }
         public void addPoint(string name, string INFO, string path, BasicGeoposition coordinate, bool visited = false)
         {
+            coordinate.Latitude = coordinate.Latitude % 1 * 100 / 60+51;
+            coordinate.Longitude = coordinate.Longitude % 1 * 100 / 60+4;
+            addPOI(new POI(name, INFO, path, visited, coordinate));
+        }
+
+        public void addPoint(string name, string INFO, string path, BasicGeoposition coordinate, bool bullshit, bool visited = false)
+        {
             addPOI(new POI(name, INFO, path, visited, coordinate));
         }
 
