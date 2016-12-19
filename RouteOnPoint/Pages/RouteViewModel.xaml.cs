@@ -32,6 +32,8 @@ namespace RouteOnPoint.Pages
         public RouteViewModel()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+
             //            List<POI> points = new List<POI>();
             //            points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
             //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
@@ -42,12 +44,6 @@ namespace RouteOnPoint.Pages
             //            Gps.SetupRoute(points);
 
             RouteButtonsEnabler(false);
-
-            if (!GPSReader.created)
-            {
-                GPSReader.created = true;
-                Load();
-            }
         }
 
         private async void Load()
@@ -55,6 +51,7 @@ namespace RouteOnPoint.Pages
             await GPSReader.SetupGPS();
             GPSReader.AddMap(myMap);
             RouteButtonsEnabler(true);
+            
         }
 
         //Button to center the screen on the users location
@@ -66,7 +63,7 @@ namespace RouteOnPoint.Pages
         //Button to show the help page
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            //rootFrame.Navigate(typeof(AssisViewModel));
+            rootFrame.Navigate(typeof(AssistViewModel));
         }
 
         //Button to play or pause the route session
@@ -82,11 +79,21 @@ namespace RouteOnPoint.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
+            if (!GPSReader.created)
+            {
+                GPSReader.created = true;
+                await GPSReader.SetupGPS();
+                Load();
+            }
+            else
+            {
+                myMap = GPSReader.Map;
+            }
         }
 
         public void RouteButtonsEnabler(bool change)

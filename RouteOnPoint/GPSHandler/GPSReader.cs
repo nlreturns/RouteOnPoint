@@ -28,12 +28,13 @@ namespace RouteOnPoint.GPSHandler
         public static List<POI> Points;
         //public static bool IsPaused = false;
         internal static bool created = false;
+        public static Route.Route route;
 
         public static void AddMap(MapControl map)
         {
             Map = map;
 
-            Map.MapElements.Add(UserLocation);
+            //Map.MapElements.Add(UserLocation);
             //Adds the event when the position changes
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user
@@ -229,21 +230,21 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
-                   if (!IsPaused)
-                   {
-                       // instantiate mappolyline
-                       var polyline = new MapPolyline();
+                   //if (!IsPaused)
+                   //{
+                   //    // instantiate mappolyline
+                   //    var polyline = new MapPolyline();
 
-                       // add geopsitions to path
-                       BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
-                       BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
-                       polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
+                   //    // add geopsitions to path
+                   //    BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
+                   //    BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
+                   //    polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
 
-                       //set appearance of connector line
-                       polyline.StrokeColor = Colors.Gray;
-                       polyline.StrokeThickness = 2;
-                       Map.MapElements.Add(polyline);
-                   }
+                   //    //set appearance of connector line
+                   //    polyline.StrokeColor = Colors.Gray;
+                   //    polyline.StrokeThickness = 2;
+                   //    Map.MapElements.Add(polyline);
+                   //}
                    GoToUserLocationAsync(false);
                });
         }

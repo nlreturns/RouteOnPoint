@@ -34,5 +34,9 @@ namespace RouteOnPoint.Pages
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Visible;
         }
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 }
