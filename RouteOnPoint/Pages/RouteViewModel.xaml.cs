@@ -33,7 +33,7 @@ namespace RouteOnPoint.Pages
         public RouteViewModel()
         {
             this.InitializeComponent();
-            Gps = new GPSReader(myMap);
+            Gps = new GPSReader(myMap, rootFrame);
             List<POI> points = new List<POI>();
             points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
             points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
