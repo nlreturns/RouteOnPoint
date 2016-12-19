@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
 using RouteOnPoint.Route;
+using Windows.UI.Xaml.Controls.Maps;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -107,6 +108,13 @@ namespace RouteOnPoint.Pages
                 CenterLocationButton.Visibility = Visibility.Visible;
             }
 
+        }
+
+        private void myMap_MapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
+        {
+            MapIcon myClickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
+            POI p = GPSReader.Points.Find(x => x._name == myClickedIcon.Title);
+            Frame.Navigate(typeof(POIViewModel), p);
         }
     }
 }
