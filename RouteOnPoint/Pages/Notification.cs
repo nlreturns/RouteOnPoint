@@ -15,7 +15,7 @@ namespace RouteOnPoint
     class Notification
     {
         public static bool IsPaused = false;
-        public static async void OffRouteMessage(Page page)
+        public static async void OffRouteMessage()
         {
             StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             Folder = await Folder.GetFolderAsync("Assets");
@@ -28,7 +28,7 @@ namespace RouteOnPoint
             {
                 FontSize = 26,
                 Title = "U wijkt van de route af",
-                MaxWidth = page.ActualWidth,
+                //MaxWidth = page.ActualWidth,
                 PrimaryButtonText = "Ok",
                 SecondaryButtonText = "Pauzeer route"
             };
@@ -39,7 +39,7 @@ namespace RouteOnPoint
 
         public static void Pauzeer(ContentDialog content, object sender)
         {
-
+            IsPaused = true;
         }
 
         public static async void POIVisit(POI poi)
@@ -64,6 +64,50 @@ namespace RouteOnPoint
                         dialog.ShowAsync();
                     }));
             
+        }
+
+        public static async void ErrorMsg(string msg)
+        {
+            StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Folder = await Folder.GetFolderAsync("Assets");
+            StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
+            MediaElement PlayMusic = new MediaElement();
+            PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+
+
+            ContentDialog dialog = new ContentDialog()
+            {
+                FontSize = 26,
+                Title = "Error",
+                Content = msg,
+                //MaxWidth = page.ActualWidth,
+                PrimaryButtonText = "Ok",
+            };
+            PlayMusic.Play();
+            await dialog.ShowAsync();
+        }
+
+        public static async void Notify(string title, string msg)
+        {
+            
+            StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Folder = await Folder.GetFolderAsync("Assets");
+            StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
+            MediaElement PlayMusic = new MediaElement();
+            PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+
+
+            ContentDialog dialog = new ContentDialog()
+            {
+                FontSize = 26,
+                Title = title,
+                Content = msg,
+                //MaxWidth = page.ActualWidth,
+                PrimaryButtonText = "Ok",
+               
+            };
+            PlayMusic.Play();
+            await dialog.ShowAsync();
         }
     }
 }
