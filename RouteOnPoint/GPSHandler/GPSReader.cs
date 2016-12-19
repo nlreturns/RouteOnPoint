@@ -108,18 +108,24 @@ namespace RouteOnPoint.GPSHandler
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
                 viewOfRoute.RouteColor = Colors.Orange;
-                
-                Map.Routes.Clear();
-                // Add the new MapRouteView to the Routes collection
-                // of the MapControl.
-                Map.Routes.Add(viewOfRoute);
+                try
+                {
+                    Map.Routes.Clear();
+                    // Add the new MapRouteView to the Routes collection
+                    // of the MapControl.
+                    Map.Routes.Add(viewOfRoute);
 
-                // Fit the MapControl to the route.
-                await Map.TrySetViewBoundsAsync(
-                      result.Route.BoundingBox,
-                      null,
-                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
-                DrawIcons();
+                    // Fit the MapControl to the route.
+                    await Map.TrySetViewBoundsAsync(
+                          result.Route.BoundingBox,
+                          null,
+                          Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+                    DrawIcons();
+                }
+                catch (Exception)
+                {
+
+                }
             }
             else
             {
