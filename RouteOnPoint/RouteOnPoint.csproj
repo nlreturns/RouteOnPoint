@@ -212,9 +212,23 @@
     <Content Include="Assets\B10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\B11.jpg" />
+    <Content Include="Assets\B12.jpg" />
+    <Content Include="Assets\B13.jpg" />
+    <Content Include="Assets\B14.jpg" />
+    <Content Include="Assets\B15.jpg" />
+    <Content Include="Assets\B16.jpg" />
+    <Content Include="Assets\B17.jpg" />
+    <Content Include="Assets\B18.jpg" />
+    <Content Include="Assets\B19.jpg" />
     <Content Include="Assets\B2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\B20.jpg" />
+    <Content Include="Assets\B21.jpg" />
+    <Content Include="Assets\B22.jpg" />
+    <Content Include="Assets\B23.jpg" />
+    <Content Include="Assets\B24.jpg" />
     <Content Include="Assets\B3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
