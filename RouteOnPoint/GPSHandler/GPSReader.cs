@@ -385,11 +385,20 @@ namespace RouteOnPoint.GPSHandler
         {
             foreach (var nextPoint in route._points)
             {
-                List<Geopoint> waypoints = new List<Geopoint>(2);
+                List<Geopoint> waypoints = new List<Geopoint>();
 
                 waypoints.Add(UserLocation.Location);
-                waypoints.Add(new Geopoint(nextPoint._coordinate));
 
+                List<POI> range = route._points.GetRange(0, route._points.IndexOf(nextPoint));
+                foreach(POI p in range)
+                {
+                    if (!p._visited)
+                    {
+                        waypoints.Add(new Geopoint(p._coordinate));
+                    }
+                    
+                }
+                
                 var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
                 if (result.Status == MapRouteFinderStatus.Success)
                 {
