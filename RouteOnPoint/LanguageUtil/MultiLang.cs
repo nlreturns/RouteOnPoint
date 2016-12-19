@@ -144,6 +144,9 @@ namespace RouteOnPoint.LanguageUtil
         {
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Selecteer Route");
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Hervat route");
+            _Dutch.Add("NOTITLEERROR", "De naam is onbekend");
+            _Dutch.Add("NOINFOERROR", "Er is geen informatie beschikbaar");
+            _Dutch.Add("NOIMAGEERROR", "Er is geen foto beschikbaar");
             _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
         }
 
@@ -333,6 +336,9 @@ namespace RouteOnPoint.LanguageUtil
         {
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
             _English.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Resume route");
+            _English.Add("NOTITLEERROR", "The name is unknown");
+            _English.Add("NOINFOERROR", "There is no information available for this point");
+            _English.Add("NOIMAGEERROR", "No image availeble");
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
         }
 

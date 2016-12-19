@@ -95,7 +95,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GPSHandler\GPSHelper.cs" />
     <Compile Include="GPSHandler\GPSReader.cs" />
     <Compile Include="LanguageUtil\MultiLang.cs" />
     <Compile Include="Pages\AssistViewModel.xaml.cs">
@@ -173,6 +172,7 @@
     <Content Include="Assets\EnglishFlag.png" />
     <Content Include="Assets\Flags\DutchFlag.png" />
     <Content Include="Assets\Flags\EnglishFlag.png" />
+    <Content Include="Assets\jingle-bells-sms.mp3" />
     <Content Include="Assets\HelpPage\GrayRoute.png" />
     <Content Include="Assets\HelpPage\HelpButton.png" />
     <Content Include="Assets\HelpPage\LocationButton.png" />
