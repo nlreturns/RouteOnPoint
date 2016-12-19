@@ -32,15 +32,17 @@ namespace RouteOnPoint.Pages
         public RouteViewModel()
         {
             this.InitializeComponent();
-                        List<POI> points = new List<POI>();
-                        points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
-                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
-//                        points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
-//                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
-//                        points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
-//                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
-                        GPSReader.SetupRoute(points);
-            //TODO disable buttons
+            //            List<POI> points = new List<POI>();
+            //            points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
+            //            points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
+            //            points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
+            //            Gps.SetupRoute(points);
+
+            RouteButtonsEnabler(false);
+
             if (!GPSReader.created)
             {
                 GPSReader.created = true;
@@ -52,6 +54,7 @@ namespace RouteOnPoint.Pages
         {
             await GPSReader.SetupGPS();
             GPSReader.AddMap(myMap);
+            RouteButtonsEnabler(true);
         }
 
         //Button to center the screen on the users location
@@ -69,13 +72,13 @@ namespace RouteOnPoint.Pages
         //Button to play or pause the route session
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (GPSReader.IsPaused)
+            if (Notification.IsPaused)
             {
-                GPSReader.IsPaused = false;
+                Notification.IsPaused = false;
             }
             else
             {
-                GPSReader.IsPaused = true;
+                Notification.IsPaused = true;
             }
         }
 
@@ -84,6 +87,23 @@ namespace RouteOnPoint.Pages
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
+        }
+
+        public void RouteButtonsEnabler(bool change)
+        {
+            PlayPauseButton.IsEnabled = change;
+            CenterLocationButton.IsEnabled = change;
+
+            if (change == false)
+            {
+                PlayPauseButton.Visibility = Visibility.Collapsed;
+                CenterLocationButton.Visibility = Visibility.Collapsed;
+            }
+            else {
+                PlayPauseButton.Visibility = Visibility.Visible;
+                CenterLocationButton.Visibility = Visibility.Visible;
+            }
+            
         }
     }
 }

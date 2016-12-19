@@ -8,7 +8,7 @@ using Windows.Devices.Geolocation;
 
 namespace RouteOnPoint.Route
 {
-    class Route
+    public class Route
     {
         [JsonProperty]
         private string _name;

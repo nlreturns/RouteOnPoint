@@ -1,4 +1,6 @@
-﻿using RouteOnPoint.LanguageUtil;
+﻿using RouteOnPoint.GPSHandler;
+using RouteOnPoint.LanguageUtil;
+using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -38,7 +40,16 @@ namespace RouteOnPoint.Pages
         private void Click(object sender, TappedRoutedEventArgs e)
         {
             Grid g = (Grid)sender;
-            switch (g.Name) { }
+            Route.Route r;
+            switch (g.Name) {
+                case "BlindWalls":
+                     r = new RouteHelper().createBlindWalls();
+                    break;
+                default:
+                     r = new RouteHelper().createHistoriscRoute();
+                    break;
+            }
+            GPSReader.route = r;
             rootFrame.Navigate(typeof(RouteViewModel));
         }
 

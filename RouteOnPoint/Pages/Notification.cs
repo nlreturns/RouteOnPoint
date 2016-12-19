@@ -10,23 +10,28 @@ namespace RouteOnPoint
 {
     class Notification
     {
+        public static bool IsPaused = false;
         public static async void OffRouteMessage(Page page)
         {
-            ContentDialog dialog = new ContentDialog()
+            if (!IsPaused)
             {
-                FontSize = 26,
-                Title = "U wijkt van de route af",
-                MaxWidth = page.ActualWidth,
-                PrimaryButtonText = "Ok",
-                SecondaryButtonText = "Pauzeer route"
-            };
-            dialog.SecondaryButtonClick += Pauzeer;
-            await dialog.ShowAsync();
+                ContentDialog dialog = new ContentDialog()
+                {
+                    FontSize = 26,
+                    Title = "U wijkt van de route af",
+                    MaxWidth = page.ActualWidth,
+                    PrimaryButtonText = "Ok",
+                    SecondaryButtonText = "Pauzeer route"
+                };
+                dialog.SecondaryButtonClick += Pauzeer;
+                await dialog.ShowAsync();
+            }
+            return;
         }
 
         public static void Pauzeer(ContentDialog content, object sender)
         {
-
+            IsPaused = true;
         }
     }
 }
