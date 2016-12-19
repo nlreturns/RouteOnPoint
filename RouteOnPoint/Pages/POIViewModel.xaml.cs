@@ -16,6 +16,7 @@ using RouteOnPoint.GPSHandler;
 using Windows.UI.Core;
 using RouteOnPoint.Route;
 using Windows.UI.Xaml.Media.Imaging;
+using RouteOnPoint.LanguageUtil;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -47,8 +48,8 @@ namespace RouteOnPoint.Pages
 
         private void FillContent()
         {
-            POIInfo.Text = POI._INFO;
-            POIName.Text = POI._name;
+            POIInfo.Text = MultiLang.GetContent(POI._INFO);
+            POIName.Text = MultiLang.GetContent(POI._name);
             Image.Source = new BitmapImage(new Uri(POI._path));
         }
 
