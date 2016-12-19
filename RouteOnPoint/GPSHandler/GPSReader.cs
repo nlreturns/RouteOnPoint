@@ -26,6 +26,8 @@ namespace RouteOnPoint.GPSHandler
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
+        public static bool IsPaused = false;
+        public static Route.Route route;
         //public static bool IsPaused = false;
         internal static bool created = false;
         public static Route.Route route;
@@ -102,7 +104,7 @@ namespace RouteOnPoint.GPSHandler
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
                 viewOfRoute.RouteColor = Colors.Orange;
-
+                
                 Map.Routes.Clear();
                 // Add the new MapRouteView to the Routes collection
                 // of the MapControl.
@@ -230,21 +232,21 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
-                   //if (!IsPaused)
-                   //{
-                   //    // instantiate mappolyline
-                   //    var polyline = new MapPolyline();
+                   if (!Notification.IsPaused)
+                   {
+                       // instantiate mappolyline
+                       var polyline = new MapPolyline();
 
-                   //    // add geopsitions to path
-                   //    BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
-                   //    BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
-                   //    polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
+                       // add geopsitions to path
+                       BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
+                       BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
+                       polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
 
-                   //    //set appearance of connector line
-                   //    polyline.StrokeColor = Colors.Gray;
-                   //    polyline.StrokeThickness = 2;
-                   //    Map.MapElements.Add(polyline);
-                   //}
+                       //set appearance of connector line
+                       polyline.StrokeColor = Colors.Gray;
+                       polyline.StrokeThickness = 2;
+                       Map.MapElements.Add(polyline);
+                   }
                    GoToUserLocationAsync(false);
                });
         }
@@ -309,6 +311,11 @@ namespace RouteOnPoint.GPSHandler
         {
             //returns the last know location (updates every 2 seconds)
             return UserLocation.Location;
+        }
+
+        public static void GetDistance()
+        {
+            
         }
     }
 }
