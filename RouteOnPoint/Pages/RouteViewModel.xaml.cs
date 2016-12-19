@@ -72,7 +72,7 @@ namespace RouteOnPoint.Pages
             AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
             if (!GPSReader.created)
-            {
+            {           
                 GPSReader.created = true;
                 await GPSReader.SetupGPS();
                 GPSReader.AddMap(myMap);
