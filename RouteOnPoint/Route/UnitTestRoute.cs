@@ -32,6 +32,23 @@ namespace RouteOnPoint.Route
              * variabelen zit.
              */
             //string breakpoint = "Ik wil hier een breakpoint";
+
+            /*
+             * testen van RouteEscaped
+             * dit moet via een emulator of fysieke telefoon getest worden.
+             * Het liefst bovenstaande unittest uitcommentariëren en deze in een loop laten runnen
+             *
+            Geopath route = new Geopath();
+            if (_handler.RouteEscaped(route))
+            {
+                // route is escaped
+                Debug.WriteLine("Escaped!");
+            }
+            else
+            {
+                Debug.WriteLine("OnRoute!");
+            }//*/
+       
         }
 
         private void SaveRoute(string path)
