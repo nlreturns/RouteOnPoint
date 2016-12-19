@@ -115,6 +115,8 @@ namespace RouteOnPoint.Route
 
             // check if left or not 
             GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            if(!_onRoute)
+                Notification.OffRouteMessage();
             return !_onRoute;
 
         }

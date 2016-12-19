@@ -15,7 +15,7 @@ namespace RouteOnPoint
     class Notification
     {
         public static bool IsPaused = false;
-        public static async void OffRouteMessage(Page page)
+        public static async void OffRouteMessage()
         {
             StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             Folder = await Folder.GetFolderAsync("Assets");
@@ -28,7 +28,6 @@ namespace RouteOnPoint
             {
                 FontSize = 26,
                 Title = "U wijkt van de route af",
-                MaxWidth = page.ActualWidth,
                 PrimaryButtonText = "Ok",
                 SecondaryButtonText = "Pauzeer route"
             };
