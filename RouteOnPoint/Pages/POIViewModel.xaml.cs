@@ -33,7 +33,7 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
         }
-
+        
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
             var POIGot = (POI)args.Parameter;
@@ -52,6 +52,11 @@ namespace RouteOnPoint.Pages
         private void Close(object sender, RoutedEventArgs e)
         {
             rootFrame.GoBack();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }

@@ -30,12 +30,13 @@ namespace RouteOnPoint.GPSHandler
         public static Route.Route route;
         //public static bool IsPaused = false;
         internal static bool created = false;
+        public static Route.Route route;
 
         public static void AddMap(MapControl map)
         {
             Map = map;
 
-            Map.MapElements.Add(UserLocation);
+            //Map.MapElements.Add(UserLocation);
             //Adds the event when the position changes
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user

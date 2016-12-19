@@ -32,26 +32,26 @@ namespace RouteOnPoint.Pages
         public RouteViewModel()
         {
             this.InitializeComponent();
-                        List<POI> points = new List<POI>();
-                        points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
-                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
-//                        points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
-//                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
-//                        points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
-//                        points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
-                        GPSReader.SetupRoute(points);
-            //TODO disable buttons
-            if (!GPSReader.created)
-            {
-                GPSReader.created = true;
-                Load();
-            }
+            this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            //            List<POI> points = new List<POI>();
+            //            points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
+            //            points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
+            //            points.Add(new POI("lolz", null, null, false, new BasicGeoposition() { Latitude = 51.591649, Longitude = 4.785404 }));
+            //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.595011, Longitude = 4.783865 }));
+            //            Gps.SetupRoute(points);
+
+            RouteButtonsEnabler(false);
         }
 
         private async void Load()
         {
             await GPSReader.SetupGPS();
             GPSReader.AddMap(myMap);
+            RouteButtonsEnabler(true);
+            
         }
 
         //Button to center the screen on the users location
@@ -63,7 +63,7 @@ namespace RouteOnPoint.Pages
         //Button to show the help page
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            //rootFrame.Navigate(typeof(AssisViewModel));
+            rootFrame.Navigate(typeof(AssistViewModel));
         }
 
         //Button to play or pause the route session
@@ -79,11 +79,21 @@ namespace RouteOnPoint.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();
+            if (!GPSReader.created)
+            {
+                GPSReader.created = true;
+                await GPSReader.SetupGPS();
+                Load();
+            }
+            else
+            {
+                myMap = GPSReader.Map;
+            }
         }
     }
 }
