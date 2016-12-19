@@ -28,6 +28,7 @@ namespace RouteOnPoint.Route
         [JsonProperty]
         public string _name { get; set; }
 
+        
         //Boolean visited if true than the user has already been here.
         [JsonProperty]
         public bool _visited { get; set; }

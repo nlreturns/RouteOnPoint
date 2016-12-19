@@ -172,10 +172,12 @@
     <Content Include="Assets\EnglishFlag.png" />
     <Content Include="Assets\Flags\DutchFlag.png" />
     <Content Include="Assets\Flags\EnglishFlag.png" />
+    <Content Include="Assets\jingle-bells-sms.mp3" />
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />
     <Content Include="Assets\Logo.png" />
+    <Content Include="Assets\Routes\Resume.png" />
     <Content Include="Assets\Text\Dutch\AntoniusKerkInfo.txt" />
     <Content Include="Assets\Text\Dutch\bibliotheekInfo.txt" />
     <Content Include="Assets\Text\Dutch\kasteelInfo.txt" />

@@ -15,6 +15,8 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
+using RouteOnPoint.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace RouteOnPoint.GPSHandler
 {
@@ -28,8 +30,11 @@ namespace RouteOnPoint.GPSHandler
         public static bool IsPaused = false;
         public static Route.Route route;
         internal static bool created = false;
+        public static Frame rootFrame;
 
-        public static void AddMap(MapControl map)
+
+
+        public static  async void AddMap(MapControl map)
         {
             Map = map;
 
@@ -37,9 +42,9 @@ namespace RouteOnPoint.GPSHandler
             //Adds the event when the position changes
             Geolocator.PositionChanged += OnPositionChangedAsync;
             //centers the map to the location of the user
-            GoToUserLocationAsync(true);
+            await GoToUserLocationAsync(true);
         }
-        
+
 
         public static async Task<bool> SetupGPS()
         {
@@ -276,7 +281,7 @@ namespace RouteOnPoint.GPSHandler
                     case GeofenceState.Entered:
                         Debug.WriteLine("Entered geofence");
                         GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        //trigger the notification TODO
+                        handleGeoFenceEntered(geofence); 
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
@@ -291,6 +296,42 @@ namespace RouteOnPoint.GPSHandler
                         break;
                 }
             }
+        }
+
+        private static async void handleGeoFenceEntered(Geofence geo)
+        {
+            foreach(POI poi in Points)
+            {
+                if (poi._name.Equals(geo.Id))
+                {
+                    poi._visited = true;
+                    Notification.POIVisit(poi);
+                    changePOIImage(poi);
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        rootFrame.Navigate(typeof(POIViewModel), poi);
+                    }));
+                }
+            }
+        }
+
+        private static async void changePOIImage(POI poi)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        foreach (MapIcon element in Map.MapElements)
+                        {
+                            if (element.Title.Equals(poi._name))
+                            {
+                                var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                                element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                break;
+                            }
+                        }
+                    }));
+           
         }
 
         public static async Task GoToUserLocationAsync(bool force)
