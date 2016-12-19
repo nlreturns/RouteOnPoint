@@ -28,7 +28,6 @@ namespace RouteOnPoint.GPSHandler
         public static List<POI> Points;
         public static bool IsPaused = false;
         public static Route.Route route;
-        //public static bool IsPaused = false;
         internal static bool created = false;
 
         public static void AddMap(MapControl map)
@@ -312,9 +311,21 @@ namespace RouteOnPoint.GPSHandler
             return UserLocation.Location;
         }
 
-        public static void GetDistance()
+        public async static void GetDi(POI nextPoint)
         {
-            
+            List<Geopoint> waypoints = new List<Geopoint>(2);
+
+            waypoints.Add(UserLocation.Location);
+            waypoints.Add(new Geopoint(nextPoint._coordinate));
+
+            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            if (result.Status == MapRouteFinderStatus.Success)
+            {
+                
+                MapRouteView viewOfRoute = new MapRouteView(result.Route);
+                DisInMeters = viewOfRoute.Route.LengthInMeters;
+                time = viewOfRoute.Route.EstimatedDuration;
+            }
         }
     }
 }
