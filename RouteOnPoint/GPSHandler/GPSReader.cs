@@ -26,7 +26,7 @@ namespace RouteOnPoint.GPSHandler
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
-        //public static bool IsPaused = false;
+        public static bool IsPaused = false;
         internal static bool created = false;
 
         public static void AddMap(MapControl map)
