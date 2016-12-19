@@ -35,7 +35,7 @@ namespace RouteOnPoint.Pages
             this.InitializeComponent();
             Gps = new GPSReader(myMap, rootFrame);
             List<POI> points = new List<POI>();
-            points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
+            points.Add(new POI("P_KASTEELVANBREDA_NAME", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
             points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.585035, Longitude = 4.794096 }));
 //            points.Add(new POI("shine", null, null, false, new BasicGeoposition() { Latitude = 51.586575, Longitude = 4.791757 }));
 //            points.Add(new POI(null, null, null, false, new BasicGeoposition() { Latitude = 51.588976, Longitude = 4.780673 }));
