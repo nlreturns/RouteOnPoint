@@ -20,7 +20,7 @@ namespace RouteOnPoint.GPSHandler
         //returns distance via the map in meters
         public double? DistanceToPoi( /*POI point,*/ Geocoordinate coord)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         public static TimeSpan? TimeToPoi(/*POI point, Geocoordinate coord*/)
@@ -32,7 +32,7 @@ namespace RouteOnPoint.GPSHandler
             //            int minutes = timeInSeconds/60;
             //            int hours = minutes/60;
             //            return new TimeSpan(hours,minutes,timeInSeconds);
-            return null;
+            throw new NotImplementedException();
         }
     }
 }

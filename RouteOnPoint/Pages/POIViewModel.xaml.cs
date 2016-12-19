@@ -16,6 +16,7 @@ using RouteOnPoint.GPSHandler;
 using Windows.UI.Core;
 using RouteOnPoint.Route;
 using Windows.UI.Xaml.Media.Imaging;
+using RouteOnPoint.LanguageUtil;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -36,8 +37,8 @@ namespace RouteOnPoint.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs args)
         {
-            var POIGot = (POI)args.Parameter;
-            POI = POIGot;
+            //var POIGot = (POI)args.Parameter;
+            //POI = POIGot;
 
             FillContent();
         }
