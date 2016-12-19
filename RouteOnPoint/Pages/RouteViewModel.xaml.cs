@@ -62,13 +62,13 @@ namespace RouteOnPoint.Pages
         //Button to play or pause the route session
         private void PlayPauseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Notification.IsPaused)
+            if (GPSReader.IsPaused)
             {
-                Notification.IsPaused = false;
+                GPSReader.IsPaused = false;
             }
             else
             {
-                Notification.IsPaused = true;
+                GPSReader.IsPaused = true;
             }
         }
 
@@ -100,11 +100,12 @@ namespace RouteOnPoint.Pages
                 PlayPauseButton.Visibility = Visibility.Collapsed;
                 CenterLocationButton.Visibility = Visibility.Collapsed;
             }
-            else {
+            else
+            {
                 PlayPauseButton.Visibility = Visibility.Visible;
                 CenterLocationButton.Visibility = Visibility.Visible;
             }
-            
+
         }
     }
 }
