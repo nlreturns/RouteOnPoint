@@ -67,7 +67,13 @@ namespace RouteOnPoint.Route
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.353467, Longitude = 4.466767 });
             r.addPoint("P_BEGIJNENHOF_NAME", "P_BEGIJNENHOF_INFO", null, new BasicGeoposition() { Latitude = 51.353817, Longitude = 4.467017 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.353800, Longitude = 4.466683 });
-            r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.356467, Longitude = 4.467650 });
+            //r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.356467, Longitude = 4.467650 });
+            
+
+//            foreach (var POI in r)
+//            {
+//                poi
+//            }
             return r;
         }
         ///Create a Blind Wall route

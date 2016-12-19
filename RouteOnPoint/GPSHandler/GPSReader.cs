@@ -90,13 +90,11 @@ namespace RouteOnPoint.GPSHandler
             return true;
         }
 
-        public static async void SetupRoute(List<POI> points)
+        public static async void SetupRoute()
         {
-           // List<POI> points = route._points;
-           //temperary
-            route._points = points;
-            List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            //waypoints.Add(UserLocation.Location);
+            List<POI> points = route._points;
+            List<Geopoint> waypoints = new List<Geopoint>();
+            waypoints.Add(UserLocation.Location);
             foreach (var point in points)
             {
                 waypoints.Add(new Geopoint(point._coordinate));
@@ -215,7 +213,7 @@ namespace RouteOnPoint.GPSHandler
                         duration);
                     Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
                                     point.Position.Longitude);
-                    GeofenceMonitor.Current.Geofences.Add(geofence);
+                        GeofenceMonitor.Current.Geofences.Add(geofence);
                 }
             }
 
@@ -300,7 +298,7 @@ namespace RouteOnPoint.GPSHandler
 
         private static async void handleGeoFenceEntered(Geofence geo)
         {
-            foreach(POI poi in Points)
+            foreach(POI poi in route._points)
             {
                 if (poi._name.Equals(geo.Id))
                 {

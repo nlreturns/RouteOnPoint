@@ -27,7 +27,6 @@ namespace RouteOnPoint.Route
     {
         private bool _paused;
         private Route _route;
-        private GPSReader _gpsreader;
         private bool _onRoute;
 
         /*
