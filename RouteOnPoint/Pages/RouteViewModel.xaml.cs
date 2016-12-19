@@ -74,8 +74,9 @@ namespace RouteOnPoint.Pages
             if (!GPSReader.created)
             {           
                 GPSReader.created = true;
-                GPSReader.AddMap(myMap);
                 await GPSReader.SetupGPS();
+                GPSReader.AddMap(myMap);
+      
                 RouteButtonsEnabler(true);
                 List<POI> points = GPSReader.route._points;
                 GPSReader.SetupRoute(points);
