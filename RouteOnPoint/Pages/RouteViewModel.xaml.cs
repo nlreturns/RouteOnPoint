@@ -53,7 +53,7 @@ namespace RouteOnPoint.Pages
         //Button to show the help page
         private void HelpButton_Click(object sender, RoutedEventArgs e)
         {
-            //rootFrame.Navigate(typeof(AssisViewModel));
+            rootFrame.Navigate(typeof(AssistViewModel));
         }
 
         //Button to play or pause the route session
