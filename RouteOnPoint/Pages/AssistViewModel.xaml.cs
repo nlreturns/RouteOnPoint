@@ -51,5 +51,9 @@ namespace RouteOnPoint.Pages
             OrangeLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_ORANGELINE_TEXT");
             GrayLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_GRAYLINE_TEXT");
         }
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Frame.GoBack();
+        }
     }
 }
