@@ -2,6 +2,7 @@
 Mobile Guiding System - UWP development project
 
 Created by Breda on point commissioned by Route on Point.
+
 Avans Hogeschool - Technische Informatica periode 2.2
 
 # Functionality
