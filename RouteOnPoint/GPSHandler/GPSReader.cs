@@ -30,7 +30,6 @@ namespace RouteOnPoint.GPSHandler
         public static Route.Route route;
         //public static bool IsPaused = false;
         internal static bool created = false;
-        public static Route.Route route;
 
         public static void AddMap(MapControl map)
         {
@@ -75,7 +74,7 @@ namespace RouteOnPoint.GPSHandler
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
-
+                    
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:

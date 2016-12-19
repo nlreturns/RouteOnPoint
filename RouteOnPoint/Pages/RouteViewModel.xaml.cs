@@ -95,5 +95,23 @@ namespace RouteOnPoint.Pages
                 myMap = GPSReader.Map;
             }
         }
+
+        public void RouteButtonsEnabler(bool change)
+        {
+            PlayPauseButton.IsEnabled = change;
+            CenterLocationButton.IsEnabled = change;
+
+            if (change == false)
+            {
+                PlayPauseButton.Visibility = Visibility.Collapsed;
+                CenterLocationButton.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                PlayPauseButton.Visibility = Visibility.Visible;
+                CenterLocationButton.Visibility = Visibility.Visible;
+            }
+
+        }
     }
 }
