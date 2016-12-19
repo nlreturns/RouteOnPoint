@@ -46,13 +46,6 @@ namespace RouteOnPoint.Pages
             RouteButtonsEnabler(false);
         }
 
-        private async void Load()
-        {
-            await GPSReader.SetupGPS();
-            GPSReader.AddMap(myMap);
-            RouteButtonsEnabler(true);
-            
-        }
 
         //Button to center the screen on the users location
         private async void CenterLocationButton_Click(object sender, RoutedEventArgs e)
@@ -88,7 +81,8 @@ namespace RouteOnPoint.Pages
             {
                 GPSReader.created = true;
                 await GPSReader.SetupGPS();
-                Load();
+                GPSReader.AddMap(myMap);
+                RouteButtonsEnabler(true);
             }
             else
             {

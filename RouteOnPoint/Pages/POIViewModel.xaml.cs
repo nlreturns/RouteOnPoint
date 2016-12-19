@@ -33,13 +33,16 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
         }
-        
-        protected override void OnNavigatedTo(NavigationEventArgs args)
-        {
-            var POIGot = (POI)args.Parameter;
-            POI = POIGot;
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+         
+      
+            var POIGot = (POI)e.Parameter;
+            POI = POIGot;
+            
             FillContent();
+            base.OnNavigatedTo(e);
         }
 
         private void FillContent()
