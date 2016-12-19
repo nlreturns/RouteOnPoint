@@ -35,6 +35,7 @@ namespace RouteOnPoint.LanguageUtil
                 _English = new Dictionary<string, string>();
                 LoadPageTextEnglish();
                 await LoadHistorischeKilometerEnglish();
+                LoadAssistPageEnglish();
                 LoadBlindWallsEnglish();
             }
 
@@ -329,6 +330,16 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
             _English.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Resume route");
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
+        }
+
+        private static void LoadAssistPageEnglish()
+        {
+            _English.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Help page");
+            _English.Add("ASSISTVIEWMODEL_LOCATIONBUTTONINFO_TEXT", "This button takes you to your current location when pressed.");
+            _English.Add("ASSISTVIEWMODEL_PAUSEBUTTONINFO_TEXT", "This button provides you to pause the route. When the route is paused you won't get any notifications untill you unpause the route by pressing the button again.");
+            _English.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "This button takes you to the page where you are right now. This page provides you with information and possibilities about and with this application.");
+            _English.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "This displays your current location on the map. If you can't see this you should press the button that takes you there.");
+            _English.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MyLocation.png");
         }
 
         //Hier staan nog de nederlandse vertalingen in
