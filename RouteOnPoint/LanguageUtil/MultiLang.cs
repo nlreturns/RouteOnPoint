@@ -26,6 +26,7 @@ namespace RouteOnPoint.LanguageUtil
                 _Dutch = new Dictionary<string, string>();
                 LoadPageTextDutch();
                 await LoadHistorischeKilometerDutch();
+                LoadAssistPageDutch();
                 LoadBlindWallsDutch();
             }
 
@@ -142,6 +143,17 @@ namespace RouteOnPoint.LanguageUtil
         {
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Selecteer Route");
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Hervat route");
+            _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
+        }
+
+        private static void LoadAssistPageDutch()
+        {
+            _Dutch.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Hulp pagina");
+            _Dutch.Add("ASSISTVIEWMODEL_LOCATIONBUTTONINFO_TEXT", "Deze knop brengt u naar uw huidige locatie wanneer hier op gedrukt wordt.");
+            _Dutch.Add("ASSISTVIEWMODEL_PAUSEBUTTONINFO_TEXT", "Deze knop zorgt ervoor dat u de route op pauze kunt zetten. Wanneer de route is gepauzeerd ontvangt u geen meldingen totdat u het pauzeren eindigt door nogmaals op deze knop te drukken.");
+            _Dutch.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "Deze knop brengt u naar het scherm waar u zich nu in bevind. Dit scherm geeft u uitleg over de functionaliteiten en mogenlijkheden van deze applicatie.");
+            _Dutch.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "Dit geeft uw huidige locatie aan op de kaart. Als u dit niet ziet druk dan op de knop om u naar uw locatie te brengen.");
+            _Dutch.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MijnLocatie.png");
         }
 
         private static void LoadBlindWallsDutch()
@@ -316,6 +328,7 @@ namespace RouteOnPoint.LanguageUtil
         {
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
             _English.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Resume route");
+            _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
         }
 
         //Hier staan nog de nederlandse vertalingen in
