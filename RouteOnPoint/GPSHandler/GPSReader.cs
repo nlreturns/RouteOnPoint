@@ -163,6 +163,7 @@ namespace RouteOnPoint.GPSHandler
                     }
 
                     // put pushpin on the map
+                    
                     Map.MapElements.Add(pushpin);
                 }
             }
@@ -299,16 +300,19 @@ namespace RouteOnPoint.GPSHandler
         {
             foreach(POI poi in Points)
             {
-                if (poi._name.Equals(geo.Id))
+                if (poi._name != null)
                 {
-                    poi._visited = true;
-                    Notification.POIVisit(poi);
-                    changePOIImage(poi);
-                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                    CoreDispatcherPriority.High, (() =>
+                    if (poi._name.Equals(geo.Id))
                     {
-                        rootFrame.Navigate(typeof(POIViewModel), poi);
-                    }));
+                        poi._visited = true;
+                        Notification.POIVisit(poi);
+                        changePOIImage(poi);
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        CoreDispatcherPriority.High, (() =>
+                        {
+                            rootFrame.Navigate(typeof(POIViewModel), poi);
+                        }));
+                    }
                 }
             }
         }
@@ -318,16 +322,23 @@ namespace RouteOnPoint.GPSHandler
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.High, (() =>
                     {
-                        foreach (MapIcon element in Map.MapElements)
+                        foreach (var element in Map.MapElements)
                         {
-                            if (element.Title.Equals(poi._name))
+
+                            if (element is MapIcon)
                             {
-                                var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
-                                element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                break;
+                                MapIcon icon = (MapIcon)element;
+                                if (icon.Title.Equals(poi._name))
+                                {
+                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                    break;
+                                }
                             }
                         }
-                    }));
+
+                    }
+                        ));
            
         }
 

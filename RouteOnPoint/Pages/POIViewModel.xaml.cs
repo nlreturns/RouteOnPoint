@@ -50,7 +50,8 @@ namespace RouteOnPoint.Pages
         {
             POIInfo.Text = MultiLang.GetContent(POI._INFO);
             POIName.Text = MultiLang.GetContent(POI._name);
-            Image.Source = new BitmapImage(new Uri(POI._path));
+            if(POI._path != null)
+                Image.Source = new BitmapImage(new Uri(POI._path));
         }
 
         private void Close(object sender, RoutedEventArgs e)
