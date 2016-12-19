@@ -155,6 +155,10 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "Deze knop brengt u naar het scherm waar u zich nu in bevind. Dit scherm geeft u uitleg over de functionaliteiten en mogenlijkheden van deze applicatie.");
             _Dutch.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "Dit geeft uw huidige locatie aan op de kaart. Als u dit niet ziet druk dan op de knop om u naar uw locatie te brengen.");
             _Dutch.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MijnLocatie.png");
+            _Dutch.Add("ASSISTVIEWMODEL_GREENPOI_TEXT", "Dit icoon geeft aan dat dit specifieke Point of Interest nog niet is bezocht.");
+            _Dutch.Add("ASSISTVIEWMODEL_BLUEPOI_TEXT", "Dit icoon geeft aan dat dit specifieke Point of Interest is bezocht.");
+            _Dutch.Add("ASSISTVIEWMODEL_ORANGELINE_TEXT", "Deze lijn geeft aan wat de route is. Dit is de geadviseerde wandelroute.");
+            _Dutch.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT","Deze lijn geeft aan wat je gelopen hebt. Dit onderdeel van de route is dus al bewandeld.");
         }
 
         private static void LoadBlindWallsDutch()
@@ -340,6 +344,10 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "This button takes you to the page where you are right now. This page provides you with information and possibilities about and with this application.");
             _English.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "This displays your current location on the map. If you can't see this you should press the button that takes you there.");
             _English.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MyLocation.png");
+            _English.Add("ASSISTVIEWMODEL_GREENPOI_TEXT", "This icon shows a Point of Interest that isn't visited yet.");
+            _English.Add("ASSISTVIEWMODEL_BLUEPOI_TEXT", "This icon shows a Point of Interest that is visited already.");
+            _English.Add("ASSISTVIEWMODEL_ORANGELINE_TEXT", "This line shows you the route. This is the advised walk.");
+            _English.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT", "This line shows you the route you have already walked.");
         }
 
         //Hier staan nog de nederlandse vertalingen in

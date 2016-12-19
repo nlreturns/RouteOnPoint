@@ -178,6 +178,7 @@
     <Content Include="Assets\HelpPage\MijnLocatie.png" />
     <Content Include="Assets\HelpPage\MyLocation.png" />
     <Content Include="Assets\HelpPage\PauseButton.png" />
+    <Content Include="Assets\HelpPage\POIGreen.png" />
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />

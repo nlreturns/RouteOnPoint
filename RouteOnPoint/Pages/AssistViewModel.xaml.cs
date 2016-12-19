@@ -46,6 +46,10 @@ namespace RouteOnPoint.Pages
             HelpButtonInfo.Text = MultiLang.GetContent("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT");
             MyLocationImage.Source = new BitmapImage(new Uri(MultiLang.GetContent("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE")));
             MyLocationInfo.Text = MultiLang.GetContent("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT");
+            GreenPOI.Text = MultiLang.GetContent("ASSISTVIEWMODEL_GREENPOI_TEXT");
+            BluePOI.Text = MultiLang.GetContent("ASSISTVIEWMODEL_BLUEPOI_TEXT");
+            OrangeLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_ORANGELINE_TEXT");
+            GrayLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_GRAYLINE_TEXT");
         }
     }
 }
