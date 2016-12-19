@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -13,6 +14,13 @@ namespace RouteOnPoint
     {
         public static async void OffRouteMessage(Page page)
         {
+            StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Folder = await Folder.GetFolderAsync("Assets");
+            StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
+            MediaElement PlayMusic = new MediaElement();
+            PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+            
+
             ContentDialog dialog = new ContentDialog()
             {
                 FontSize = 26,
@@ -22,6 +30,7 @@ namespace RouteOnPoint
                 SecondaryButtonText = "Pauzeer route"
             };
             dialog.SecondaryButtonClick += Pauzeer;
+            PlayMusic.Play();
             await dialog.ShowAsync();
         }
 
@@ -32,12 +41,19 @@ namespace RouteOnPoint
 
         public static async void POIVisit(POI poi)
         {
+            StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+            Folder = await Folder.GetFolderAsync("Assets");
+            StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
+            MediaElement PlayMusic = new MediaElement();
+            PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+
             ContentDialog dialog = new ContentDialog()
             {
                 FontSize = 26,
                 Title = "U nadert " + poi._name,
                 PrimaryButtonText = "Ok"
             };
+            PlayMusic.Play();
             await dialog.ShowAsync();
         }
     }

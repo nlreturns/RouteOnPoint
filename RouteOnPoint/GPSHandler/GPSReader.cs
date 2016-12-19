@@ -281,6 +281,7 @@ namespace RouteOnPoint.GPSHandler
                 {
                     poi._visited = true;
                     Notification.POIVisit(poi);
+                    DrawIcons();
                     rootFrame.Navigate(typeof(POIViewModel), poi);
                 }
             }
