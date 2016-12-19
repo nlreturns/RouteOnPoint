@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
+using Windows.Devices.PointOfService;
 using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.Storage.Streams;
@@ -21,6 +22,7 @@ namespace RouteOnPoint.GPSHandler
     {
         public static Geolocator Geolocator;
         private static Geopoint _lastGeopoint;
+        private static List<Geopoint> _walkedroute;
         public static MapIcon UserLocation;
         public static MapControl Map;
         public static List<POI> Points;
@@ -94,7 +96,7 @@ namespace RouteOnPoint.GPSHandler
 
             SetupGeoFence(points);
 
-            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints);
+            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
@@ -218,7 +220,7 @@ namespace RouteOnPoint.GPSHandler
         {
             //Set the currentlocation to the new position when the positions changes
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-               CoreDispatcherPriority.High, (() =>
+               CoreDispatcherPriority.High,  () =>
                {
                    _lastGeopoint = UserLocation.Location;
                    UserLocation.Location = new Geopoint(new BasicGeoposition()
@@ -227,8 +229,28 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
+                   if (!IsPaused)
+                   {
+                       // instantiate mappolyline
+                       var polyline = new MapPolyline();
+
+                       // add geopsitions to path
+                       BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
+                       BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
+                       polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
+
+                       //set appearance of connector line
+                       polyline.StrokeColor = Colors.Gray;
+                       polyline.StrokeThickness = 2;
+                       Map.MapElements.Add(polyline);
+                   }
                    GoToUserLocationAsync(false);
-               }));
+               });
+        }
+
+        private static void DrawVisitedRoute()
+        {
+            
         }
         
         public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)

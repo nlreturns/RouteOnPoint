@@ -27,6 +27,7 @@ namespace RouteOnPoint.Pages
     public sealed partial class RouteViewModel : Page
     {
         Frame rootFrame = Window.Current.Content as Frame;
+        
 
         public RouteViewModel()
         {
