@@ -25,7 +25,6 @@ namespace RouteOnPoint.GPSHandler
         private static List<BasicGeoposition> _walkedroute = new List<BasicGeoposition>();
         public static MapIcon UserLocation;
         public static MapControl Map;
-        public static List<POI> Points;
         public static bool IsPaused = false;
         public static Route.Route route;
         internal static bool created = false;
@@ -88,7 +87,9 @@ namespace RouteOnPoint.GPSHandler
 
         public static async void SetupRoute(List<POI> points)
         {
-            Points = points;
+           // List<POI> points = route._points;
+           //temperary
+            route._points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
             //waypoints.Add(UserLocation.Location);
             foreach (var point in points)
@@ -125,7 +126,7 @@ namespace RouteOnPoint.GPSHandler
 
         public static void DrawIcons()
         {
-            foreach (var poi in Points)
+            foreach (var poi in route._points)
             {
                 if (poi._name != null)
                 {
@@ -231,6 +232,8 @@ namespace RouteOnPoint.GPSHandler
                    });
                    if (!Notification.IsPaused)
                    {
+                       GetDi();
+
                        // instantiate mappolyline
                        var polyline = new MapPolyline();
 
@@ -311,20 +314,41 @@ namespace RouteOnPoint.GPSHandler
             return UserLocation.Location;
         }
 
-        public async static void GetDi(POI nextPoint)
+        public async static void GetDi()
         {
-            List<Geopoint> waypoints = new List<Geopoint>(2);
-
-            waypoints.Add(UserLocation.Location);
-            waypoints.Add(new Geopoint(nextPoint._coordinate));
-
-            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
-            if (result.Status == MapRouteFinderStatus.Success)
+            foreach (var nextPoint in route._points)
             {
-                
-                MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                DisInMeters = viewOfRoute.Route.LengthInMeters;
-                time = viewOfRoute.Route.EstimatedDuration;
+                List<Geopoint> waypoints = new List<Geopoint>(2);
+
+                waypoints.Add(UserLocation.Location);
+                waypoints.Add(new Geopoint(nextPoint._coordinate));
+
+                var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+                if (result.Status == MapRouteFinderStatus.Success)
+                {
+
+                    MapRouteView viewOfRoute = new MapRouteView(result.Route);
+                    foreach (var element in Map.MapElements)
+                    {
+                        if(element is MapIcon)
+                        {
+                            MapIcon icon = (MapIcon) element;
+                            char[] whitespace = new char[] { ' '};
+                            string[] splitted = icon.Title.Split(whitespace);
+                            if (splitted[0].Equals(nextPoint._name))
+                            {
+                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                CoreDispatcherPriority.High, (() =>
+                                {
+                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
+                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+                                }));
+                            }
+                        }
+                        
+                    }
+                }
             }
         }
     }
