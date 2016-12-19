@@ -93,7 +93,7 @@ namespace RouteOnPoint.Route
          * 
          * @Geopath route - The route thats currently walked on
          */
-        private bool RouteEscaped(Geopath route)
+        public bool RouteEscaped(Geopath route)
         {
             // create geofence around geopath
             string fenceId = "path";
