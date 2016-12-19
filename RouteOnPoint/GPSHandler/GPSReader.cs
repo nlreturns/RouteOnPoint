@@ -384,28 +384,28 @@ namespace RouteOnPoint.GPSHandler
                 var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
                 if (result.Status == MapRouteFinderStatus.Success)
                 {
-
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                    foreach (var element in Map.MapElements)
-                    {
-                        if(element is MapIcon)
-                        {
-                            MapIcon icon = (MapIcon) element;
-                            char[] whitespace = new char[] { ' '};
-                            string[] splitted = icon.Title.Split(whitespace);
-                            if (splitted[0].Equals(nextPoint._name))
-                            {
-                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                CoreDispatcherPriority.High, (() =>
-                                {
-                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
-                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
-                                }));
-                            }
-                        }
-                        
-                    }
+                    MapElement[] tempList = new MapElement[Map.MapElements.Count];
+                    Map.MapElements.CopyTo(tempList,0);
+//                    foreach (var element in Map.MapElements)
+//                    {
+//                        if(element is MapIcon)
+//                        {
+//                            MapIcon icon = (MapIcon) element;
+//                            char[] whitespace = new char[] { ' '};
+//                            string[] splitted = icon.Title.Split(whitespace);
+//                            if (splitted[0].Equals(nextPoint._name))
+//                            {
+//                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+//                                CoreDispatcherPriority.High, (() =>
+//                                {
+//                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
+//                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+//                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+//                                }));
+//                            }
+//                        }
+//                    }
                 }
             }
         }
