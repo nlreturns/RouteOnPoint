@@ -256,7 +256,7 @@ namespace RouteOnPoint.GPSHandler
                     case GeofenceState.Entered:
                         Debug.WriteLine("Entered geofence");
                         GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        handleGeoFenceEntered(geofence);
+                        handleGeoFenceEntered(geofence); 
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
@@ -281,8 +281,21 @@ namespace RouteOnPoint.GPSHandler
                 {
                     poi._visited = true;
                     Notification.POIVisit(poi);
-                    DrawIcons();
+                    changePOIImage(poi);
                     rootFrame.Navigate(typeof(POIViewModel), poi);
+                }
+            }
+        }
+
+        private void changePOIImage(POI poi)
+        {
+            foreach (MapIcon element in Map.MapElements)
+            {
+                if (element.Title.Equals(poi._name))
+                {
+                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                    element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                    break;
                 }
             }
         }
