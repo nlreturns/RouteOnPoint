@@ -15,6 +15,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
 using RouteOnPoint.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace RouteOnPoint.GPSHandler
 {
@@ -26,12 +27,14 @@ namespace RouteOnPoint.GPSHandler
         public MapControl Map;
         public List<POI> Points;
         public bool IsPaused = false;
+        private Frame rootFrame;
         
 
-        public GPSReader(MapControl map)
+        public GPSReader(MapControl map, Frame rootFrame )
         {
             SetupGPS();
             Map = map;
+            this.rootFrame = rootFrame;
         }
 
         private async void SetupGPS()
@@ -278,10 +281,9 @@ namespace RouteOnPoint.GPSHandler
                 {
                     poi._visited = true;
                     Notification.POIVisit(poi);
+                    rootFrame.Navigate(typeof(POIViewModel), poi);
                 }
             }
-
-            //navigeren naar poiviewmodel
         }
 
         public async Task GoToUserLocationAsync(bool force)
