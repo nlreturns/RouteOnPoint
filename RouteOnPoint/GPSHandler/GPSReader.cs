@@ -273,7 +273,7 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        private void handleGeoFenceEntered(Geofence geo)
+        private async void handleGeoFenceEntered(Geofence geo)
         {
             foreach(POI poi in Points)
             {
@@ -282,7 +282,11 @@ namespace RouteOnPoint.GPSHandler
                     poi._visited = true;
                     Notification.POIVisit(poi);
                     changePOIImage(poi);
-                    rootFrame.Navigate(typeof(POIViewModel), poi);
+                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        rootFrame.Navigate(typeof(POIViewModel), poi);
+                    }));
                 }
             }
         }

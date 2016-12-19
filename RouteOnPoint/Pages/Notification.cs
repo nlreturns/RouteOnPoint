@@ -45,17 +45,23 @@ namespace RouteOnPoint
             StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
             Folder = await Folder.GetFolderAsync("Assets");
             StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
-            MediaElement PlayMusic = new MediaElement();
-            PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
-
-            ContentDialog dialog = new ContentDialog()
-            {
-                FontSize = 26,
-                Title = "U nadert " + poi._name,
-                PrimaryButtonText = "Ok"
-            };
-            PlayMusic.Play();
-            await dialog.ShowAsync();
+            MediaElement PlayMusic = null;
+            var file = await sf.OpenAsync(FileAccessMode.Read);
+            ContentDialog dialog = null;
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        PlayMusic = new MediaElement();
+                        PlayMusic.SetSource(file, sf.ContentType);
+                        dialog = new ContentDialog()
+                        {
+                            FontSize = 26,
+                            Title = "U nadert " + poi._name,
+                            PrimaryButtonText = "Ok"
+                        };
+                        dialog.ShowAsync();
+                    }));
+            
         }
     }
 }
