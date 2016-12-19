@@ -144,7 +144,7 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Hervat route");
             _Dutch.Add("NOTITLEERROR", "De naam is onbekend");
             _Dutch.Add("NOINFOERROR", "Er is geen informatie beschikbaar");
-            _Dutch.Add("NOTITLEERROR", "Er is geen foto beschikbaar");
+            _Dutch.Add("NOIMAGEERROR", "Er is geen foto beschikbaar");
         }
 
         private static void LoadBlindWallsDutch()
@@ -321,7 +321,7 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT", "Resume route");
             _English.Add("NOTITLEERROR", "The name is unknown");
             _English.Add("NOINFOERROR", "There is no information available for this point");
-            _English.Add("NOTITLEERROR", "No image availeble");
+            _English.Add("NOIMAGEERROR", "No image availeble");
         }
 
         //Hier staan nog de nederlandse vertalingen in
