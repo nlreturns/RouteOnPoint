@@ -287,17 +287,22 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        private void changePOIImage(POI poi)
+        private async void changePOIImage(POI poi)
         {
-            foreach (MapIcon element in Map.MapElements)
-            {
-                if (element.Title.Equals(poi._name))
-                {
-                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
-                    element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                    break;
-                }
-            }
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        foreach (MapIcon element in Map.MapElements)
+                        {
+                            if (element.Title.Equals(poi._name))
+                            {
+                                var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                                element.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                break;
+                            }
+                        }
+                    }));
+           
         }
 
         public async Task GoToUserLocationAsync(bool force)
