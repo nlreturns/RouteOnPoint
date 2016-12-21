@@ -42,16 +42,11 @@ namespace RouteOnPoint.Route
             lijstje.Add(new BasicGeoposition() {Latitude = 51.356467, Longitude = 4.467650});
             lijstje.Add(new BasicGeoposition() {Latitude = 51.356967, Longitude = 4.467333});
             Geopath route = new Geopath(lijstje);
-            if (_handler.RouteEscaped(route))
-            {
-                // route is escaped
-                Debug.WriteLine("Escaped!");
-            }
-            else
-            {
-                Debug.WriteLine("OnRoute!");
-            }//*/
-       
+            _handler.RouteEscaped(route);
+            /*
+             * User input will determine if the event will get triggered
+             * Please leave the route to test :)
+             */
         }
 
         private void SaveRoute(string path)

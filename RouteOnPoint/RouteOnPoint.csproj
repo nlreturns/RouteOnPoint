@@ -279,6 +279,9 @@
     <Content Include="Assets\HelpPage\PauseButton.png" />
     <Content Include="Assets\HelpPage\POIBlue.png" />
     <Content Include="Assets\HelpPage\POIGreen.png" />
+    <Content Include="Assets\jingle-bells-sms.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />

@@ -28,8 +28,6 @@ namespace RouteOnPoint.Route
         private bool _paused;
         private Route _route;
 
-        private bool _onRoute;
-
         /*
          * Save a route with all info included.
          * 
@@ -93,10 +91,10 @@ namespace RouteOnPoint.Route
          * 
          * @Geopath route - The route thats currently walked on
          */
-        public bool RouteEscaped(Geopath route)
+        public void RouteEscaped(Geopath route)
         {
             // create geofence around geopath
-            string fenceId = "path";
+            string fenceId = "Route";
 
             MonitoredGeofenceStates monitoredStates =
                         MonitoredGeofenceStates.Entered |
@@ -115,10 +113,6 @@ namespace RouteOnPoint.Route
 
             // check if left or not 
             GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
-            if(!_onRoute)
-                Notification.OffRouteMessage();
-            return !_onRoute;
-
         }
 
         /**
@@ -146,22 +140,18 @@ namespace RouteOnPoint.Route
                     //Entered the geofence
                     case GeofenceState.Entered:
                         GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        _onRoute = true;
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
-                        _onRoute = true;
                         break;
                     //Exited the geofence
                     case GeofenceState.Exited:
-                        _onRoute = false;
+                        Notification.OffRouteMessage();
                         break;
                     //No state
                     case GeofenceState.None:
-                        _onRoute = true;
                         break;
                     default:
-                        _onRoute = true;
                         break;
                 }
             }
