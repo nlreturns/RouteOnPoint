@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
 using RouteOnPoint.Route;
 using Windows.UI.Xaml.Controls.Maps;
+using RouteOnPoint.LanguageUtil;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -115,8 +116,20 @@ namespace RouteOnPoint.Pages
         private void myMap_MapElementClick(Windows.UI.Xaml.Controls.Maps.MapControl sender, Windows.UI.Xaml.Controls.Maps.MapElementClickEventArgs args)
         {
             MapIcon myClickedIcon = args.MapElements.FirstOrDefault(x => x is MapIcon) as MapIcon;
-            POI p = GPSReader.route._points.Find(x => x._name == myClickedIcon.Title);
+
+            char[] bar = new char[] { '-' };
+            string[] splitted = myClickedIcon.Title.Split(bar);
+            POI p = null;
+            foreach (var point in GPSReader.route._points)
+            {
+                if(point._name!=null)
+                if (MultiLang.GetContent(point._name).Contains(splitted[0]))
+                {
+                    p = point;
+                }
+            }
             Frame.Navigate(typeof(POIViewModel), p);
+            //            POI p = GPSReader.route._points.Find(x => x._name == myClickedIcon.Title);
         }
     }
 }

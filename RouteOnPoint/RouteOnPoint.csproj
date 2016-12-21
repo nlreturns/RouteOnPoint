@@ -212,9 +212,23 @@
     <Content Include="Assets\B10.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\B11.jpg" />
+    <Content Include="Assets\B12.jpg" />
+    <Content Include="Assets\B13.jpg" />
+    <Content Include="Assets\B14.jpg" />
+    <Content Include="Assets\B15.jpg" />
+    <Content Include="Assets\B16.jpg" />
+    <Content Include="Assets\B17.jpg" />
+    <Content Include="Assets\B18.jpg" />
+    <Content Include="Assets\B19.jpg" />
     <Content Include="Assets\B2.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\B20.jpg" />
+    <Content Include="Assets\B21.jpg" />
+    <Content Include="Assets\B22.jpg" />
+    <Content Include="Assets\B23.jpg" />
+    <Content Include="Assets\B24.jpg" />
     <Content Include="Assets\B3.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -255,6 +269,18 @@
     <Content Include="Assets\jingle-bells-sms.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\HelpPage\GrayRoute.png" />
+    <Content Include="Assets\HelpPage\HelpButton.png" />
+    <Content Include="Assets\HelpPage\LocationButton.png" />
+    <Content Include="Assets\HelpPage\MijnLocatie.png" />
+    <Content Include="Assets\HelpPage\MyLocation.png" />
+    <Content Include="Assets\HelpPage\OrangeRoute.png" />
+    <Content Include="Assets\HelpPage\PauseButton.png" />
+    <Content Include="Assets\HelpPage\POIBlue.png" />
+    <Content Include="Assets\HelpPage\POIGreen.png" />
+    <Content Include="Assets\jingle-bells-sms.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
     <Content Include="Assets\Routes\HistorischeKilometer.png" />
@@ -262,24 +288,60 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Assets\Routes\Resume.png" />
-    <Content Include="Assets\Text\Dutch\AntoniusKerkInfo.txt" />
-    <Content Include="Assets\Text\Dutch\bibliotheekInfo.txt" />
-    <Content Include="Assets\Text\Dutch\kasteelInfo.txt" />
-    <Content Include="Assets\Text\Dutch\kloosterKazerneInfo.txt" />
-    <Content Include="Assets\Text\Dutch\NassauMonumentInfo.txt" />
-    <Content Include="Assets\Text\Dutch\stadhuisInfo.txt" />
-    <Content Include="Assets\Text\Dutch\TorenstraatInfo.txt" />
-    <Content Include="Assets\Text\Dutch\valkenbergInfo.txt" />
-    <Content Include="Assets\Text\Dutch\vishalInfo.txt" />
-    <Content Include="Assets\Text\English\AntoniusKerkInfo.txt" />
-    <Content Include="Assets\Text\English\bibliotheekInfo.txt" />
-    <Content Include="Assets\Text\English\kasteelInfo.txt" />
-    <Content Include="Assets\Text\English\kloosterKazerneInfo.txt" />
-    <Content Include="Assets\Text\English\NassauMonumentInfo.txt" />
-    <Content Include="Assets\Text\English\stadhuisInfo.txt" />
-    <Content Include="Assets\Text\English\TorenstraatInfo.txt" />
-    <Content Include="Assets\Text\English\valkenbergInfo.txt" />
-    <Content Include="Assets\Text\English\vishalInfo.txt" />
+    <Content Include="Assets\Text\Dutch\AntoniusKerkInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\bibliotheekInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\kasteelInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\kloosterKazerneInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\NassauMonumentInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\stadhuisInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\TorenstraatInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\valkenbergInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\Dutch\vishalInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\AntoniusKerkInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\bibliotheekInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\kasteelInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\kloosterKazerneInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\NassauMonumentInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\stadhuisInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\TorenstraatInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\valkenbergInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Text\English\vishalInfo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Assets\Icons\Blackdot.png" />
     <Content Include="Assets\Icons\BlueIcon.png" />
     <Content Include="Assets\Icons\GreenIcon.png" />

@@ -6,6 +6,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using RouteOnPoint.GPSHandler;
 
 namespace RouteOnPoint
 {
@@ -87,12 +88,10 @@ namespace RouteOnPoint
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //@TODO GET ACTIVE ROUTE
+            //@TODO test code 8)
             RouteHandler save = new RouteHandler();
-            Route.Route route = new Route.Route("Mooi");
-            save.SaveRouteWithState(route, "RouteData.json");
-
-                
+            save.SaveRouteWithState(GPSReader.route, "RouteData.json");
+            
             deferral.Complete();
         }
     }
