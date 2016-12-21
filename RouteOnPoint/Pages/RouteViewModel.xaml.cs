@@ -29,7 +29,7 @@ namespace RouteOnPoint.Pages
     public sealed partial class RouteViewModel : Page
     {
         Frame rootFrame = Window.Current.Content as Frame;
-        
+        public string path ="/Assets/Flags/CombinedFlag.png";
 
         public RouteViewModel()
         {
@@ -71,6 +71,9 @@ namespace RouteOnPoint.Pages
         {
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
             AppViewBackButtonVisibility.Collapsed;
+
+            if (GPSReader.created) { GPSReader.UserLocation.Title = MultiLang.GetContent("GPSREADER_LOCATION_TEXT"); }
+            
             this.Frame.BackStack.Clear();
             if (!GPSReader.created)
             {           
@@ -128,8 +131,16 @@ namespace RouteOnPoint.Pages
                     p = point;
                 }
             }
-            Frame.Navigate(typeof(POIViewModel), p);
+            if (p != null)
+            {
+                Frame.Navigate(typeof(POIViewModel), p);
+            }
             //            POI p = GPSReader.route._points.Find(x => x._name == myClickedIcon.Title);
+        }
+
+        private void ChangeLanguage_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(LanguageViewModel), this);
         }
     }
 }

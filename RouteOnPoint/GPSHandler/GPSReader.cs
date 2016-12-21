@@ -51,7 +51,7 @@ namespace RouteOnPoint.GPSHandler
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
-
+         
             //Switch case for the AccessStatus
             switch (accessStatus)
             {
@@ -251,6 +251,8 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
+    
+                   
                    if (!Notification.IsPaused)
                    {
                        GetDi();
@@ -283,7 +285,9 @@ namespace RouteOnPoint.GPSHandler
                 //Get the state of the geofence
                 GeofenceState state = report.NewState;
 
-                //Get the Geofence which state is changed
+                //Get the Geofence which state is 
+
+
                 Geofence geofence = report.Geofence;
 
                 //Switch case to know which state it is

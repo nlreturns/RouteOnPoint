@@ -32,7 +32,7 @@ namespace RouteOnPoint.Pages
     {
         Frame rootFrame = Window.Current.Content as Frame;
         string language;
-
+        bool navigateToMap = false;
         public LanguageViewModel()
         {
             this.InitializeComponent();
@@ -55,11 +55,23 @@ namespace RouteOnPoint.Pages
             Button button = (Button)sender;
             language = button.Name.ToString();
             await setLanguage((LanguageEnum)Enum.Parse(typeof(LanguageEnum), language));
-            rootFrame.Navigate(typeof(RouteSelectionViewModel));
+            if (navigateToMap)
+            {
+                rootFrame.Navigate(typeof(RouteViewModel));
+            }
+            else
+            {
+                rootFrame.Navigate(typeof(RouteSelectionViewModel));
+
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (e.Parameter is RouteViewModel)
+            {
+                navigateToMap = true;
+            }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Collapsed;
             this.Frame.BackStack.Clear();

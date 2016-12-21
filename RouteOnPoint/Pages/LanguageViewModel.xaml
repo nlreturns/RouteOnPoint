@@ -22,10 +22,10 @@
             <TextBlock Margin="5,5,5,5" Text="Select language" HorizontalAlignment="Center" FontSize="26" Foreground="White" FontWeight="Bold"/>
         </StackPanel>
         <StackPanel Grid.Row="3">
-            <Button Name="Dutch" Height="100" Margin="50,25,50,0" MaxWidth="200" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
+            <Button Name="Dutch" Height="100" Margin="50,25,50,0" MaxWidth="200" Padding="0" BorderThickness="2" BorderBrush="Black" HorizontalAlignment="Stretch" Click="Language_Click">
                 <Image Source="/Assets/Flags/DutchFlag.png" MaxWidth="200" Stretch="Fill"/>
             </Button>
-            <Button Name="English" Height="100" Margin="50,50,50,0" MaxWidth="200" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
+            <Button Name="English" Height="100" Margin="50,50,50,0" MaxWidth="200" Padding="0" BorderThickness="2" BorderBrush="Black" HorizontalAlignment="Stretch" Click="Language_Click">
                 <Image Source="/Assets/Flags/EnglishFlag.png" MaxWidth="200" Stretch="Fill"/>
             </Button>
         </StackPanel>
