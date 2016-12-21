@@ -388,42 +388,48 @@ namespace RouteOnPoint.GPSHandler
                 List<Geopoint> waypoints = new List<Geopoint>();
 
                 waypoints.Add(UserLocation.Location);
+                waypoints.Add(new Geopoint(nextPoint._coordinate));
 
-                List<POI> range = route._points.GetRange(0, route._points.IndexOf(nextPoint));
-                foreach(POI p in range)
-                {
-                    if (!p._visited)
-                    {
-                        waypoints.Add(new Geopoint(p._coordinate));
-                    }
-                    
-                }
-                
+                //                List<POI> range = route._points.GetRange(0, route._points.IndexOf(nextPoint));
+                //                foreach(POI p in range)
+                //                {
+                //                    if (!p._visited)
+                //                    {
+                //                        waypoints.Add(new Geopoint(p._coordinate));
+                //                    }
+                //                    
+                //                }
+
                 var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
                 if (result.Status == MapRouteFinderStatus.Success)
                 {
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
                     MapElement[] tempList = new MapElement[Map.MapElements.Count];
                     Map.MapElements.CopyTo(tempList,0);
-//                    foreach (var element in Map.MapElements)
-//                    {
-//                        if(element is MapIcon)
-//                        {
-//                            MapIcon icon = (MapIcon) element;
-//                            char[] whitespace = new char[] { ' '};
-//                            string[] splitted = icon.Title.Split(whitespace);
-//                            if (splitted[0].Equals(nextPoint._name))
-//                            {
-//                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-//                                CoreDispatcherPriority.High, (() =>
-//                                {
-//                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
-//                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-//                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
-//                                }));
-//                            }
-//                        }
-//                    }
+                    int i = 0;
+                    foreach (var element in tempList)
+                    {
+                        if(element is MapIcon)
+                        {
+                            MapIcon icon = (MapIcon) element;
+                            char[] whitespace = new char[] { ' '};
+                            string[] splitted = icon.Title.Split(whitespace);
+                            if (splitted[0].Equals(nextPoint._name))
+                            {
+                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                CoreDispatcherPriority.High, (() =>
+                                {
+                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
+                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+                                }));
+                            }
+                            Map.MapElements[i] = icon;
+                            i++;
+                        }
+                    }
+                    
+
                 }
             }
         }
