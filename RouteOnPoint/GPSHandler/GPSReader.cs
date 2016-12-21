@@ -28,7 +28,6 @@ namespace RouteOnPoint.GPSHandler
         private static List<BasicGeoposition> _walkedroute = new List<BasicGeoposition>();
         public static MapIcon UserLocation;
         public static MapControl Map;
-        public static List<POI> Points;
         public static bool IsPaused = false;
         public static Route.Route route;
         internal static bool created = false;
@@ -92,11 +91,11 @@ namespace RouteOnPoint.GPSHandler
             return true;
         }
 
-        public static async void SetupRoute(List<POI> points)
+        public static async void SetupRoute()
         {
-            Points = points;
-            List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            //waypoints.Add(UserLocation.Location);
+            List<POI> points = route._points;
+            List<Geopoint> waypoints = new List<Geopoint>();
+            waypoints.Add(UserLocation.Location);
             foreach (var point in points)
             {
                 waypoints.Add(new Geopoint(point._coordinate));
@@ -106,7 +105,8 @@ namespace RouteOnPoint.GPSHandler
             MapRouteRestrictions restrictions = new MapRouteRestrictions();
             restrictions = MapRouteRestrictions.None;
             MapRouteOptimization optimize = MapRouteOptimization.Distance;
-            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+            MapRouteFinderResult result;
+            result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
@@ -139,7 +139,7 @@ namespace RouteOnPoint.GPSHandler
 
         public static void DrawIcons()
         {
-            foreach (var poi in Points)
+            foreach (var poi in route._points)
             {
                 if (poi._name != null)
                 {
@@ -149,7 +149,7 @@ namespace RouteOnPoint.GPSHandler
                     pushpin.Location = new Geopoint(poi._coordinate);
 
                     // assign pushpin title
-                    pushpin.Title = poi._name;
+                    pushpin.Title = MultiLang.GetContent(poi._name);
 
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
@@ -224,7 +224,7 @@ namespace RouteOnPoint.GPSHandler
                         duration);
                     Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
                                     point.Position.Longitude);
-                    GeofenceMonitor.Current.Geofences.Add(geofence);
+                        GeofenceMonitor.Current.Geofences.Add(geofence);
                 }
             }
 
@@ -246,6 +246,8 @@ namespace RouteOnPoint.GPSHandler
                    });
                    if (!Notification.IsPaused)
                    {
+                       GetDi();
+
                        // instantiate mappolyline
                        var polyline = new MapPolyline();
 
@@ -307,7 +309,7 @@ namespace RouteOnPoint.GPSHandler
 
         private static async void handleGeoFenceEntered(Geofence geo)
         {
-            foreach(POI poi in Points)
+            foreach(POI poi in route._points)
             {
                 if (poi._name != null)
                 {
@@ -337,7 +339,7 @@ namespace RouteOnPoint.GPSHandler
                             if (element is MapIcon)
                             {
                                 MapIcon icon = (MapIcon)element;
-                                if (icon.Title.Equals(poi._name))
+                                if (icon.Title.Equals(MultiLang.GetContent( poi._name)))
                                 {
                                     var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
                                     icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
@@ -372,20 +374,56 @@ namespace RouteOnPoint.GPSHandler
             return UserLocation.Location;
         }
 
-        public async static void GetDi(POI nextPoint)
+        public async static void GetDi()
         {
-            List<Geopoint> waypoints = new List<Geopoint>(2);
-
-            waypoints.Add(UserLocation.Location);
-            waypoints.Add(new Geopoint(nextPoint._coordinate));
-
-            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
-            if (result.Status == MapRouteFinderStatus.Success)
+            foreach (var nextPoint in route._points)
             {
-                
-                MapRouteView viewOfRoute = new MapRouteView(result.Route);
-             //   DisInMeters = viewOfRoute.Route.LengthInMeters;
-             //   time = viewOfRoute.Route.EstimatedDuration;
+                List<Geopoint> waypoints = new List<Geopoint>();
+
+                waypoints.Add(UserLocation.Location);
+                waypoints.Add(new Geopoint(nextPoint._coordinate));
+
+                //                List<POI> range = route._points.GetRange(0, route._points.IndexOf(nextPoint));
+                //                foreach(POI p in range)
+                //                {
+                //                    if (!p._visited)
+                //                    {
+                //                        waypoints.Add(new Geopoint(p._coordinate));
+                //                    }
+                //                    
+                //                }
+
+                var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+                if (result.Status == MapRouteFinderStatus.Success)
+                {
+                    MapRouteView viewOfRoute = new MapRouteView(result.Route);
+                    MapElement[] tempList = new MapElement[Map.MapElements.Count];
+                    Map.MapElements.CopyTo(tempList,0);
+                    int i = 0;
+                    foreach (var element in tempList)
+                    {
+                        if(element is MapIcon)
+                        {
+                            MapIcon icon = (MapIcon) element;
+                            char[] whitespace = new char[] { ' '};
+                            string[] splitted = icon.Title.Split(whitespace);
+                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                            {
+                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                CoreDispatcherPriority.High, (() =>
+                                {
+                                    icon.Title = MultiLang.GetContent( nextPoint._name )+ " " + viewOfRoute.Route.LengthInMeters + "M " +
+                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+                                }));
+                            }
+                            Map.MapElements[i] = icon;
+                            i++;
+                        }
+                    }
+                    
+
+                }
             }
         }
     }
