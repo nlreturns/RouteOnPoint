@@ -11,7 +11,7 @@ namespace RouteOnPoint.Route
     public class Route
     {
         [JsonProperty]
-        private string _name;
+        public string _name;
         [JsonProperty]
         public List<POI> _points { get; set; }
 

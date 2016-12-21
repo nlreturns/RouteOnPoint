@@ -22,7 +22,7 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Margin="5,5,5,5">
-            <Image Name="Image" Margin="0,0,0,5"/>
+            <Image Name="Image" Margin="0,10" MaxWidth="380" MaxHeight="640" ManipulationMode="Scale" />
             <!--<TextBlock FontWeight="Bold" FontSize="15" Text="Straat: Liniestraat"/>
             <TextBlock FontWeight="Bold" FontSize="15" Text="Materiaal: Spuitverf en latex op baksteen"/>
             <TextBlock FontWeight="Bold" FontSize="15" Text="Jaar: 2016"/>

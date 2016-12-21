@@ -105,7 +105,8 @@ namespace RouteOnPoint.GPSHandler
             MapRouteRestrictions restrictions = new MapRouteRestrictions();
             restrictions = MapRouteRestrictions.None;
             MapRouteOptimization optimize = MapRouteOptimization.Distance;
-            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+            MapRouteFinderResult result;
+            result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
@@ -148,7 +149,7 @@ namespace RouteOnPoint.GPSHandler
                     pushpin.Location = new Geopoint(poi._coordinate);
 
                     // assign pushpin title
-                    pushpin.Title = poi._name;
+                    pushpin.Title = MultiLang.GetContent(poi._name);
 
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
@@ -338,7 +339,7 @@ namespace RouteOnPoint.GPSHandler
                             if (element is MapIcon)
                             {
                                 MapIcon icon = (MapIcon)element;
-                                if (icon.Title.Equals(poi._name))
+                                if (icon.Title.Equals(MultiLang.GetContent( poi._name)))
                                 {
                                     var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
                                     icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
@@ -381,6 +382,7 @@ namespace RouteOnPoint.GPSHandler
                 List<Geopoint> waypoints = new List<Geopoint>();
 
                 waypoints.Add(UserLocation.Location);
+                waypoints.Add(new Geopoint(nextPoint._coordinate));
 
 
                 List<POI> range = new List<POI>();
