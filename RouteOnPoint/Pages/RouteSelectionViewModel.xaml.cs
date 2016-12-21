@@ -46,7 +46,8 @@ namespace RouteOnPoint.Pages
             Route.Route r;
             switch (g.Name)
             {
-                case "BlindWalls":
+
+                case "Blind":
                     r = new RouteHelper().createBlindWalls();
                     break;
                 default:
