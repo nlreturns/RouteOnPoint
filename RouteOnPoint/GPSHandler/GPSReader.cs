@@ -106,14 +106,7 @@ namespace RouteOnPoint.GPSHandler
             restrictions = MapRouteRestrictions.None;
             MapRouteOptimization optimize = MapRouteOptimization.Distance;
             MapRouteFinderResult result;
-            if (route._name.Equals("R_BLINDWALLS_NAME"))
-            {
-                result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
-            }
-            else
-            {
-                result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
-            }
+            result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
