@@ -372,26 +372,26 @@ namespace RouteOnPoint.GPSHandler
 
         public async static void GetDi()
         {
-            for (int nextpoint = 0; nextpoint < route._points.Count(); nextpoint++)
-            //foreach (POI nextPoint in route._points)
+            //for (int nextpoint = 0; nextpoint < route._points.Count(); nextpoint++)
+            foreach (POI nextPoint in route._points)
             {
                 List<Geopoint> waypoints = new List<Geopoint>();
 
                 waypoints.Add(UserLocation.Location);
-                waypoints.Add(new Geopoint(nextPoint._coordinate));
+                //waypoints.Add(new Geopoint(nextPoint._coordinate));
 
 
                 List<POI> range = new List<POI>();
-                for (int j = 0; j <= nextpoint; j++)
+                for (int j = 0; j <= route._points.IndexOf(nextPoint); j++)
                 {
                     range.Add(route._points[j]);
                 }
                 foreach (POI p in range)
                 {
-                   // if (!p._visited)
-                 //   {
+                    if (!p._visited)
+                    {
                         waypoints.Add(new Geopoint(p._coordinate));
-                    //}
+                    }
 
                 }
                 
