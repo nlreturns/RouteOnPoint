@@ -149,7 +149,7 @@ namespace RouteOnPoint.GPSHandler
                     pushpin.Location = new Geopoint(poi._coordinate);
 
                     // assign pushpin title
-                    pushpin.Title = poi._name;
+                    pushpin.Title = MultiLang.GetContent(poi._name);
 
                     //  make sure pushpin always appears
                     pushpin.CollisionBehaviorDesired = MapElementCollisionBehavior.RemainVisible;
@@ -339,7 +339,7 @@ namespace RouteOnPoint.GPSHandler
                             if (element is MapIcon)
                             {
                                 MapIcon icon = (MapIcon)element;
-                                if (icon.Title.Equals(poi._name))
+                                if (icon.Title.Equals(MultiLang.GetContent( poi._name)))
                                 {
                                     var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
                                     icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
@@ -407,12 +407,12 @@ namespace RouteOnPoint.GPSHandler
                             MapIcon icon = (MapIcon) element;
                             char[] whitespace = new char[] { ' '};
                             string[] splitted = icon.Title.Split(whitespace);
-                            if (splitted[0].Equals(nextPoint._name))
+                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                             {
                                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                                 CoreDispatcherPriority.High, (() =>
                                 {
-                                    icon.Title = nextPoint._name + " " + viewOfRoute.Route.LengthInMeters + "M " +
+                                    icon.Title = MultiLang.GetContent( nextPoint._name )+ " " + viewOfRoute.Route.LengthInMeters + "M " +
                                                  viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
                                                  viewOfRoute.Route.EstimatedDuration.Seconds;
                                 }));
