@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Windows.Devices.Geolocation.Geofencing;
+using Windows.Devices.PointOfService;
 using Windows.Foundation;
 using Windows.Services.Maps;
 using Windows.Storage.Streams;
@@ -15,25 +16,39 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
 using RouteOnPoint.LanguageUtil;
+using RouteOnPoint.Pages;
+using Windows.UI.Xaml.Controls;
 
 namespace RouteOnPoint.GPSHandler
 {
-    public class GPSReader
+    public static class GPSReader
     {
-        public Geolocator Geolocator;
-        public static Geopoint CurrentLocation;
+        public static Geolocator Geolocator;
+        private static Geopoint _lastGeopoint;
+        private static List<BasicGeoposition> _walkedroute = new List<BasicGeoposition>();
         public static MapIcon UserLocation;
-        public MapControl Map;
-        public List<POI> Points;
-        public bool IsPaused = false;
+        public static MapControl Map;
+        public static List<POI> Points;
+        public static bool IsPaused = false;
+        public static Route.Route route;
+        internal static bool created = false;
+        public static Frame rootFrame;
 
-        public GPSReader(MapControl map)
+
+
+        public static  async void AddMap(MapControl map)
         {
-            SetupGPS();
             Map = map;
+
+            Map.MapElements.Add(UserLocation);
+            //Adds the event when the position changes
+            Geolocator.PositionChanged += OnPositionChangedAsync;
+            //centers the map to the location of the user
+            await GoToUserLocationAsync(true);
         }
 
-        private async void SetupGPS()
+
+        public static async Task<bool> SetupGPS()
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
@@ -48,14 +63,6 @@ namespace RouteOnPoint.GPSHandler
                     
                     //Activates GPS and gets first location
                     Geoposition pos = await Geolocator.GetGeopositionAsync();
-
-                    //Sets CurrentLocation as the location
-                    CurrentLocation = new Geopoint(new BasicGeoposition()
-                    {
-                        Latitude = pos.Coordinate.Latitude,
-                        Longitude = pos.Coordinate.Longitude
-
-                    });
 
                     //set usericon
                     var myImageUri = new Uri("ms-appx:///Assets/Icons/Blackdot.png");
@@ -72,12 +79,7 @@ namespace RouteOnPoint.GPSHandler
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
-
-                    Map.MapElements.Add(UserLocation);
-
-                    //Adds the event when the position changes
-                    Geolocator.PositionChanged += OnPositionChangedAsync;
-                    GoToUserLocationAsync(true);
+                    
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
@@ -86,37 +88,47 @@ namespace RouteOnPoint.GPSHandler
                 case GeolocationAccessStatus.Unspecified:
                     break;
                 }
+
+            return true;
         }
 
-        public async void SetupRoute(List<POI> points)
+        public static async void SetupRoute(List<POI> points)
         {
             Points = points;
             List<Geopoint> waypoints = new List<Geopoint>(points.Count);
-            //waypoints.Add(CurrentLocation);
+            //waypoints.Add(UserLocation.Location);
             foreach (var point in points)
             {
                 waypoints.Add(new Geopoint(point._coordinate));
             }
 
             SetupGeoFence(points);
-
-            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints);
+            MapRouteRestrictions restrictions = new MapRouteRestrictions();
+            restrictions = MapRouteRestrictions.None;
+            MapRouteOptimization optimize = MapRouteOptimization.Distance;
+            var result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
                 viewOfRoute.RouteColor = Colors.Orange;
+                try
+                {
+                    Map.Routes.Clear();
+                    // Add the new MapRouteView to the Routes collection
+                    // of the MapControl.
+                    Map.Routes.Add(viewOfRoute);
 
-                Map.Routes.Clear();
-                // Add the new MapRouteView to the Routes collection
-                // of the MapControl.
-                Map.Routes.Add(viewOfRoute);
+                    // Fit the MapControl to the route.
+                    await Map.TrySetViewBoundsAsync(
+                          result.Route.BoundingBox,
+                          null,
+                          Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
+                    DrawIcons();
+                }
+                catch (Exception)
+                {
 
-                // Fit the MapControl to the route.
-                await Map.TrySetViewBoundsAsync(
-                      result.Route.BoundingBox,
-                      null,
-                      Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
-                DrawIcons();
+                }
             }
             else
             {
@@ -125,7 +137,7 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        public void DrawIcons()
+        public static void DrawIcons()
         {
             foreach (var poi in Points)
             {
@@ -145,6 +157,7 @@ namespace RouteOnPoint.GPSHandler
                     // set pushpin bottom center over geoposition
                     pushpin.NormalizedAnchorPoint = new Point(0.5, 1.0);
 
+                    
 
                     // set custom image to pushpin
                     if (poi._visited)
@@ -159,13 +172,14 @@ namespace RouteOnPoint.GPSHandler
                     }
 
                     // put pushpin on the map
+                    
                     Map.MapElements.Add(pushpin);
                 }
             }
 
         }
 
-        public void SetupGeoFence(List<POI> points)
+        public static void SetupGeoFence(List<POI> points)
         {
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
@@ -217,23 +231,45 @@ namespace RouteOnPoint.GPSHandler
         GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
         }
 
-        private async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
+        private static async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
         {
             //Set the currentlocation to the new position when the positions changes
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-               CoreDispatcherPriority.High, (() =>
+               CoreDispatcherPriority.High,  () =>
                {
+                   _lastGeopoint = UserLocation.Location;
                    UserLocation.Location = new Geopoint(new BasicGeoposition()
                    {
                        Latitude = e.Position.Coordinate.Latitude,
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
+                   if (!Notification.IsPaused)
+                   {
+                       // instantiate mappolyline
+                       var polyline = new MapPolyline();
+
+                       // add geopsitions to path
+                       BasicGeoposition basicGeoposition = new BasicGeoposition() { Latitude = _lastGeopoint.Position.Latitude, Longitude = _lastGeopoint.Position.Longitude };
+                       BasicGeoposition basicGeoposition2 = new BasicGeoposition() { Latitude = UserLocation.Location.Position.Latitude, Longitude = UserLocation.Location.Position.Longitude };
+                       _walkedroute.Add(basicGeoposition2);
+                       polyline.Path = new Geopath(new List<BasicGeoposition>() { basicGeoposition, basicGeoposition2 });
+
+                       //set appearance of connector line
+                       polyline.StrokeColor = Colors.Gray;
+                       polyline.StrokeThickness = 7;
+                       Map.MapElements.Add(polyline);
+                   }
                    GoToUserLocationAsync(false);
-               }));
+               });
+        }
+
+        private static void DrawVisitedRoute()
+        {
+            
         }
         
-        public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
+        public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
             var reports = sender.ReadReports();
@@ -252,7 +288,7 @@ namespace RouteOnPoint.GPSHandler
                     case GeofenceState.Entered:
                         Debug.WriteLine("Entered geofence");
                         GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        //trigger the notification TODO
+                        handleGeoFenceEntered(geofence); 
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
@@ -269,13 +305,59 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        public async Task GoToUserLocationAsync(bool force)
+        private static async void handleGeoFenceEntered(Geofence geo)
         {
-            if (force || CurrentLocation != null)
+            foreach(POI poi in Points)
+            {
+                if (poi._name != null)
+                {
+                    if (poi._name.Equals(geo.Id))
+                    {
+                        poi._visited = true;
+                        Notification.POIVisit(poi);
+                        changePOIImage(poi);
+                        await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                        CoreDispatcherPriority.High, (() =>
+                        {
+                            rootFrame.Navigate(typeof(POIViewModel), poi);
+                        }));
+                    }
+                }
+            }
+        }
+
+        private static async void changePOIImage(POI poi)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        foreach (var element in Map.MapElements)
+                        {
+
+                            if (element is MapIcon)
+                            {
+                                MapIcon icon = (MapIcon)element;
+                                if (icon.Title.Equals(poi._name))
+                                {
+                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
+                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                        ));
+           
+        }
+
+        public static async Task GoToUserLocationAsync(bool force)
+        {
+            if (force || UserLocation != null)
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                     CoreDispatcherPriority.High, (() =>
                     {
-                        Map.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(CurrentLocation, 1000));
+                        Map.TrySetSceneAsync(MapScene.CreateFromLocationAndRadius(UserLocation.Location, 1000));
                     }));
             else
             {
@@ -284,10 +366,27 @@ namespace RouteOnPoint.GPSHandler
             }
         }
 
-        public Geopoint GetCurrentLocation()
+        public static Geopoint GetCurrentLocation()
         {
             //returns the last know location (updates every 2 seconds)
-            return CurrentLocation;
+            return UserLocation.Location;
+        }
+
+        public async static void GetDi(POI nextPoint)
+        {
+            List<Geopoint> waypoints = new List<Geopoint>(2);
+
+            waypoints.Add(UserLocation.Location);
+            waypoints.Add(new Geopoint(nextPoint._coordinate));
+
+            var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            if (result.Status == MapRouteFinderStatus.Success)
+            {
+                
+                MapRouteView viewOfRoute = new MapRouteView(result.Route);
+             //   DisInMeters = viewOfRoute.Route.LengthInMeters;
+             //   time = viewOfRoute.Route.EstimatedDuration;
+            }
         }
     }
 }

@@ -37,12 +37,12 @@ namespace RouteOnPoint.Pages
             Hervat.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT");
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
         }
-        
+
         private void Click(object sender, TappedRoutedEventArgs e)
         {
             Grid grid = (Grid)sender;
-            
-            if(grid.Name == "Blind" || grid.Name == "Kilo")
+
+            if (grid.Name == "Blind" || grid.Name == "Kilo")
             {
                 rootFrame.Navigate(typeof(RouteViewModel));
             }

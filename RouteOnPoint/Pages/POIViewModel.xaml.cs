@@ -35,24 +35,41 @@ namespace RouteOnPoint.Pages
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs args)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //var POIGot = (POI)args.Parameter;
-            //POI = POIGot;
-
+         
+      
+            var POIGot = (POI)e.Parameter;
+            POI = POIGot;
+            
             FillContent();
+            base.OnNavigatedTo(e);
         }
 
         private void FillContent()
         {
-            POIInfo.Text = POI._INFO;
-            POIName.Text = POI._name;
-            Image.Source = new BitmapImage(new Uri(POI._path));
+            if(POI._INFO == null || MultiLang.GetContent(POI._INFO)==null)
+                POIInfo.Text = MultiLang.GetContent("NOINFOERROR");        
+            else { POIInfo.Text = MultiLang.GetContent(POI._INFO); }
+            if (POI._name == null|| MultiLang.GetContent(POI._name) == null) { POIName.Text = MultiLang.GetContent("NOTITLEERROR");
+                 }
+            else { POIName.Text = MultiLang.GetContent(POI._name); }
+
+            if (POI._path != null)
+                    Image.Source = new BitmapImage(new Uri(POI._path));
+            
+            
+
         }
 
         private void Close(object sender, RoutedEventArgs e)
         {
             rootFrame.GoBack();
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            Frame.GoBack();
         }
     }
 }
