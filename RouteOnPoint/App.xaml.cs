@@ -25,10 +25,7 @@ namespace RouteOnPoint
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            ApplicationViewTitleBar formattableTitleBar = ApplicationView.GetForCurrentView().TitleBar;
-            formattableTitleBar.ButtonBackgroundColor = Colors.Transparent;
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
+            
 
 
         }
