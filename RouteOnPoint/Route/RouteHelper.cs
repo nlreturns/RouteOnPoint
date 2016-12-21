@@ -47,7 +47,7 @@ namespace RouteOnPoint.Route
             r.addPoint("P_STADHUIS_NAME", "P_STADHUIS_INFO", null, new BasicGeoposition() { Latitude = 51.353250, Longitude = 4.465667 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.352783, Longitude = 4.465817 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.352500, Longitude = 4.465933 });
-            r.addPoint("P_ANTONIUSVANPADAUKERK_NAME", "P_ANTONIUSVANPADUAKERK_INFO" , null, new BasicGeoposition() { Latitude = 51.352583, Longitude = 4.466350 });
+            r.addPoint("P_ANTONIUSVANPADUAKERK_NAME", "P_ANTONIUSVANPADUAKERK_INFO" , null, new BasicGeoposition() { Latitude = 51.352583, Longitude = 4.466350 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.352967, Longitude = 4.467100 });
             r.addPoint("P_BIBLIOTHEEK_NAME", "P_BIBLIOTHEEK_INFO", null, new BasicGeoposition() { Latitude = 51.352800, Longitude = 4.467367 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.352417, Longitude = 4.468133 });
