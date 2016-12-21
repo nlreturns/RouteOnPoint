@@ -20,7 +20,7 @@ namespace RouteOnPoint.Route
         {
             MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
             _handler = new RouteHandler();
-            
+
             /*
              * er kan maar 1 tegelijk uitgevoerd worden omdat beide methodes hetzelfde
              * file gebruiken. Commentarieër 1 methode om de andere te testen.
@@ -30,8 +30,28 @@ namespace RouteOnPoint.Route
 
             /* eventuele breakpoint line om te kijken of alle data in de juiste
              * variabelen zit.
-             */ 
+             */
             //string breakpoint = "Ik wil hier een breakpoint";
+
+            /*
+             * testen van RouteEscaped
+             * dit moet via een emulator of fysieke telefoon getest worden.
+             * Het liefst bovenstaande unittest uitcommentariëren en deze in een loop laten runnen
+             */
+            List<BasicGeoposition> lijstje = new List<BasicGeoposition>();
+            lijstje.Add(new BasicGeoposition() {Latitude = 51.356467, Longitude = 4.467650});
+            lijstje.Add(new BasicGeoposition() {Latitude = 51.356967, Longitude = 4.467333});
+            Geopath route = new Geopath(lijstje);
+            if (_handler.RouteEscaped(route))
+            {
+                // route is escaped
+                Debug.WriteLine("Escaped!");
+            }
+            else
+            {
+                Debug.WriteLine("OnRoute!");
+            }//*/
+       
         }
 
         private void SaveRoute(string path)
@@ -42,9 +62,9 @@ namespace RouteOnPoint.Route
 
         private void GetRoute(string path)
         {
-            Task<string> r2 = null;
+            Task<Route> r2 = null;
             Task.Run(() => r2 = _handler.GetRouteFromFile(path)).Wait();
-            _route = JsonConvert.DeserializeObject<Route>(r2.Result);
+            _route = r2.Result;
         }
 
     }
