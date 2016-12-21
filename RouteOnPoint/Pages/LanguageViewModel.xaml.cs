@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
 using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
@@ -36,11 +37,17 @@ namespace RouteOnPoint.Pages
         {
             this.InitializeComponent();
             TestMultiLang test = new TestMultiLang();
-            ApplicationViewTitleBar formattableTitleBar = ApplicationView.GetForCurrentView().TitleBar;
-            formattableTitleBar.ButtonBackgroundColor = Colors.Transparent;
-            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
-            coreTitleBar.ExtendViewIntoTitleBar = true;
 
+            var isAvailable = Windows.Foundation.Metadata.ApiInformation.IsTypePresent(typeof(StatusBar).FullName);
+            if (isAvailable)
+                hideBar();
+
+        }
+
+        async void hideBar()
+        {
+            StatusBar bar = StatusBar.GetForCurrentView();
+            await bar.HideAsync();
         }
 
         private async void Language_Click(object sender, RoutedEventArgs e)
