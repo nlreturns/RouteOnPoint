@@ -45,6 +45,9 @@
                 FontSize="55" 
                 Background="Transparent"
                 Foreground="Gray"/>
-
+        <Button Name="ChangeLanguage" Height="50" Margin="10" MaxWidth="50" Padding="0" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="ChangeLanguage_Click">
+            <Image Source="{x:Bind path ,Mode=OneWay}" MaxWidth="50" Stretch="Fill"/>
+        </Button>
     </Grid>
+    
 </Page>

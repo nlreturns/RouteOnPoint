@@ -15,7 +15,7 @@ namespace RouteOnPoint.LanguageUtil
 
         public enum LanguageEnum { English, Dutch};
 
-        private static LanguageEnum Language;
+        public static LanguageEnum Language;
 
         //set language and load the dictionary for the given language
         public static async Task setLanguage(LanguageEnum lang)
