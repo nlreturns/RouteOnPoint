@@ -7,31 +7,30 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="White">
+    <Grid Background="White" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
         
         <Grid>
-            <TextBlock FontSize="26" FontWeight="Bold" Foreground="Orange" Margin="10,5,5,5" Name="POIName"/>
-            <Button Width="50" Height="50" HorizontalAlignment="Right" Margin="2,2,10,2" Click="Close">
-                <Image Source="/Assets/Buttons/Cross.png"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+                <TextBlock  FontSize="26" FontWeight="Bold" Foreground="Orange"  Name="POIName" HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+            </ScrollViewer>
+            <Button Width="50" Height="50" HorizontalAlignment="Center" Click="Close" Grid.Column="1"  VerticalAlignment="Center">
+                <Image Source="/Assets/Buttons/Cross.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </Grid>
-        <ScrollViewer Grid.Row="1" Margin="5,5,5,5">
-            <StackPanel  Margin="5,5,5,5">
-            <Image Name="Image" Margin="0,10" MaxWidth="380" MaxHeight="640" ManipulationMode="Scale" />
-            <!--<TextBlock FontWeight="Bold" FontSize="15" Text="Straat: Liniestraat"/>
-            <TextBlock FontWeight="Bold" FontSize="15" Text="Materiaal: Spuitverf en latex op baksteen"/>
-            <TextBlock FontWeight="Bold" FontSize="15" Text="Jaar: 2016"/>
-            <TextBlock FontWeight="Bold" FontSize="15" Text="Fotografie: Rosa Meininger"/>-->
-
-
-        
-            <TextBlock Name="POIInfo" TextWrapping="WrapWholeWords"/>
-            </StackPanel>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Visible" >
+            <RelativePanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Image Name="Image" Margin="5" MaxWidth="380" MaxHeight="640" ManipulationMode="Scale" />
+                <TextBlock Name="POIInfo" Margin="5,5,5,25" TextWrapping="WrapWholeWords" MaxWidth="380" RelativePanel.Below="Image"/>
+            </RelativePanel>
         </ScrollViewer>
     </Grid>
 </Page>
