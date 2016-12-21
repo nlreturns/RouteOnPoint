@@ -7,7 +7,57 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Name="Header" FontSize="26" Margin="5,5,5,5"/>
 
+        <ScrollViewer Grid.Row="1">
+            <StackPanel>
+                
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/LocationButton.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="LocationButtonInfo" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/PauseButton.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="PauseButtonInfo" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/HelpButton.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="HelpButtonInfo" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Name="MyLocationImage" Width="110" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="MyLocationInfo" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/POIGreen.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="GreenPOI" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/POIBlue.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="BluePOI" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/OrangeRoute.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="OrangeLine" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+
+                <StackPanel Margin="0,0,10,10">
+                    <Image Source="/Assets/HelpPage/GrayRoute.png" Width="50" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+                    <TextBlock Name="GrayLine" Margin="5,5,5,5" TextWrapping="WrapWholeWords" />
+                </StackPanel>
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

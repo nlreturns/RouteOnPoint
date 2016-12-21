@@ -26,6 +26,7 @@ namespace RouteOnPoint.LanguageUtil
                 _Dutch = new Dictionary<string, string>();
                 LoadPageTextDutch();
                 await LoadHistorischeKilometerDutch();
+                LoadAssistPageDutch();
                 LoadBlindWallsDutch();
             }
 
@@ -34,6 +35,7 @@ namespace RouteOnPoint.LanguageUtil
                 _English = new Dictionary<string, string>();
                 LoadPageTextEnglish();
                 await LoadHistorischeKilometerEnglish();
+                LoadAssistPageEnglish();
                 LoadBlindWallsEnglish();
             }
 
@@ -145,6 +147,21 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("NOTITLEERROR", "De naam is onbekend");
             _Dutch.Add("NOINFOERROR", "Er is geen informatie beschikbaar");
             _Dutch.Add("NOIMAGEERROR", "Er is geen foto beschikbaar");
+            _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
+        }
+
+        private static void LoadAssistPageDutch()
+        {
+            _Dutch.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Hulp pagina");
+            _Dutch.Add("ASSISTVIEWMODEL_LOCATIONBUTTONINFO_TEXT", "Deze knop brengt u naar uw huidige locatie wanneer hier op gedrukt wordt.");
+            _Dutch.Add("ASSISTVIEWMODEL_PAUSEBUTTONINFO_TEXT", "Deze knop zorgt ervoor dat u de route op pauze kunt zetten. Wanneer de route is gepauzeerd ontvangt u geen meldingen totdat u het pauzeren eindigt door nogmaals op deze knop te drukken.");
+            _Dutch.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "Deze knop brengt u naar het scherm waar u zich nu in bevind. Dit scherm geeft u uitleg over de functionaliteiten en mogenlijkheden van deze applicatie.");
+            _Dutch.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "Dit geeft uw huidige locatie aan op de kaart. Als u dit niet ziet druk dan op de knop om u naar uw locatie te brengen.");
+            _Dutch.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MijnLocatie.png");
+            _Dutch.Add("ASSISTVIEWMODEL_GREENPOI_TEXT", "Dit icoon geeft aan dat dit specifieke Point of Interest nog niet is bezocht.");
+            _Dutch.Add("ASSISTVIEWMODEL_BLUEPOI_TEXT", "Dit icoon geeft aan dat dit specifieke Point of Interest is bezocht.");
+            _Dutch.Add("ASSISTVIEWMODEL_ORANGELINE_TEXT", "Deze kleur lijn geeft aan wat de route is. Dit is de geadviseerde wandelroute.");
+            _Dutch.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT","Deze kleur lijn geeft aan wat je gelopen hebt. Dit onderdeel van de route is dus al bewandeld.");
         }
 
         private static void LoadBlindWallsDutch()
@@ -322,6 +339,21 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("NOTITLEERROR", "The name is unknown");
             _English.Add("NOINFOERROR", "There is no information available for this point");
             _English.Add("NOIMAGEERROR", "No image availeble");
+            _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
+        }
+
+        private static void LoadAssistPageEnglish()
+        {
+            _English.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Help page");
+            _English.Add("ASSISTVIEWMODEL_LOCATIONBUTTONINFO_TEXT", "This button takes you to your current location when pressed.");
+            _English.Add("ASSISTVIEWMODEL_PAUSEBUTTONINFO_TEXT", "This button provides you to pause the route. When the route is paused you won't get any notifications untill you unpause the route by pressing the button again.");
+            _English.Add("ASSISTVIEWMODEL_HELPBUTTONINFO_TEXT", "This button takes you to the page where you are right now. This page provides you with information and possibilities about and with this application.");
+            _English.Add("ASSISTVIEWMODEL_MYLOCATIONINFO_TEXT", "This displays your current location on the map. If you can't see this you should press the button that takes you there.");
+            _English.Add("ASSISTVIEWMODEL_MYLOACTIONINFO_IMAGE", "ms-appx:///Assets/HelpPage/MyLocation.png");
+            _English.Add("ASSISTVIEWMODEL_GREENPOI_TEXT", "This icon shows a Point of Interest that isn't visited yet.");
+            _English.Add("ASSISTVIEWMODEL_BLUEPOI_TEXT", "This icon shows a Point of Interest that is visited already.");
+            _English.Add("ASSISTVIEWMODEL_ORANGELINE_TEXT", "This color line shows you the route. This is the advised walk.");
+            _English.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT", "This color line shows you the route you have already walked.");
         }
 
         //Hier staan nog de nederlandse vertalingen in
