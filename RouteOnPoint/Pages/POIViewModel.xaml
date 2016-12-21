@@ -14,15 +14,15 @@
 
         </Grid.RowDefinitions>
         
-        <Grid Margin="5">
+        <Grid  Background="Beige">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+            <ScrollViewer Margin="5" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
                 <TextBlock  FontSize="26" FontWeight="Bold" Foreground="Orange"  Name="POIName" HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center"/>
             </ScrollViewer>
-            <Button Width="50" Height="50" HorizontalAlignment="Center" Click="Close" Grid.Column="1"  VerticalAlignment="Center">
+            <Button Margin="5" Width="50" Height="50" HorizontalAlignment="Center" Click="Close" Grid.Column="1"  VerticalAlignment="Center">
                 <Image Source="/Assets/Buttons/Cross.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </Grid>
