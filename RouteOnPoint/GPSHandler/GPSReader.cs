@@ -81,6 +81,7 @@ namespace RouteOnPoint.GPSHandler
 
                     //Adds the event when the position changes
                     Geolocator.PositionChanged += OnPositionChangedAsync;
+                    Geolocator.StatusChanged += OnStatusChanged;
                     GoToUserLocationAsync(true);
                     break;
                 //Denied Access
@@ -91,6 +92,8 @@ namespace RouteOnPoint.GPSHandler
                     break;
                 }
         }
+
+        
 
         public async void SetupRoute(List<POI> points)
         {
@@ -236,7 +239,46 @@ namespace RouteOnPoint.GPSHandler
                    GoToUserLocationAsync(false);
                }));
         }
-        
+
+        async private void OnStatusChanged(Geolocator sender, StatusChangedEventArgs e)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                // Show the location setting message only if status is disabled.
+
+                switch (e.Status)
+                {
+                    case PositionStatus.Ready:
+                        // Location platform is providing valid data.
+                        break;
+
+                    case PositionStatus.Initializing:
+                        // Location platform is attempting to acquire a fix. ;
+                        break;
+
+                    case PositionStatus.NoData:
+                        // Location platform could not obtain location data.
+                        break;
+
+                    case PositionStatus.Disabled:
+                        // The permission to access location data is denied by the user or other policies.
+                        break;
+
+                    case PositionStatus.NotInitialized:
+                        // The location platform is not initialized. This indicates that the application 
+                        // has not made a request for location data.
+                        break;
+
+                    case PositionStatus.NotAvailable:
+                        // The location platform is not available on this version of the OS.
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        }
+
         public async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
