@@ -106,7 +106,14 @@ namespace RouteOnPoint.GPSHandler
             restrictions = MapRouteRestrictions.None;
             MapRouteOptimization optimize = MapRouteOptimization.Distance;
             MapRouteFinderResult result;
-            result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+            if (route._name.Equals("R_BLINDWALLS_NAME"))
+            {
+                result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+            }
+            else
+            {
+                result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            }
             if (result.Status == MapRouteFinderStatus.Success)
             {
                 MapRouteView viewOfRoute = new MapRouteView(result.Route);
@@ -313,7 +320,6 @@ namespace RouteOnPoint.GPSHandler
                     {
                         poi._visited = true;
                         Notification.POIVisit(poi);
-                        changePOIImage(poi);
                         await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                         CoreDispatcherPriority.High, (() =>
                         {
@@ -322,31 +328,6 @@ namespace RouteOnPoint.GPSHandler
                     }
                 }
             }
-        }
-
-        private static async void changePOIImage(POI poi)
-        {
-            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                    CoreDispatcherPriority.High, (() =>
-                    {
-                        foreach (var element in Map.MapElements)
-                        {
-
-                            if (element is MapIcon)
-                            {
-                                MapIcon icon = (MapIcon)element;
-                                if (icon.Title.Equals(MultiLang.GetContent( poi._name)))
-                                {
-                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/BlueIcon.png");
-                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                    break;
-                                }
-                            }
-                        }
-
-                    }
-                        ));
-           
         }
 
         public static async Task GoToUserLocationAsync(bool force)
@@ -400,8 +381,18 @@ namespace RouteOnPoint.GPSHandler
                     Debug.WriteLine("should not come here RANGE");
                     continue;
                 }
-
-                var result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+                MapRouteRestrictions restrictions = new MapRouteRestrictions();
+                restrictions = MapRouteRestrictions.None;
+                MapRouteOptimization optimize = MapRouteOptimization.Distance;
+                MapRouteFinderResult result;
+                if (route._name.Equals("R_BLINDWALLS_NAME"))
+                {
+                    result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+                }
+                else
+                {
+                    result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+                }
                 if (result.Status == MapRouteFinderStatus.Success)
                 {
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
