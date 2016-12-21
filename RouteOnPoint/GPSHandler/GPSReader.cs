@@ -275,7 +275,7 @@ namespace RouteOnPoint.GPSHandler
             
         }
 
-
+        //check if gps signal is avaibale
         async private static void OnStatusChanged(Geolocator sender, StatusChangedEventArgs e)
         {
             await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
@@ -293,6 +293,7 @@ namespace RouteOnPoint.GPSHandler
                         break;
 
                     case PositionStatus.NoData:
+                        Notification.OffRouteMessage();
                         // Location platform could not obtain location data.
                         break;
 
@@ -306,6 +307,7 @@ namespace RouteOnPoint.GPSHandler
                         break;
 
                     case PositionStatus.NotAvailable:
+                        Notification.OffRouteMessage();
                         // The location platform is not available on this version of the OS.
                         break;
 
