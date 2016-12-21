@@ -3,6 +3,9 @@ using RouteOnPoint.Route;
 using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -22,7 +25,12 @@ namespace RouteOnPoint
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-            
+            ApplicationViewTitleBar formattableTitleBar = ApplicationView.GetForCurrentView().TitleBar;
+            formattableTitleBar.ButtonBackgroundColor = Colors.Transparent;
+            CoreApplicationViewTitleBar coreTitleBar = CoreApplication.GetCurrentView().TitleBar;
+            coreTitleBar.ExtendViewIntoTitleBar = true;
+
+
         }
 
         /// <summary>
