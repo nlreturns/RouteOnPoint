@@ -256,6 +256,7 @@
     <Content Include="Assets\B9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\background.jpg" />
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\DutchFlag.png">

@@ -15,16 +15,18 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="4*"/>
         </Grid.RowDefinitions>
+        <Image Grid.RowSpan="5" Stretch="Fill" Source="ms-appx:///Assets/background.jpg" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+
         <StackPanel Grid.Row="1">
             <TextBlock Margin="5,5,5,5" Text="Selecteer taal" HorizontalAlignment="Center" FontSize="26"/>
             <TextBlock Margin="5,5,5,5" Text="Select language" HorizontalAlignment="Center" FontSize="26"/>
         </StackPanel>
         <StackPanel Grid.Row="3">
-            <Button Name="Dutch" Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
-                <Image Source="/Assets/Flags/DutchFlag.png" Stretch="Fill"/>
+            <Button Name="Dutch" Height="100" Margin="50,10,50,10" MaxWidth="300" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
+                <Image Source="/Assets/Flags/DutchFlag.png" MaxWidth="300" Stretch="Fill"/>
             </Button>
-            <Button Name="English" Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
-                <Image Source="/Assets/Flags/EnglishFlag.png" Stretch="Fill"/>
+            <Button Name="English" Height="100" Margin="50,10,50,10" MaxWidth="300" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch" Click="Language_Click">
+                <Image Source="/Assets/Flags/EnglishFlag.png" MaxWidth="300" Stretch="Fill"/>
             </Button>
         </StackPanel>
         <Image Grid.Row="4" Source="/Assets/Logo.png" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="51" Height="49"/>
