@@ -58,7 +58,7 @@ namespace RouteOnPoint.GPSHandler
                 //Allowed acces
                 case GeolocationAccessStatus.Allowed:
                     //Initaliases the GPS with custom parameters
-                    Geolocator = new Geolocator { DesiredAccuracyInMeters = 20, ReportInterval = 2000 };
+                    Geolocator = new Geolocator { DesiredAccuracyInMeters = 20, MovementThreshold = 5};
                     
                     //Activates GPS and gets first location
                     Geoposition pos = await Geolocator.GetGeopositionAsync();
@@ -265,11 +265,7 @@ namespace RouteOnPoint.GPSHandler
                    GoToUserLocationAsync(false);
                });
         }
-
-        private static void DrawVisitedRoute()
-        {
-            
-        }
+        
         
         public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
@@ -405,16 +401,21 @@ namespace RouteOnPoint.GPSHandler
                         if(element is MapIcon)
                         {
                             MapIcon icon = (MapIcon) element;
-                            char[] whitespace = new char[] { ' '};
-                            string[] splitted = icon.Title.Split(whitespace);
+                            char[] bar = new char[] { '-'};
+                            string[] splitted = icon.Title.Split(bar);
                             if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                             {
                                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
                                 CoreDispatcherPriority.High, (() =>
                                 {
-                                    icon.Title = MultiLang.GetContent( nextPoint._name )+ " " + viewOfRoute.Route.LengthInMeters + "M " +
+                                    icon.Title = MultiLang.GetContent( nextPoint._name )+ "-" + viewOfRoute.Route.LengthInMeters + "M " +
                                                  viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
                                                  viewOfRoute.Route.EstimatedDuration.Seconds;
+                                    if (nextPoint._visited)
+                                    {
+                                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                        icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                    }
                                 }));
                             }
                             Map.MapElements[i] = icon;
