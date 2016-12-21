@@ -370,16 +370,17 @@ namespace RouteOnPoint.GPSHandler
             return UserLocation.Location;
         }
 
+        /*
+         * Calculates the Distance in meters and the time in minutes the user has to walk 
+         * until it arrives at the next destination.
+         */
         public async static void GetDi()
         {
-            //for (int nextpoint = 0; nextpoint < route._points.Count(); nextpoint++)
             foreach (POI nextPoint in route._points)
             {
                 List<Geopoint> waypoints = new List<Geopoint>();
 
                 waypoints.Add(UserLocation.Location);
-                //waypoints.Add(new Geopoint(nextPoint._coordinate));
-
 
                 List<POI> range = new List<POI>();
                 for (int j = 0; j <= route._points.IndexOf(nextPoint); j++)

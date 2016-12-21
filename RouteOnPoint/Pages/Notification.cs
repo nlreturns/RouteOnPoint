@@ -17,6 +17,8 @@ namespace RouteOnPoint
     class Notification
     {
         public static bool IsPaused = false;
+
+        //The notification that triggers when the user walks away from the route
         public static async void OffRouteMessage()
         {
             if (!IsPaused)
@@ -37,7 +39,7 @@ namespace RouteOnPoint
                     PrimaryButtonText = "Ok",
                     SecondaryButtonText = "Pauzeer route"
                 };
-                dialog.SecondaryButtonClick += Pauzeer;
+                dialog.SecondaryButtonClick += Pause;
 
                 if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                 {
@@ -53,11 +55,12 @@ namespace RouteOnPoint
             }
         }
 
-        public static void Pauzeer(ContentDialog content, object sender)
+        public static void Pause(ContentDialog content, object sender)
         {
             IsPaused = true;
         }
 
+        //The notification that triggers when nearing the next destination
         public static async void POIVisit(POI poi)
         {
             if (!IsPaused)
@@ -91,6 +94,7 @@ namespace RouteOnPoint
             
         }
 
+        //The notification that triggers when an error occurs in the code
         public static async void ErrorMsg(string msg)
         {
             if (!IsPaused)
@@ -121,6 +125,7 @@ namespace RouteOnPoint
             }
         }
 
+        //The notification that triggers when something needs to be notified that is none of the above
         public static async void Notify(string title, string msg)
         {
             if (!IsPaused)
