@@ -293,7 +293,7 @@ namespace RouteOnPoint.GPSHandler
                         break;
 
                     case PositionStatus.NoData:
-                        Notification.OffRouteMessage();
+                        Notification.Notify(MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TITLE"), MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TEXT"));
                         // Location platform could not obtain location data.
                         break;
 
@@ -307,7 +307,6 @@ namespace RouteOnPoint.GPSHandler
                         break;
 
                     case PositionStatus.NotAvailable:
-                        Notification.OffRouteMessage();
                         // The location platform is not available on this version of the OS.
                         break;
 

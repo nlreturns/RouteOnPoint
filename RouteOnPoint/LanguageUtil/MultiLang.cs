@@ -148,6 +148,8 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("NOINFOERROR", "Er is geen informatie beschikbaar");
             _Dutch.Add("NOIMAGEERROR", "Er is geen foto beschikbaar");
             _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
+            _Dutch.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal niet gevonden");
+            _Dutch.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point kan je locatie niet bepalen, omdat er geen GPS signaal beschikbaar is");
         }
 
         private static void LoadAssistPageDutch()
@@ -340,6 +342,9 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("NOINFOERROR", "There is no information available for this point");
             _English.Add("NOIMAGEERROR", "No image availeble");
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
+            _English.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal not found");
+            _English.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point can't find your location due to there's no GPS signal");
+
         }
 
         private static void LoadAssistPageEnglish()
