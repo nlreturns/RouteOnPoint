@@ -17,6 +17,7 @@ namespace RouteOnPoint.LanguageUtil
 
         private static LanguageEnum Language;
 
+        //set language and load the dictionary for the given language
         public static async Task setLanguage(LanguageEnum lang)
         {
             Language = lang;
@@ -41,6 +42,7 @@ namespace RouteOnPoint.LanguageUtil
 
         }
 
+        //return string in the current language for given key
         public static string GetContent(string key)
         {
 
@@ -62,6 +64,9 @@ namespace RouteOnPoint.LanguageUtil
         }
 
         //DUTCH
+        #region
+
+        //Historic kilometer text Dutch
         private static async Task LoadHistorischeKilometerDutch()
         {
             string[] paths = new string[9];
@@ -140,6 +145,7 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("P_BEGIJNENHOF_NAME", "Begijnenhof");
         }
 
+        //All pages text Dutch
         private static void LoadPageTextDutch()
         {
             _Dutch.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Selecteer Route");
@@ -152,6 +158,7 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point kan je locatie niet bepalen, omdat er geen GPS signaal beschikbaar is");
         }
 
+        //Assistpage text Dutch
         private static void LoadAssistPageDutch()
         {
             _Dutch.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Hulp pagina");
@@ -166,6 +173,7 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT","Deze kleur lijn geeft aan wat je gelopen hebt. Dit onderdeel van de route is dus al bewandeld.");
         }
 
+        //Blindwalls text Dutch
         private static void LoadBlindWallsDutch()
         {
             _Dutch.Add("R_BLINDWALLS_NAME", "Blind Walls");
@@ -254,7 +262,12 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("P_STAYNICESCOUTING_NAME", "Staynice scouting");
         }
 
-        //ENGLISH
+        #endregion
+
+        //ENGLISCH
+        #region 
+
+        //Historic kilometer text Englisch
         private static async Task LoadHistorischeKilometerEnglish()
         {
             string[] paths = new string[9];
@@ -334,6 +347,7 @@ namespace RouteOnPoint.LanguageUtil
 
         }
 
+        //All pages text Englisch
         private static void LoadPageTextEnglish()
         {
             _English.Add("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT", "Select Route");
@@ -347,6 +361,7 @@ namespace RouteOnPoint.LanguageUtil
 
         }
 
+        //AssistPage text Englisch
         private static void LoadAssistPageEnglish()
         {
             _English.Add("ASSISTVIEWMODEL_HEADER_TEXT", "Help page");
@@ -361,7 +376,7 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("ASSISTVIEWMODEL_GRAYLINE_TEXT", "This color line shows you the route you have already walked.");
         }
 
-        //Hier staan nog de nederlandse vertalingen in
+        //BlindWalls text Englisch
         private static void LoadBlindWallsEnglish()
         {
             _English.Add("R_BLINDWALLS_NAME", "Blind Walls");
@@ -449,6 +464,8 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("P_TECKELKMA_NAME", "Teckel KMA");
             _English.Add("P_STAYNICESCOUTING_NAME", "Staynice scouting");
         }
+
+        #endregion
 
 
     }
