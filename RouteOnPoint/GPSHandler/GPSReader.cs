@@ -15,6 +15,7 @@ using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls.Maps;
 using RouteOnPoint.Route;
+using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Pages;
 using Windows.UI.Xaml.Controls;
 
@@ -74,7 +75,7 @@ namespace RouteOnPoint.GPSHandler
 
                         }),
                         NormalizedAnchorPoint = new Point(0.5, 1.0),
-                        Title = "My Location",
+                        Title = MultiLang.GetContent("GPSREADER_LOCATION_TEXT"),
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
