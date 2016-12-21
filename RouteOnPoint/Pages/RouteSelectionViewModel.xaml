@@ -31,8 +31,8 @@
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="Kilometer"/>
                 </Grid>
             </Button>
-            <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" HorizontalAlignment="Stretch">
-                <Grid Tapped="Click">
+            <Button Height="100" Margin="50,10,50,10" Padding="0" BorderThickness="0" Name="ResumeButton" HorizontalAlignment="Stretch">
+                <Grid Tapped="Click" Name="Resume">
                     <Image Source="/Assets/Routes/Resume.png" Stretch="Fill"/>
                     <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="26" Name="Hervat"/>
                 </Grid>
