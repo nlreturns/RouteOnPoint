@@ -7,29 +7,31 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="White" >
+    <Grid Background="#FFE4E5E7" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
+            <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
 
         </Grid.RowDefinitions>
-        
-        <Grid  Background="Beige">
+
+        <Grid  Background="#FFE4E5E7">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer Margin="5" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
-                <TextBlock  FontSize="26" FontWeight="Bold" Foreground="Orange"  Name="POIName" HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center"/>
+            <ScrollViewer Margin="15,5,5,5" HorizontalScrollMode="Enabled" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Hidden" VerticalScrollMode="Disabled">
+                <TextBlock  FontSize="26" FontWeight="Bold"  Name="POIName" HorizontalAlignment="Left" TextWrapping="NoWrap" VerticalAlignment="Center" Foreground="#FFFF9411"/>
             </ScrollViewer>
             <Button Margin="5" Width="50" Height="50" HorizontalAlignment="Center" Click="Close" Grid.Column="1"  VerticalAlignment="Center">
                 <Image Source="/Assets/Buttons/Cross.png" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </Grid>
-        <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Visible" >
-            <RelativePanel Margin="5,5,5,25"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-                <Image Name="Image" MaxWidth="380" MaxHeight="640" ManipulationMode="Scale" />
-                <TextBlock Name="POIInfo" Margin="5,5,5,25" TextWrapping="WrapWholeWords" MaxWidth="380" RelativePanel.Below="Image"/>
+        <ScrollViewer Grid.Row="1" VerticalScrollMode="Enabled" HorizontalScrollMode="Disabled" VerticalScrollBarVisibility="Auto" >
+            <RelativePanel Margin="15,7,15,25"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
+                <Border BorderThickness="2" Name="Border" BorderBrush="Black">
+                    <Image Name="Image" MaxWidth="360" MaxHeight="640" ManipulationMode="Scale" />
+                </Border>
+                <TextBlock Name="POIInfo" Margin="5,5,5,25" TextWrapping="WrapWholeWords" MaxWidth="360" RelativePanel.Below="Border"/>
             </RelativePanel>
         </ScrollViewer>
     </Grid>

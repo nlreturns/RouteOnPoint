@@ -29,6 +29,7 @@
                 <Image Source="/Assets/Flags/EnglishFlag.png" MaxWidth="200" Stretch="Fill"/>
             </Button>
         </StackPanel>
-        <Image Grid.Row="4" Source="/Assets/Logo.png" Margin="10,10,10,20" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="51" Height="49"/>
+        <Image Grid.Row="4" Source="/Assets/Logo.png" Margin="10,10,10,10" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="51" Height="49"/>
     </Grid>
+    
 </Page>
