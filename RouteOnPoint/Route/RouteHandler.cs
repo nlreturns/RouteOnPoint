@@ -94,7 +94,7 @@ namespace RouteOnPoint.Route
         public void RouteEscaped(Geopath route)
         {
             // create geofence around geopath
-            string fenceId = "path";
+            string fenceId = "Route";
 
             MonitoredGeofenceStates monitoredStates =
                         MonitoredGeofenceStates.Entered |
