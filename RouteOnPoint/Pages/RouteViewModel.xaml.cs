@@ -59,10 +59,12 @@ namespace RouteOnPoint.Pages
         {
             if (GPSReader.IsPaused)
             {
+                Notification.Notify(MultiLang.GetContent("ROUTEVIEWMODEL_PAUSENOTIFY_UNPAUSE"), "");
                 GPSReader.IsPaused = false;
             }
             else
             {
+                Notification.Notify(MultiLang.GetContent("ROUTEVIEWMODEL_PAUSENOTIFY_PAUSE"), "");
                 GPSReader.IsPaused = true;
             }
         }

@@ -156,6 +156,9 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
             _Dutch.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal niet gevonden");
             _Dutch.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point kan je locatie niet bepalen, omdat er geen GPS signaal beschikbaar is");
+            _Dutch.Add("ROUTEVIEWMODEL_PAUSENOTIFY_PAUSE", "De sessie is gepauzeerd");
+            _Dutch.Add("ROUTEVIEWMODEL_PAUSENOTIFY_UNPAUSE", "De sessie wordt hervat");
+
         }
 
         //Assistpage text Dutch
@@ -358,6 +361,8 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
             _English.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal not found");
             _English.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point can't find your location due to there's no GPS signal");
+            _English.Add("ROUTEVIEWMODEL_PAUSENOTIFY_PAUSE", "The session is paused");
+            _English.Add("ROUTEVIEWMODEL_PAUSENOTIFY_UNPAUSE", "Session will be resumed");
 
         }
 
