@@ -405,34 +405,38 @@ namespace RouteOnPoint.GPSHandler
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
                     MapElement[] tempList = new MapElement[Map.MapElements.Count];
                     Map.MapElements.CopyTo(tempList, 0);
-                    foreach (var element in Map.MapElements)
+                    try
                     {
-                        if (element is MapIcon)
+                        foreach (var element in Map.MapElements)
                         {
-                            MapIcon icon = (MapIcon) element;
-                            char[] bar = new char[] { '-'};
-                            string[] splitted = icon.Title.Split(bar);
-                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                            if (element is MapIcon)
                             {
-                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                CoreDispatcherPriority.High, (() =>
+                                MapIcon icon = (MapIcon)element;
+                                char[] bar = new char[] { '-' };
+                                string[] splitted = icon.Title.Split(bar);
+                                if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                                 {
-                                    icon.Title = MultiLang.GetContent( nextPoint._name )+ "-" + viewOfRoute.Route.LengthInMeters + "M " +
-                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
-                                    if (nextPoint._visited)
+                                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                                    CoreDispatcherPriority.High, (() =>
                                     {
-                                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
-                                        icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                    }
-                                }));
-                            }
-                            else
-                            {
-                                //Debug.WriteLine("should not come here NAME");
+                                        icon.Title = MultiLang.GetContent(nextPoint._name) + "-" + viewOfRoute.Route.LengthInMeters + "M " +
+                                                     viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                     viewOfRoute.Route.EstimatedDuration.Seconds;
+                                        if (nextPoint._visited)
+                                        {
+                                            var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                            icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                        }
+                                    }));
+                                }
+                                else
+                                {
+                                    //Debug.WriteLine("should not come here NAME");
+                                }
                             }
                         }
                     }
+                    catch (Exception) { }
                 }
             }
         }
