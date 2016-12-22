@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
 using RouteOnPoint.LanguageUtil;
+using Windows.UI.Popups;
 
 namespace RouteOnPoint
 {
@@ -96,7 +97,7 @@ namespace RouteOnPoint
             }
             if (e.Kind == ActivationKind.ToastNotification)
             {
-
+                MessageDialog m = new MessageDialog("Started from toast");
                     
                     var arguments = e.Arguments;
 

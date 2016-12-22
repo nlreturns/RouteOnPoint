@@ -99,8 +99,13 @@ namespace RouteOnPoint
                                 Title = "U nadert " + MultiLang.GetContent(poi._name),
                                 PrimaryButtonText = "Ok"
                             };
-                            dialog.ShowAsync();
-                            
+                            try
+                            {
+                                dialog.ShowAsync();
+                            }
+                            catch (Exception) { }
+
+
                         }));
             }
             
