@@ -205,7 +205,7 @@ namespace RouteOnPoint.GPSHandler
 
                     await RegisterBackgroundTasks(fenceId);
 
-                    if (IsTaskRegistered())
+                    if (IsTaskRegistered(fenceId))
                     {
                         // Define the fence location and radius.
                         BasicGeoposition position;
@@ -289,10 +289,10 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        static bool IsTaskRegistered()
+        static bool IsTaskRegistered(string fenceId)
         {
             var Registered = false;
-            var entry = BackgroundTaskRegistration.AllTasks.FirstOrDefault(keyval => keyval.Value.Name == "PetsnikkerVacationFence");
+            var entry = BackgroundTaskRegistration.AllTasks.FirstOrDefault(keyval => keyval.Value.Name == fenceId);
             if (entry.Value != null)
                 Registered = true;
             return Registered;
