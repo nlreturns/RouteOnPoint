@@ -1,4 +1,5 @@
-﻿using RouteOnPoint.LanguageUtil;
+﻿using RouteOnPoint.GPSHandler;
+using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Pages;
 using RouteOnPoint.Route;
 using System;
@@ -33,9 +34,11 @@ namespace RouteOnPoint.Test
             b.Latitude = 51.58834964389717;
             b.Longitude = 4.786133766174316;
             POI punt2 = new POI("P_ZENKONEGODEVAERT_NAME", "P_ZENKONEGODEVAERT_INFO", null, false, b);
+            Route.Route R = new Route.Route("R_BLINDWALLS_NAME");
+            GPSReader.route = R;
             RouteHandler save = new RouteHandler();
             save.SaveRouteWithState(GPSHandler.GPSReader.route, "RouteData.json");
-            Frame.Navigate(typeof (RouteViewModel));
+         
             
         }
     }
