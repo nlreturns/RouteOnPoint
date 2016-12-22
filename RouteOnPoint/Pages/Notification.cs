@@ -34,7 +34,7 @@ namespace RouteOnPoint
                 ContentDialog dialog = new ContentDialog()
                 {
                     FontSize = 26,
-                    Title = "U wijkt van de route af",
+                    Title = "U bent buiten Breda",
                     PrimaryButtonText = "Ok",
                     SecondaryButtonText = "Pauzeer route"
                 };
