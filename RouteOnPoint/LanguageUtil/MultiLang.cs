@@ -322,7 +322,7 @@ namespace RouteOnPoint.LanguageUtil
 
             _English.Add("P_VVV_NAME", "VVV");
             _English.Add("P_LIEFDESZUSTER_NAME", "Liefdeszuster");
-            _English.Add("P_NASSABARONIEMONUMENT_NAME", "Nassau Baronie Monument");
+            _English.Add("P_NASSAUBARONIEMONUMENT_NAME", "Nassau Baronie Monument");
             _English.Add("P_THELIGHTHOUSE_NAME", "The Light House");
             _English.Add("P_KASTEELVANBREDA_NAME", "Kasteel van Breda");
             _English.Add("P_STADHOUDERSPOORT_NAME", "Stadhouderspoort");

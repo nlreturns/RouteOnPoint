@@ -133,7 +133,7 @@ namespace RouteOnPoint.GPSHandler
                           Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
                     DrawIcons();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                 }
@@ -546,30 +546,36 @@ namespace RouteOnPoint.GPSHandler
             }
             else
             {
-                foreach (var element in Map.MapElements)
+                try
                 {
-                    if (element is MapIcon)
+                    foreach (var element in Map.MapElements)
                     {
-                        MapIcon icon = (MapIcon) element;
-                        char[] bar = new char[] {'-'};
-                        string[] splitted = icon.Title.Split(bar);
-                        if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                        if (element is MapIcon)
                         {
-                            await
-                                Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
-                                    .RunAsync(
-                                        CoreDispatcherPriority.High, (() =>
-                                        {
-                                            icon.Title = MultiLang.GetContent(nextPoint._name);
-
-                                            if (nextPoint._visited)
+                            MapIcon icon = (MapIcon) element;
+                            char[] bar = new char[] {'-'};
+                            string[] splitted = icon.Title.Split(bar);
+                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                            {
+                                await
+                                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
+                                        .RunAsync(
+                                            CoreDispatcherPriority.High, (() =>
                                             {
-                                                var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
-                                                icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                            }
-                                        }));
+                                                icon.Title = MultiLang.GetContent(nextPoint._name);
+
+                                                if (nextPoint._visited)
+                                                {
+                                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                                }
+                                            }));
+                            }
                         }
                     }
+                }
+                catch (Exception)
+                {
                 }
             }
         }
