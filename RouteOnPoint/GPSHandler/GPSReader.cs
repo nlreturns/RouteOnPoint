@@ -266,11 +266,6 @@ namespace RouteOnPoint.GPSHandler
                    
                    if (!Notification.IsPaused)
                    {
-                       foreach (POI nextPoint in route._points)
-                       {
-                           GetDi(nextPoint);
-                       }
-
                        // instantiate mappolyline
                        var polyline = new MapPolyline();
 
@@ -285,15 +280,13 @@ namespace RouteOnPoint.GPSHandler
                        polyline.StrokeThickness = 7;
                        polyline.ZIndex = 16;
                        Map.MapElements.Add(polyline);
+                       foreach (POI nextPoint in route._points)
+                       {
+                           GetDi(nextPoint);
+                       }
                    }
                    GoToUserLocationAsync(false);
                });
-        }
-
-
-        private static void DrawVisitedRoute()
-        {
-            
         }
 
         //check if gps signal is avaibale
@@ -445,7 +438,7 @@ namespace RouteOnPoint.GPSHandler
             }
             foreach (POI p in range)
             {
-                if (!p._visited)
+                if (!p._visited&& p._name!=null)
                 {
                     waypoints.Add(new Geopoint(p._coordinate));
                 }
@@ -455,19 +448,56 @@ namespace RouteOnPoint.GPSHandler
             restrictions = MapRouteRestrictions.None;
             MapRouteOptimization optimize = MapRouteOptimization.Distance;
             MapRouteFinderResult result;
-            if (route._name.Equals("R_BLINDWALLS_NAME"))
+            if (waypoints.Count() > 1)
             {
-                result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+                if (route._name.Equals("R_BLINDWALLS_NAME"))
+                {
+
+                    result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+                }
+                else
+                {
+                    result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+                }
+                if (result.Status == MapRouteFinderStatus.Success)
+                {
+                    MapRouteView viewOfRoute = new MapRouteView(result.Route);
+                    MapElement[] tempList = new MapElement[Map.MapElements.Count];
+                    Map.MapElements.CopyTo(tempList, 0);
+                    foreach (var element in Map.MapElements)
+                    {
+                        if (element is MapIcon)
+                        {
+                            MapIcon icon = (MapIcon)element;
+                            char[] bar = new char[] { '-' };
+                            string[] splitted = icon.Title.Split(bar);
+                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                            {
+                                await
+                                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
+                                        .RunAsync(
+                                            CoreDispatcherPriority.High, (() =>
+                                            {
+
+                                                icon.Title = MultiLang.GetContent(nextPoint._name) + "-" +
+                                                             viewOfRoute.Route.LengthInMeters + "M " +
+                                                             viewOfRoute.Route.EstimatedDuration.Hours + ":" +
+                                                             viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                             viewOfRoute.Route.EstimatedDuration.Seconds;
+
+                                                if (nextPoint._visited)
+                                                {
+                                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                                }
+                                            }));
+                            }
+                        }
+                    }
+                }
             }
             else
             {
-                result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
-            }
-            if (result.Status == MapRouteFinderStatus.Success)
-            {
-                MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                MapElement[] tempList = new MapElement[Map.MapElements.Count];
-                Map.MapElements.CopyTo(tempList, 0);
                 try
                 {
                     foreach (var element in Map.MapElements)
@@ -479,25 +509,26 @@ namespace RouteOnPoint.GPSHandler
                             string[] splitted = icon.Title.Split(bar);
                             if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                             {
-                                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                CoreDispatcherPriority.High, (() =>
-                                {
-                                    icon.Title = MultiLang.GetContent(nextPoint._name) + "-" + viewOfRoute.Route.LengthInMeters + "M " +
-                                                    viewOfRoute.Route.EstimatedDuration.Hours + ":" +
-                                                    viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                    viewOfRoute.Route.EstimatedDuration.Seconds;
-                                    if (nextPoint._visited)
-                                    {
-                                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
-                                        icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                    }
-                                }));
+                                await
+                                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
+                                        .RunAsync(
+                                            CoreDispatcherPriority.High, (() =>
+                                            {
+                                                icon.Title = MultiLang.GetContent(nextPoint._name);
+
+                                                if (nextPoint._visited)
+                                                {
+                                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                                }
+                                            }));
                             }
                         }
                     }
                 }
-                catch (Exception) { }
-                
+                catch (Exception)
+                {
+                }
             }
         }
     }
