@@ -207,7 +207,7 @@ namespace RouteOnPoint.GPSHandler
 
                     await RegisterBackgroundTasks(s);
 
-                    if (IsTaskRegistered(s))
+                    if (IsTaskRegistered(s)) 
                     {
                         // Define the fence location and radius.
                         BasicGeoposition position;

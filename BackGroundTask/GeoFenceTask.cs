@@ -12,11 +12,11 @@ namespace BackGroundTask
 {
     public sealed class GeoFenceTask : IBackgroundTask
     {
-        public static string s;
+        
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            s = taskInstance.InstanceId.ToString();
+            string s = taskInstance.InstanceId.ToString();
             var monitor = GeofenceMonitor.Current;
             if (monitor.Geofences.Any())
             {
@@ -30,7 +30,7 @@ namespace BackGroundTask
                         case GeofenceState.Entered:
                             {
 
-                                ShowToast(s + " reached", "Check the app for more information");
+                                ShowToast(s + " reached", "Check the app for more information", s);
                                 break;
                             }
 
@@ -43,7 +43,7 @@ namespace BackGroundTask
             //deferral.Complete();
         }
 
-        private static void ShowToast(string firstLine, string secondLine)
+        private static void ShowToast(string firstLine, string secondLine, string s)
         {
             var toastXmlContent =
               ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
