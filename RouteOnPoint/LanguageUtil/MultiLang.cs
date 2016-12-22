@@ -156,6 +156,8 @@ namespace RouteOnPoint.LanguageUtil
             _Dutch.Add("GPSREADER_LOCATION_TEXT", "Mijn Locatie");
             _Dutch.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal niet gevonden");
             _Dutch.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point kan je locatie niet bepalen, omdat er geen GPS signaal beschikbaar is");
+            _Dutch.Add("NOTIFICATION_ENTERED", "Bezienswaardigheid bereikt");
+            _Dutch.Add("NOTIFICATION_ENTERED2", "U nadert ");
         }
 
         //Assistpage text Dutch
@@ -321,7 +323,7 @@ namespace RouteOnPoint.LanguageUtil
 
             _English.Add("P_VVV_NAME", "VVV");
             _English.Add("P_LIEFDESZUSTER_NAME", "Liefdeszuster");
-            _English.Add("P_NASSABARONIEMONUMENT_NAME", "Nassau Baronie Monument");
+            _English.Add("P_NASSAUBARONIEMONUMENT_NAME", "Nassau Baronie Monument");
             _English.Add("P_THELIGHTHOUSE_NAME", "The Light House");
             _English.Add("P_KASTEELVANBREDA_NAME", "Kasteel van Breda");
             _English.Add("P_STADHOUDERSPOORT_NAME", "Stadhouderspoort");
@@ -358,7 +360,9 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
             _English.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal not found");
             _English.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point can't find your location due to there's no GPS signal");
-
+            _English.Add("NOTIFICATION_ENTERED", "Sight reached");
+            _English.Add("NOTIFICATION_ENTERED2", "You reached ");
+            //_English.Add()
         }
 
         //AssistPage text Englisch
