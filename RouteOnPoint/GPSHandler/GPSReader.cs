@@ -375,7 +375,10 @@ namespace RouteOnPoint.GPSHandler
                             Notification.OffRouteMessage();
                             Debug.WriteLine("Left Breda");
                         }
-                        Debug.WriteLine("Left geofence");
+                        else
+                        {
+                            Debug.WriteLine("Left geofence");
+                        }
                         break;
                     //No state
                     case GeofenceState.None:
