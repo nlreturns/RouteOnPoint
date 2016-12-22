@@ -12,7 +12,7 @@ namespace BackGroundTask
 {
     public sealed class GeoFenceTask : IBackgroundTask
     {
-        public static string s;
+        private static string s;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
