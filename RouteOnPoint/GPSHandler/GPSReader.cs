@@ -203,9 +203,11 @@ namespace RouteOnPoint.GPSHandler
                     // Set the fence ID.
                     string fenceId = poi._name;
 
-                    await RegisterBackgroundTasks(fenceId);
+                    string s = MultiLang.GetContent(fenceId);
 
-                    if (IsTaskRegistered(fenceId))
+                    await RegisterBackgroundTasks(s);
+
+                    if (IsTaskRegistered(s))
                     {
                         // Define the fence location and radius.
                         BasicGeoposition position;
@@ -261,9 +263,10 @@ namespace RouteOnPoint.GPSHandler
             }
             else
             {
+                
                 var taskBuilder = new BackgroundTaskBuilder();
                 taskBuilder.Name = fenceId;
-
+                
                 taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
                 taskBuilder.SetTrigger(new LocationTrigger(LocationTriggerType.Geofence));
 

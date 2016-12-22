@@ -14,7 +14,7 @@ namespace BackGroundTask
     {
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-
+            string  s = taskInstance.InstanceId.ToString();
             var monitor = GeofenceMonitor.Current;
             if (monitor.Geofences.Any())
             {
@@ -28,7 +28,7 @@ namespace BackGroundTask
                         case GeofenceState.Entered:
                             {
 
-                                ShowToast("Sight reached", "Check the app for more information");
+                                ShowToast(s + " reached", "Check the app for more information");
                                 break;
                             }
 
