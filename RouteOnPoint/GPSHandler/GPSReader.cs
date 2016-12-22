@@ -18,6 +18,7 @@ using RouteOnPoint.Route;
 using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Pages;
 using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel.Background;
 
 namespace RouteOnPoint.GPSHandler
 {
@@ -132,7 +133,7 @@ namespace RouteOnPoint.GPSHandler
                           Windows.UI.Xaml.Controls.Maps.MapAnimationKind.None);
                     DrawIcons();
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
 
                 }
@@ -188,8 +189,10 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        public static void SetupGeoFence(List<POI> points)
+        public static async void SetupGeoFence(List<POI> points)
         {
+            
+
             GeofenceMonitor.Current.Geofences.Clear();
             // add Breda as a geofence
             BasicGeoposition Breda = new BasicGeoposition() {Latitude= 51.587309751245456, Longitude = 4.7728729248046875};
@@ -208,45 +211,102 @@ namespace RouteOnPoint.GPSHandler
                     // Set the fence ID.
                     string fenceId = poi._name;
 
-                    // Define the fence location and radius.
-                    BasicGeoposition position;
-                    position.Latitude = point.Position.Latitude;
-                    position.Longitude = point.Position.Longitude;
-                    position.Altitude = point.Position.Altitude;
-                    int radius = 20;
+                    string s = MultiLang.GetContent(fenceId);
 
-                    // Set the circular region for geofence.
-                    Geocircle geocircle = new Geocircle(position, radius);
+                    await RegisterBackgroundTasks(s);
 
-                    // Remove the geofence after the first trigger.
-                    bool singleUse = true;
+                    if (IsTaskRegistered(s))
+                    {
+                        // Define the fence location and radius.
+                        BasicGeoposition position;
+                        position.Latitude = point.Position.Latitude;
+                        position.Longitude = point.Position.Longitude;
+                        position.Altitude = point.Position.Altitude;
+                        int radius = 20;
 
-                    // Set the monitored states.
-                    MonitoredGeofenceStates monitoredStates =
-                        MonitoredGeofenceStates.Entered |
-                        MonitoredGeofenceStates.Exited |
-                        MonitoredGeofenceStates.Removed;
+                        // Set the circular region for geofence.
+                        Geocircle geocircle = new Geocircle(position, radius);
 
-                    // Set how long you need to be in geofence for the enter event to fire.
-                    TimeSpan dwellTime = TimeSpan.FromSeconds(5);
+                        // Remove the geofence after the first trigger.
+                        bool singleUse = true;
 
-                    // Set how long the geofence should be active.
-                    TimeSpan duration = TimeSpan.FromDays(1);
+                        // Set the monitored states.
+                        MonitoredGeofenceStates monitoredStates =
+                            MonitoredGeofenceStates.Entered |
+                            MonitoredGeofenceStates.Exited |
+                            MonitoredGeofenceStates.Removed;
 
-                    // Set up the start time of the geofence.
-                    DateTimeOffset startTime = DateTime.Now;
+                        // Set how long you need to be in geofence for the enter event to fire.
+                        TimeSpan dwellTime = TimeSpan.FromSeconds(5);
 
-                    // Create the geofence.
-                    Geofence geofence = new Geofence(fenceId, geocircle, monitoredStates, singleUse, dwellTime,
-                        startTime,
-                        duration);
-                    Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
-                                    point.Position.Longitude);
+                        // Set how long the geofence should be active.
+                        TimeSpan duration = TimeSpan.FromDays(1);
+
+                        // Set up the start time of the geofence.
+                        DateTimeOffset startTime = DateTime.Now;
+
+                        // Create the geofence.
+                        Geofence geofence = new Geofence(fenceId, geocircle, monitoredStates, singleUse, dwellTime,
+                            startTime,
+                            duration);
+                        Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
+                                        point.Position.Longitude);
                         GeofenceMonitor.Current.Geofences.Add(geofence);
+                    }
                 }
             }
 
-        GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+        }
+
+        //Registers the background task with a LocationTrigger
+        static async Task RegisterBackgroundTasks(string fenceId)
+        {
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+
+
+            if (access == BackgroundAccessStatus.Denied)
+            {
+
+            }
+            else
+            {
+                
+                var taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = fenceId;
+                
+                taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                taskBuilder.SetTrigger(new LocationTrigger(LocationTriggerType.Geofence));
+
+                taskBuilder.TaskEntryPoint = typeof(BackGroundTask.GeoFenceTask).FullName;
+
+                var registration = taskBuilder.Register();
+
+                registration.Completed += (sender, e) =>
+                {
+                    try
+                    {
+                        e.CheckResult();
+                    }
+                    catch (Exception error)
+                    {
+                        Debug.WriteLine(error);
+                    }
+                };
+
+
+
+            }
+
+        }
+
+        static bool IsTaskRegistered(string fenceId)
+        {
+            var Registered = false;
+            var entry = BackgroundTaskRegistration.AllTasks.FirstOrDefault(keyval => keyval.Value.Name == fenceId);
+            if (entry.Value != null)
+                Registered = true;
+            return Registered;
         }
 
         private static async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
@@ -425,6 +485,7 @@ namespace RouteOnPoint.GPSHandler
          * Calculates the Distance in meters and the time in minutes the user has to walk 
          * until it arrives at the next destination.
          */
+
         public async static void GetDi(POI nextPoint)
         {
             List<Geopoint> waypoints = new List<Geopoint>();
@@ -464,48 +525,49 @@ namespace RouteOnPoint.GPSHandler
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
                     MapElement[] tempList = new MapElement[Map.MapElements.Count];
                     Map.MapElements.CopyTo(tempList, 0);
-                    foreach (var element in Map.MapElements)
-                    {
-                        if (element is MapIcon)
+                    
+                        foreach (var element in Map.MapElements)
                         {
-                            MapIcon icon = (MapIcon)element;
-                            char[] bar = new char[] { '-' };
-                            string[] splitted = icon.Title.Split(bar);
-                            if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                            if (element is MapIcon)
                             {
-                                await
-                                    Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
-                                        .RunAsync(
-                                            CoreDispatcherPriority.High, (() =>
-                                            {
-
-                                                icon.Title = MultiLang.GetContent(nextPoint._name) + "-" +
-                                                             viewOfRoute.Route.LengthInMeters + "M " +
-                                                             viewOfRoute.Route.EstimatedDuration.Hours + ":" +
-                                                             viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                             viewOfRoute.Route.EstimatedDuration.Seconds;
-
-                                                if (nextPoint._visited)
+                                MapIcon icon = (MapIcon)element;
+                                char[] bar = new char[] { '-' };
+                                string[] splitted = icon.Title.Split(bar);
+                                if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                                {
+                                    await
+                                        Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher
+                                            .RunAsync(
+                                                CoreDispatcherPriority.High, (() =>
                                                 {
-                                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
-                                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                                }
-                                            }));
+
+                                                    icon.Title = MultiLang.GetContent(nextPoint._name) + "-" +
+                                                                 viewOfRoute.Route.LengthInMeters + "M " +
+                                                                 viewOfRoute.Route.EstimatedDuration.Hours + ":" +
+                                                                 viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                                 viewOfRoute.Route.EstimatedDuration.Seconds;
+
+                                                    if (nextPoint._visited)
+                                                    {
+                                                        var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                                        icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
+                                                    }
+                                                }));
+                                }
                             }
                         }
-                    }
+                    
                 }
             }
             else
             {
-                try
-                {
+               
                     foreach (var element in Map.MapElements)
                     {
                         if (element is MapIcon)
                         {
-                            MapIcon icon = (MapIcon)element;
-                            char[] bar = new char[] { '-' };
+                            MapIcon icon = (MapIcon) element;
+                            char[] bar = new char[] {'-'};
                             string[] splitted = icon.Title.Split(bar);
                             if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                             {
@@ -525,10 +587,7 @@ namespace RouteOnPoint.GPSHandler
                             }
                         }
                     }
-                }
-                catch (Exception)
-                {
-                }
+                
             }
         }
     }

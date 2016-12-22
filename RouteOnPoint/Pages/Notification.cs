@@ -2,6 +2,7 @@
 using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,10 @@ using Windows.Phone.Devices.Notification;
 using Windows.Storage;
 using Windows.System.Profile;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
 using RouteOnPoint.GPSHandler;
 
 namespace RouteOnPoint
@@ -97,6 +100,7 @@ namespace RouteOnPoint
                                 PrimaryButtonText = "Ok"
                             };
                             dialog.ShowAsync();
+                            
                         }));
             }
             
@@ -162,5 +166,7 @@ namespace RouteOnPoint
                 await dialog.ShowAsync();
             }
         }
+
+        
     }
 }
