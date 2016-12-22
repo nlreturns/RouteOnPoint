@@ -31,6 +31,37 @@ namespace RouteOnPoint
 
         }
 
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.ToastNotification)
+            {
+                var toastArgs = args as ToastNotificationActivatedEventArgs;
+                var arguments = toastArgs.Argument;
+
+                POI navigatePOI = null;
+
+                foreach (POI p in GPSReader.route._points)
+                {
+                    if (p._name == arguments)
+                    {
+                        navigatePOI = p;
+                    }
+                }
+
+                if (navigatePOI != null)
+                {
+                    Frame rootFrame = Window.Current.Content as Frame;
+                    if (rootFrame == null)
+                    {
+                        rootFrame = new Frame();
+                        Window.Current.Content = rootFrame;
+                    }
+                    rootFrame.Navigate(typeof(RouteViewModel), navigatePOI);
+                    Window.Current.Activate();
+                }
+            }
+        }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.

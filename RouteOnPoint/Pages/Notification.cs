@@ -96,7 +96,7 @@ namespace RouteOnPoint
                             }
                             catch (System.Runtime.InteropServices.COMException e)
                             {
-                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), MultiLang.GetContent("NOTIFICATION_ENTERED2") + MultiLang.GetContent(poi._name));
+                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), MultiLang.GetContent("NOTIFICATION_ENTERED2") + MultiLang.GetContent(poi._name), poi);
                             }
                             
                         }));
@@ -165,7 +165,7 @@ namespace RouteOnPoint
             }
         }
 
-        private static void ShowToast(string firstLine, string secondLine)
+        private static void ShowToast(string firstLine, string secondLine, POI p)
         {
             var toastXmlContent =
               ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
@@ -173,8 +173,9 @@ namespace RouteOnPoint
             var txtNodes = toastXmlContent.GetElementsByTagName("text");
             txtNodes[0].AppendChild(toastXmlContent.CreateTextNode(firstLine));
             txtNodes[1].AppendChild(toastXmlContent.CreateTextNode(secondLine));
+            var launchAttribute = toastXmlContent.CreateAttribute("launch");
+            launchAttribute.Value = p._name;
 
-           
 
             var toast = new ToastNotification(toastXmlContent);
             var toastNotifier = ToastNotificationManager.CreateToastNotifier();
