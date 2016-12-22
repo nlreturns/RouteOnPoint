@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="4f0fb017-d2dd-4ce7-a3a7-9fb00e88fa8e" Publisher="CN=janwi" Version="1.0.0.0" />
+  <Identity Name="Route-On-Point" Publisher="CN=janwi" Version="1.0.0.0" />
   <mp:PhoneIdentity PhoneProductId="4f0fb017-d2dd-4ce7-a3a7-9fb00e88fa8e" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>RouteOnPoint</DisplayName>
@@ -24,15 +24,14 @@
         </uap:InitialRotationPreference>
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Tasks.ServicingComplete">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
-          </BackgroundTasks>
-        </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="BackGroundTask.GeoFenceTask">
           <BackgroundTasks>
+            <Task Type="general" />
             <Task Type="systemEvent" />
             <Task Type="timer" />
+            <Task Type="pushNotification" />
+            <Task Type="location" />
+            <Task Type="deviceUse" />
           </BackgroundTasks>
         </Extension>
       </Extensions>
@@ -40,6 +39,7 @@
   </Applications>
   <Capabilities>
     <Capability Name="internetClient" />
+    <uap:Capability Name="removableStorage" />
     <DeviceCapability Name="location" />
   </Capabilities>
 </Package>
