@@ -35,7 +35,6 @@ namespace RouteOnPoint
                 {
                     FontSize = 26,
                     Title = "U wijkt van de route af",
-                    //MaxWidth = page.ActualWidth,
                     PrimaryButtonText = "Ok",
                     SecondaryButtonText = "Pauzeer route"
                 };
@@ -111,7 +110,6 @@ namespace RouteOnPoint
                     FontSize = 26,
                     Title = "Error",
                     Content = msg,
-                    //MaxWidth = page.ActualWidth,
                     PrimaryButtonText = "Ok",
                 };
                 if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
@@ -142,7 +140,6 @@ namespace RouteOnPoint
                     FontSize = 26,
                     Title = title,
                     Content = msg,
-                    //MaxWidth = page.ActualWidth,
                     PrimaryButtonText = "Ok",
 
                 };
