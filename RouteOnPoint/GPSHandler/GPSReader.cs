@@ -191,6 +191,14 @@ namespace RouteOnPoint.GPSHandler
         public static void SetupGeoFence(List<POI> points)
         {
             GeofenceMonitor.Current.Geofences.Clear();
+            // add Breda as a geofence
+            BasicGeoposition Breda = new BasicGeoposition() {Latitude= 51.587309751245456, Longitude = 4.7728729248046875};
+            string id = "InsideBreda";
+            Geocircle InsideBreda = new Geocircle(Breda,5000);
+            Geofence BredaGeofence = new Geofence(id, InsideBreda, MonitoredGeofenceStates.Exited, false,
+                TimeSpan.FromSeconds(5), DateTime.Now, TimeSpan.FromDays(1));
+            GeofenceMonitor.Current.Geofences.Add(BredaGeofence);
+
             foreach (var poi in points)
             {
                 //Debug.WriteLine();
@@ -361,8 +369,9 @@ namespace RouteOnPoint.GPSHandler
                         break;
                     //Exited the geofence
                     case GeofenceState.Exited:
-                        if(geofence.Id.Equals("Route"))
-                        Notification.OffRouteMessage();
+                        // if exited Breda
+                        if (geofence.Id.Equals("InsideBreda"))
+                            Notification.OffRouteMessage();
                         Debug.WriteLine("Left geofence");
                         break;
                     //No state
