@@ -89,6 +89,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <None Include="ClassDiagram1.cd" />
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
@@ -244,9 +245,6 @@
     <Content Include="Assets\B7.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\B8.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\B8.jpeg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -256,6 +254,7 @@
     <Content Include="Assets\B9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\background.jpg" />
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
     <Content Include="Assets\DutchFlag.png">
@@ -264,6 +263,7 @@
     <Content Include="Assets\EnglishFlag.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Flags\CombinedFlag.png" />
     <Content Include="Assets\Flags\DutchFlag.png" />
     <Content Include="Assets\Flags\EnglishFlag.png" />
     <Content Include="Assets\jingle-bells-sms.mp3">
