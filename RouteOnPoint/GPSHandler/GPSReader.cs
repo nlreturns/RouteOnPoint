@@ -78,7 +78,13 @@ namespace RouteOnPoint.GPSHandler
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
-                    
+
+                    Map.MapElements.Add(UserLocation);
+
+                    //Adds the event when the position changes
+                    Geolocator.PositionChanged += OnPositionChangedAsync;
+                    Geolocator.StatusChanged += OnStatusChanged;
+                    GoToUserLocationAsync(true);
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
@@ -193,6 +199,7 @@ namespace RouteOnPoint.GPSHandler
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
             {
+                //Debug.WriteLine();
                 if (poi._name != null)
                 {
                     Geopoint point = new Geopoint(poi._coordinate);
@@ -257,7 +264,10 @@ namespace RouteOnPoint.GPSHandler
                    
                    if (!Notification.IsPaused)
                    {
-                       GetDi();
+                       foreach (POI nextPoint in route._points)
+                       {
+                           GetDi(nextPoint);
+                       }
 
                        // instantiate mappolyline
                        var polyline = new MapPolyline();
@@ -271,13 +281,60 @@ namespace RouteOnPoint.GPSHandler
                        //set appearance of connector line
                        polyline.StrokeColor = Colors.Gray;
                        polyline.StrokeThickness = 7;
+                       polyline.ZIndex = 16;
                        Map.MapElements.Add(polyline);
                    }
                    GoToUserLocationAsync(false);
                });
         }
-        
-        
+
+
+        private static void DrawVisitedRoute()
+        {
+            
+        }
+
+        //check if gps signal is avaibale
+        async private static void OnStatusChanged(Geolocator sender, StatusChangedEventArgs e)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                // Show the location setting message only if status is disabled.
+
+                switch (e.Status)
+                {
+                    case PositionStatus.Ready:
+                        // Location platform is providing valid data.
+                        break;
+
+                    case PositionStatus.Initializing:
+                        // Location platform is attempting to acquire a fix. ;
+                        break;
+
+                    case PositionStatus.NoData:
+                        Notification.Notify(MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TITLE"), MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TEXT"));
+                        // Location platform could not obtain location data.
+                        break;
+
+                    case PositionStatus.Disabled:
+                        // The permission to access location data is denied by the user or other policies.
+                        break;
+
+                    case PositionStatus.NotInitialized:
+                        // The location platform is not initialized. This indicates that the application 
+                        // has not made a request for location data.
+                        break;
+
+                    case PositionStatus.NotAvailable:
+                        // The location platform is not available on this version of the OS.
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        }
+
         public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
@@ -298,8 +355,11 @@ namespace RouteOnPoint.GPSHandler
                     //Entered the geofence
                     case GeofenceState.Entered:
                         Debug.WriteLine("Entered geofence");
-                        GeofenceMonitor.Current.Geofences.Remove(geofence);
-                        handleGeoFenceEntered(geofence); 
+                        if (!geofence.Id.Equals("Route"))
+                        {
+                            GeofenceMonitor.Current.Geofences.Remove(geofence);
+                            handleGeoFenceEntered(geofence);
+                        }
                         break;
                     //Removed the geofence
                     case GeofenceState.Removed:
@@ -307,6 +367,8 @@ namespace RouteOnPoint.GPSHandler
                         break;
                     //Exited the geofence
                     case GeofenceState.Exited:
+                        if(geofence.Id.Equals("Route"))
+                        Notification.OffRouteMessage();
                         Debug.WriteLine("Left geofence");
                         break;
                     //No state
@@ -361,83 +423,68 @@ namespace RouteOnPoint.GPSHandler
          * Calculates the Distance in meters and the time in minutes the user has to walk 
          * until it arrives at the next destination.
          */
-        public async static void GetDi()
+        public async static void GetDi(POI nextPoint)
         {
-            foreach (POI nextPoint in route._points)
+            List<Geopoint> waypoints = new List<Geopoint>();
+
+            waypoints.Add(UserLocation.Location);
+
+            List<POI> range = new List<POI>();
+            for (int j = 0; j <= route._points.IndexOf(nextPoint); j++)
             {
-                List<Geopoint> waypoints = new List<Geopoint>();
-
-                waypoints.Add(UserLocation.Location);
-
-                List<POI> range = new List<POI>();
-                for (int j = 0; j <= route._points.IndexOf(nextPoint); j++)
+                range.Add(route._points[j]);
+            }
+            foreach (POI p in range)
+            {
+                if (!p._visited)
                 {
-                    range.Add(route._points[j]);
+                    waypoints.Add(new Geopoint(p._coordinate));
                 }
-                foreach (POI p in range)
+
+            }
+            MapRouteRestrictions restrictions = new MapRouteRestrictions();
+            restrictions = MapRouteRestrictions.None;
+            MapRouteOptimization optimize = MapRouteOptimization.Distance;
+            MapRouteFinderResult result;
+            if (route._name.Equals("R_BLINDWALLS_NAME"))
+            {
+                result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
+            }
+            else
+            {
+                result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
+            }
+            if (result.Status == MapRouteFinderStatus.Success)
+            {
+                MapRouteView viewOfRoute = new MapRouteView(result.Route);
+                MapElement[] tempList = new MapElement[Map.MapElements.Count];
+                Map.MapElements.CopyTo(tempList, 0);
+                foreach (var element in Map.MapElements)
                 {
-                    if (!p._visited)
+                    if (element is MapIcon)
                     {
-                        waypoints.Add(new Geopoint(p._coordinate));
-                    }
-
-                }
-                
-                if (range.Count < 1)
-                {
-                    Debug.WriteLine("should not come here RANGE");
-                    continue;
-                }
-                MapRouteRestrictions restrictions = new MapRouteRestrictions();
-                restrictions = MapRouteRestrictions.None;
-                MapRouteOptimization optimize = MapRouteOptimization.Distance;
-                MapRouteFinderResult result;
-                if (route._name.Equals("R_BLINDWALLS_NAME"))
-                {
-                    result = await MapRouteFinder.GetDrivingRouteFromWaypointsAsync(waypoints, optimize, restrictions);
-                }
-                else
-                {
-                    result = await MapRouteFinder.GetWalkingRouteFromWaypointsAsync(waypoints);
-                }
-                if (result.Status == MapRouteFinderStatus.Success)
-                {
-                    MapRouteView viewOfRoute = new MapRouteView(result.Route);
-                    MapElement[] tempList = new MapElement[Map.MapElements.Count];
-                    Map.MapElements.CopyTo(tempList, 0);
-                    try
-                    {
-                        foreach (var element in Map.MapElements)
+                        MapIcon icon = (MapIcon) element;
+                        char[] bar = new char[] { '-'};
+                        string[] splitted = icon.Title.Split(bar);
+                        if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
                         {
-                            if (element is MapIcon)
+                            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                            CoreDispatcherPriority.High, (() =>
                             {
-                                MapIcon icon = (MapIcon)element;
-                                char[] bar = new char[] { '-' };
-                                string[] splitted = icon.Title.Split(bar);
-                                if (splitted[0].Equals(MultiLang.GetContent(nextPoint._name)))
+                                icon.Title = MultiLang.GetContent( nextPoint._name )+ "-" + viewOfRoute.Route.LengthInMeters + "M " +
+                                                viewOfRoute.Route.EstimatedDuration.Hours+":"+ 
+                                                viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
+                                                viewOfRoute.Route.EstimatedDuration.Seconds;
+                                if (nextPoint._visited)
                                 {
-                                    await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                                    CoreDispatcherPriority.High, (() =>
-                                    {
-                                        icon.Title = MultiLang.GetContent(nextPoint._name) + "-" + viewOfRoute.Route.LengthInMeters + "M " +
-                                                     viewOfRoute.Route.EstimatedDuration.Minutes + ":" +
-                                                     viewOfRoute.Route.EstimatedDuration.Seconds;
-                                        if (nextPoint._visited)
-                                        {
-                                            var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
-                                            icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
-                                        }
-                                    }));
+                                    var myImageUri = new Uri("ms-appx:///Assets/Icons/GreenIcon.png");
+                                    icon.Image = RandomAccessStreamReference.CreateFromUri(myImageUri);
                                 }
-                                else
-                                {
-                                    //Debug.WriteLine("should not come here NAME");
-                                }
-                            }
+                            }));
                         }
                     }
-                    catch (Exception) { }
                 }
+                
             }
         }
     }

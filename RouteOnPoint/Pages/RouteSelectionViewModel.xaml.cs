@@ -29,7 +29,9 @@ namespace RouteOnPoint.Pages
     {
         Frame rootFrame = Window.Current.Content as Frame;
         Route.Route route;
+
         private Route.Route loadedRoute = null;
+
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
@@ -48,6 +50,7 @@ namespace RouteOnPoint.Pages
             Route.Route r = null;
             switch (g.Name)
             {
+
                 case "Blind":
                     r = new RouteHelper().createBlindWalls();
                     break;
@@ -56,7 +59,9 @@ namespace RouteOnPoint.Pages
                     break;
                 case "Resume":
                     r = loadedRoute;
+
                     break;
+
 
             }
             GPSReader.route = r;
@@ -88,10 +93,12 @@ namespace RouteOnPoint.Pages
             {
                 loadedRoute = null;
             }
+
             if (loadedRoute == null || loadedRoute._points.Count() < 1)
             {
                 ResumeButton.Visibility = Visibility.Collapsed;
                 Resume.Visibility = Visibility.Collapsed;
+
 
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
