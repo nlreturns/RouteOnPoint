@@ -51,7 +51,7 @@ namespace RouteOnPoint.GPSHandler
         {
             //Gets the AccessStatus, if we have acces to the GPS
             var accessStatus = await Geolocator.RequestAccessAsync();
-
+         
             //Switch case for the AccessStatus
             switch (accessStatus)
             {
@@ -78,7 +78,13 @@ namespace RouteOnPoint.GPSHandler
                         ZIndex = 0,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
-                    
+
+                    Map.MapElements.Add(UserLocation);
+
+                    //Adds the event when the position changes
+                    Geolocator.PositionChanged += OnPositionChangedAsync;
+                    Geolocator.StatusChanged += OnStatusChanged;
+                    GoToUserLocationAsync(true);
                     break;
                 //Denied Access
                 case GeolocationAccessStatus.Denied:
@@ -139,7 +145,9 @@ namespace RouteOnPoint.GPSHandler
             }
             else
             {
+#if DEBUG
                 Debug.WriteLine("error with route");
+#endif
             }
 
         }
@@ -251,6 +259,8 @@ namespace RouteOnPoint.GPSHandler
                        Longitude = e.Position.Coordinate.Longitude
 
                    });
+    
+                   
                    if (!Notification.IsPaused)
                    {
                        GetDi();
@@ -272,8 +282,54 @@ namespace RouteOnPoint.GPSHandler
                    GoToUserLocationAsync(false);
                });
         }
-        
-        
+
+
+        private static void DrawVisitedRoute()
+        {
+            
+        }
+
+        //check if gps signal is avaibale
+        async private static void OnStatusChanged(Geolocator sender, StatusChangedEventArgs e)
+        {
+            await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+            {
+                // Show the location setting message only if status is disabled.
+
+                switch (e.Status)
+                {
+                    case PositionStatus.Ready:
+                        // Location platform is providing valid data.
+                        break;
+
+                    case PositionStatus.Initializing:
+                        // Location platform is attempting to acquire a fix. ;
+                        break;
+
+                    case PositionStatus.NoData:
+                        Notification.Notify(MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TITLE"), MultiLang.GetContent("GPSREADER_GPSAVAILABLE_TEXT"));
+                        // Location platform could not obtain location data.
+                        break;
+
+                    case PositionStatus.Disabled:
+                        // The permission to access location data is denied by the user or other policies.
+                        break;
+
+                    case PositionStatus.NotInitialized:
+                        // The location platform is not initialized. This indicates that the application 
+                        // has not made a request for location data.
+                        break;
+
+                    case PositionStatus.NotAvailable:
+                        // The location platform is not available on this version of the OS.
+                        break;
+
+                    default:
+                        break;
+                }
+            });
+        }
+
         public static async void OnGeofenceStateChanged(GeofenceMonitor sender, object e)
         {
             //Gets all state reports
@@ -283,7 +339,9 @@ namespace RouteOnPoint.GPSHandler
                 //Get the state of the geofence
                 GeofenceState state = report.NewState;
 
-                //Get the Geofence which state is changed
+                //Get the Geofence which state is 
+
+
                 Geofence geofence = report.Geofence;
 
                 //Switch case to know which state it is
@@ -423,7 +481,8 @@ namespace RouteOnPoint.GPSHandler
                             }
                             else
                             {
-                                Debug.WriteLine("should not come here NAME");
+
+                                //Debug.WriteLine("should not come here NAME");
                             }
                         }
                     }

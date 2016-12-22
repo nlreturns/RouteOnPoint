@@ -3,6 +3,7 @@ using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,6 +30,8 @@ namespace RouteOnPoint.Pages
         Frame rootFrame = Window.Current.Content as Frame;
         Route.Route route;
 
+        private Route.Route loadedRoute = null;
+
         public RouteSelectionViewModel()
         {
             this.InitializeComponent();
@@ -37,21 +40,29 @@ namespace RouteOnPoint.Pages
             Selecteer.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_SELECTROUTE_TEXT");
             Hervat.Text = MultiLang.GetContent("ROUTESELECTIONVIEWMODEL_RESUMEROUTE_TEXT");
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
+
         }
 
-        private void Click(object sender, TappedRoutedEventArgs e)
+        private async void Click(object sender, TappedRoutedEventArgs e)
         {
-    
+
             Grid g = (Grid)sender;
-            Route.Route r;
+            Route.Route r = null;
             switch (g.Name)
             {
+
                 case "Blind":
                     r = new RouteHelper().createBlindWalls();
                     break;
-                default:
+                case "Kilo":
                     r = new RouteHelper().createHistoriscRoute();
                     break;
+                case "Resume":
+                    r = loadedRoute;
+
+                    break;
+
+
             }
             GPSReader.route = r;
             rootFrame.Navigate(typeof(RouteViewModel));
@@ -71,10 +82,34 @@ namespace RouteOnPoint.Pages
             }
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
+            RouteHandler load = new RouteHandler();
+            try
+            {
+                loadedRoute = await load.GetRouteFromFile("RouteData.json");
+            }
+            catch (Exception)
+            {
+                loadedRoute = null;
+            }
+
+            if (loadedRoute == null || loadedRoute._points.Count() < 1)
+            {
+                ResumeButton.Visibility = Visibility.Collapsed;
+                Resume.Visibility = Visibility.Collapsed;
+
+
+            }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Visible;
+#if DEBUG
+
+            await MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
+            Debug.WriteLine(MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME"));
+            await MultiLang.setLanguage(MultiLang.LanguageEnum.English);
+            Debug.WriteLine(MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME"));
+#endif
         }
     }
 }
