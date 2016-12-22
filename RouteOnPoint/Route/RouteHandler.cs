@@ -21,6 +21,7 @@ using RouteOnPoint.GPSHandler;
  * Version 0.2 - Adusted SaveRouteWithState, added functionality to
  *               SaveRouteWithState and GetRouteFromFile.
  */
+
 namespace RouteOnPoint.Route
 {
     class RouteHandler
@@ -33,6 +34,7 @@ namespace RouteOnPoint.Route
          * 
          * Version 0.2 - removed List<POI> POI - this is saved inside Route
          */
+
         public async void SaveRouteWithState(Route route, string path)
         {
             // create json string
@@ -60,27 +62,35 @@ namespace RouteOnPoint.Route
          * Get a Route from excisting file.
          * Returns Route with excisting data.
          */
+
         public async Task<Route> GetRouteFromFile(String path)
         {
             // select folder and file
             StorageFolder folder = ApplicationData.Current.LocalFolder;
-            StorageFile file = await folder.GetFileAsync(path);
-
-            // open stream and get size
-            var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
-            ulong size = stream.Size;
-
-            // read stream
-            using (var inputStream = stream.GetInputStreamAt(0))
+            try
             {
-                using (var dataReader = new Windows.Storage.Streams.DataReader(inputStream))
+                StorageFile file = await folder.GetFileAsync(path);
+
+                // open stream and get size
+                var stream = await file.OpenAsync(FileAccessMode.ReadWrite);
+                ulong size = stream.Size;
+
+                // read stream
+                using (var inputStream = stream.GetInputStreamAt(0))
                 {
-                    uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
-                    string text = dataReader.ReadString(numBytesLoaded);
-                    // convert to Route object and return
-                    Route obj = JsonConvert.DeserializeObject<Route>(text);
-                    return obj;
+                    using (var dataReader = new Windows.Storage.Streams.DataReader(inputStream))
+                    {
+                        uint numBytesLoaded = await dataReader.LoadAsync((uint)size);
+                        string text = dataReader.ReadString(numBytesLoaded);
+                        // convert to Route object and return
+                        Route obj = JsonConvert.DeserializeObject<Route>(text);
+                        return obj;
+                    }
                 }
+            }
+            catch (FileNotFoundException)
+            {
+                return null;
             }
         }
 
