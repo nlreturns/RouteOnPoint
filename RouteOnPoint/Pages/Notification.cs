@@ -13,6 +13,7 @@ using Windows.UI.Core;
 using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
 
 namespace RouteOnPoint
 {
@@ -95,7 +96,7 @@ namespace RouteOnPoint
                             }
                             catch (System.Runtime.InteropServices.COMException e)
                             {
-                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), "U nadert " + MultiLang.GetContent(poi._name));
+                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), MultiLang.GetContent("NOTIFICATION_ENTERED2") + MultiLang.GetContent(poi._name));
                             }
                             
                         }));
@@ -173,10 +174,17 @@ namespace RouteOnPoint
             txtNodes[0].AppendChild(toastXmlContent.CreateTextNode(firstLine));
             txtNodes[1].AppendChild(toastXmlContent.CreateTextNode(secondLine));
 
+           
+
             var toast = new ToastNotification(toastXmlContent);
             var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+
+            
+
             toastNotifier.Show(toast);
 
+            
+            
             Debug.WriteLine("Toast: {0} {1}", firstLine, secondLine);
         }
     }
