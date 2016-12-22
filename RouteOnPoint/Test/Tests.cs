@@ -9,7 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.Foundation;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Maps;
 
 namespace RouteOnPoint.Test
 {
@@ -26,7 +29,6 @@ namespace RouteOnPoint.Test
         public static async void RouteTest()
         {
             await MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
-            List<POI> points = new List<POI>();
             BasicGeoposition b = new BasicGeoposition();
             b.Latitude = 51.58389660297626;
             b.Longitude = 4.795510768890381;
@@ -34,12 +36,21 @@ namespace RouteOnPoint.Test
             b.Latitude = 51.58834964389717;
             b.Longitude = 4.786133766174316;
             POI punt2 = new POI("P_ZENKONEGODEVAERT_NAME", "P_ZENKONEGODEVAERT_INFO", null, false, b);
-            Route.Route R = new Route.Route("R_BLINDWALLS_NAME");
-            GPSReader.route = R;
-            RouteHandler save = new RouteHandler();
-            save.SaveRouteWithState(GPSHandler.GPSReader.route, "RouteData.json");
-         
-            
+            Route.Route r = new Route.Route("R_BLINDWALLS_NAME");
+            r.addPOI(punt1);
+            r.addPOI(punt2);
+            var myImageUri = new Uri("ms-appx:///Assets/Icons/Blackdot.png");
+            GPSReader.UserLocation = new MapIcon()
+            {
+                Location = new Geopoint(new BasicGeoposition()
+                {
+                    Latitude = 51.58490990812901,
+                    Longitude = 4.7939229011535645
+                }),
+            };
+            GPSReader.route = r;
+            GPSReader.SetupRoute();
+
         }
     }
 }

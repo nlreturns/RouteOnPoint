@@ -11,6 +11,7 @@ using Windows.System.Profile;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using RouteOnPoint.GPSHandler;
 
 namespace RouteOnPoint
 {
@@ -57,6 +58,7 @@ namespace RouteOnPoint
         public static void Pause(ContentDialog content, object sender)
         {
             IsPaused = true;
+            GPSReader.IsPaused = true;
         }
 
         //The notification that triggers when nearing the next destination
