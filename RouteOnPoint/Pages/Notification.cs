@@ -2,6 +2,7 @@
 using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Windows.Phone.Devices.Notification;
 using Windows.Storage;
 using Windows.System.Profile;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -87,7 +89,15 @@ namespace RouteOnPoint
                                 Title = "U nadert " + MultiLang.GetContent(poi._name),
                                 PrimaryButtonText = "Ok"
                             };
-                            dialog.ShowAsync();
+                            try
+                            {
+                                dialog.ShowAsync();
+                            }
+                            catch (System.Runtime.InteropServices.COMException e)
+                            {
+                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), "U nadert " + MultiLang.GetContent(poi._name));
+                            }
+                            
                         }));
             }
             
@@ -152,6 +162,22 @@ namespace RouteOnPoint
                 PlayMusic.Play();
                 await dialog.ShowAsync();
             }
+        }
+
+        private static void ShowToast(string firstLine, string secondLine)
+        {
+            var toastXmlContent =
+              ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
+
+            var txtNodes = toastXmlContent.GetElementsByTagName("text");
+            txtNodes[0].AppendChild(toastXmlContent.CreateTextNode(firstLine));
+            txtNodes[1].AppendChild(toastXmlContent.CreateTextNode(secondLine));
+
+            var toast = new ToastNotification(toastXmlContent);
+            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+            toastNotifier.Show(toast);
+
+            Debug.WriteLine("Toast: {0} {1}", firstLine, secondLine);
         }
     }
 }
