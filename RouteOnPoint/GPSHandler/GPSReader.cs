@@ -349,8 +349,8 @@ namespace RouteOnPoint.GPSHandler
                 {
                     //Entered the geofence
                     case GeofenceState.Entered:
-                        Debug.WriteLine("Entered geofence: " +geofence.Id);
-                        if (!geofence.Id.Equals("Route")&&!geofence.Id.Equals("InsideBreda"))
+                        Debug.WriteLine("Entered geofence");
+                        if (!geofence.Id.Equals("InsideBreda"))
                         {
                             GeofenceMonitor.Current.Geofences.Remove(geofence);
                             handleGeoFenceEntered(geofence);
@@ -364,7 +364,6 @@ namespace RouteOnPoint.GPSHandler
                     case GeofenceState.Exited:
                         // if exited Breda
                         if (geofence.Id.Equals("InsideBreda"))
-                        {
                             Notification.OffRouteMessage();
                             Debug.WriteLine("Left Breda");
                         }
