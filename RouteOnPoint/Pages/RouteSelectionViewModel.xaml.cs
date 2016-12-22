@@ -103,6 +103,7 @@ namespace RouteOnPoint.Pages
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Visible;
+
         }
     }
 }
