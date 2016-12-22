@@ -28,15 +28,8 @@ namespace BackGroundTask
                         case GeofenceState.Entered:
                             {
 
-                                ShowToast("Approaching Home", ":-)");
+                                ShowToast("Sight reached", "Check the app for more information");
                                 break;
-                            }
-                        case GeofenceState.Exited:
-                            {
-                                ShowToast("Leaving Home", ":-)");
-                                break;
-
-
                             }
 
 
