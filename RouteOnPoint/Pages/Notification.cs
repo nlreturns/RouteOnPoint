@@ -90,14 +90,7 @@ namespace RouteOnPoint
                                 Title = "U nadert " + MultiLang.GetContent(poi._name),
                                 PrimaryButtonText = "Ok"
                             };
-                            try
-                            {
-                                dialog.ShowAsync();
-                            }
-                            catch (System.Runtime.InteropServices.COMException e)
-                            {
-                                ShowToast(MultiLang.GetContent("NOTIFICATION_ENTERED"), MultiLang.GetContent("NOTIFICATION_ENTERED2") + MultiLang.GetContent(poi._name), poi);
-                            }
+                            dialog.ShowAsync();
                             
                         }));
             }
@@ -165,28 +158,6 @@ namespace RouteOnPoint
             }
         }
 
-        private static void ShowToast(string firstLine, string secondLine, POI p)
-        {
-            var toastXmlContent =
-              ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText02);
-
-            var txtNodes = toastXmlContent.GetElementsByTagName("text");
-            txtNodes[0].AppendChild(toastXmlContent.CreateTextNode(firstLine));
-            txtNodes[1].AppendChild(toastXmlContent.CreateTextNode(secondLine));
-            var launchAttribute = toastXmlContent.CreateAttribute("launch");
-            launchAttribute.Value = p._name;
-
-
-            var toast = new ToastNotification(toastXmlContent);
-            var toastNotifier = ToastNotificationManager.CreateToastNotifier();
-
-            
-
-            toastNotifier.Show(toast);
-
-            
-            
-            Debug.WriteLine("Toast: {0} {1}", firstLine, secondLine);
-        }
+        
     }
 }
