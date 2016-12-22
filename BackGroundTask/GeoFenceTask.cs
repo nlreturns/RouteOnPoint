@@ -12,9 +12,11 @@ namespace BackGroundTask
 {
     public sealed class GeoFenceTask : IBackgroundTask
     {
+        public static string s;
+
         public void Run(IBackgroundTaskInstance taskInstance)
         {
-            string  s = taskInstance.InstanceId.ToString();
+            s = taskInstance.InstanceId.ToString();
             var monitor = GeofenceMonitor.Current;
             if (monitor.Geofences.Any())
             {
@@ -49,6 +51,8 @@ namespace BackGroundTask
             var txtNodes = toastXmlContent.GetElementsByTagName("text");
             txtNodes[0].AppendChild(toastXmlContent.CreateTextNode(firstLine));
             txtNodes[1].AppendChild(toastXmlContent.CreateTextNode(secondLine));
+            var launchAttribute = toastXmlContent.CreateAttribute("launch");
+            launchAttribute.Value = s;
 
             var toast = new ToastNotification(toastXmlContent);
             var toastNotifier = ToastNotificationManager.CreateToastNotifier();
