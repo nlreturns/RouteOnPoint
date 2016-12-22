@@ -365,8 +365,8 @@ namespace RouteOnPoint.GPSHandler
                         // if exited Breda
                         if (geofence.Id.Equals("InsideBreda"))
                         {
-                            Notification.OffRouteMessage();
                             Debug.WriteLine("Left Breda");
+                            Notification.OffRouteMessage();
                         }
                         else
                         {

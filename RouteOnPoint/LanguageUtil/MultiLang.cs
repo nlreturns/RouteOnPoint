@@ -358,7 +358,7 @@ namespace RouteOnPoint.LanguageUtil
             _English.Add("GPSREADER_LOCATION_TEXT", "My Location");
             _English.Add("GPSREADER_GPSAVAILABLE_TITLE", "GPS signal not found");
             _English.Add("GPSREADER_GPSAVAILABLE_TEXT", "Route on point can't find your location due to there's no GPS signal");
-
+            //_English.Add()
         }
 
         //AssistPage text Englisch
