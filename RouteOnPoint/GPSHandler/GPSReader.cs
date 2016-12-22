@@ -145,7 +145,9 @@ namespace RouteOnPoint.GPSHandler
             }
             else
             {
+#if DEBUG
                 Debug.WriteLine("error with route");
+#endif
             }
 
         }
@@ -479,7 +481,8 @@ namespace RouteOnPoint.GPSHandler
                             }
                             else
                             {
-                                Debug.WriteLine("should not come here NAME");
+
+                                //Debug.WriteLine("should not come here NAME");
                             }
                         }
                     }
