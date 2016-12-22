@@ -400,6 +400,12 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackGroundTask\BackGroundTask.csproj">
+      <Project>{2fd52f63-b3b3-4eda-9b44-210281ca2615}</Project>
+      <Name>BackGroundTask</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -18,6 +18,7 @@ using RouteOnPoint.Route;
 using RouteOnPoint.LanguageUtil;
 using RouteOnPoint.Pages;
 using Windows.UI.Xaml.Controls;
+using Windows.ApplicationModel.Background;
 
 namespace RouteOnPoint.GPSHandler
 {
@@ -194,8 +195,10 @@ namespace RouteOnPoint.GPSHandler
 
         }
 
-        public static void SetupGeoFence(List<POI> points)
+        public static async void SetupGeoFence(List<POI> points)
         {
+            
+
             GeofenceMonitor.Current.Geofences.Clear();
             foreach (var poi in points)
             {
@@ -205,45 +208,99 @@ namespace RouteOnPoint.GPSHandler
                     // Set the fence ID.
                     string fenceId = poi._name;
 
-                    // Define the fence location and radius.
-                    BasicGeoposition position;
-                    position.Latitude = point.Position.Latitude;
-                    position.Longitude = point.Position.Longitude;
-                    position.Altitude = point.Position.Altitude;
-                    int radius = 20;
+                    await RegisterBackgroundTasks(fenceId);
 
-                    // Set the circular region for geofence.
-                    Geocircle geocircle = new Geocircle(position, radius);
+                    if (IsTaskRegistered())
+                    {
+                        // Define the fence location and radius.
+                        BasicGeoposition position;
+                        position.Latitude = point.Position.Latitude;
+                        position.Longitude = point.Position.Longitude;
+                        position.Altitude = point.Position.Altitude;
+                        int radius = 20;
 
-                    // Remove the geofence after the first trigger.
-                    bool singleUse = true;
+                        // Set the circular region for geofence.
+                        Geocircle geocircle = new Geocircle(position, radius);
 
-                    // Set the monitored states.
-                    MonitoredGeofenceStates monitoredStates =
-                        MonitoredGeofenceStates.Entered |
-                        MonitoredGeofenceStates.Exited |
-                        MonitoredGeofenceStates.Removed;
+                        // Remove the geofence after the first trigger.
+                        bool singleUse = true;
 
-                    // Set how long you need to be in geofence for the enter event to fire.
-                    TimeSpan dwellTime = TimeSpan.FromSeconds(5);
+                        // Set the monitored states.
+                        MonitoredGeofenceStates monitoredStates =
+                            MonitoredGeofenceStates.Entered |
+                            MonitoredGeofenceStates.Exited |
+                            MonitoredGeofenceStates.Removed;
 
-                    // Set how long the geofence should be active.
-                    TimeSpan duration = TimeSpan.FromDays(1);
+                        // Set how long you need to be in geofence for the enter event to fire.
+                        TimeSpan dwellTime = TimeSpan.FromSeconds(5);
 
-                    // Set up the start time of the geofence.
-                    DateTimeOffset startTime = DateTime.Now;
+                        // Set how long the geofence should be active.
+                        TimeSpan duration = TimeSpan.FromDays(1);
 
-                    // Create the geofence.
-                    Geofence geofence = new Geofence(fenceId, geocircle, monitoredStates, singleUse, dwellTime,
-                        startTime,
-                        duration);
-                    Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
-                                    point.Position.Longitude);
+                        // Set up the start time of the geofence.
+                        DateTimeOffset startTime = DateTime.Now;
+
+                        // Create the geofence.
+                        Geofence geofence = new Geofence(fenceId, geocircle, monitoredStates, singleUse, dwellTime,
+                            startTime,
+                            duration);
+                        Debug.WriteLine("made a geofence at lat: " + point.Position.Latitude + " long: " +
+                                        point.Position.Longitude);
                         GeofenceMonitor.Current.Geofences.Add(geofence);
+                    }
                 }
             }
 
-        GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+            GeofenceMonitor.Current.GeofenceStateChanged += OnGeofenceStateChanged;
+        }
+
+        //Registers the background task with a LocationTrigger
+        static async Task RegisterBackgroundTasks(string fenceId)
+        {
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+
+
+            if (access == BackgroundAccessStatus.Denied)
+            {
+
+            }
+            else
+            {
+                var taskBuilder = new BackgroundTaskBuilder();
+                taskBuilder.Name = fenceId;
+
+                taskBuilder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                taskBuilder.SetTrigger(new LocationTrigger(LocationTriggerType.Geofence));
+
+                taskBuilder.TaskEntryPoint = typeof(BackGroundTask.GeoFenceTask).FullName;
+
+                var registration = taskBuilder.Register();
+
+                registration.Completed += (sender, e) =>
+                {
+                    try
+                    {
+                        e.CheckResult();
+                    }
+                    catch (Exception error)
+                    {
+                        Debug.WriteLine(error);
+                    }
+                };
+
+
+
+            }
+
+        }
+
+        static bool IsTaskRegistered()
+        {
+            var Registered = false;
+            var entry = BackgroundTaskRegistration.AllTasks.FirstOrDefault(keyval => keyval.Value.Name == "PetsnikkerVacationFence");
+            if (entry.Value != null)
+                Registered = true;
+            return Registered;
         }
 
         private static async void OnPositionChangedAsync(Geolocator sender, PositionChangedEventArgs e)
