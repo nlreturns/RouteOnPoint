@@ -38,12 +38,6 @@ namespace RouteOnPoint.GPSHandler
         public static  async void AddMap(MapControl map)
         {
             Map = map;
-
-            Map.MapElements.Add(UserLocation);
-            //Adds the event when the position changes
-            Geolocator.PositionChanged += OnPositionChangedAsync;
-            //centers the map to the location of the user
-            await GoToUserLocationAsync(true);
         }
 
 

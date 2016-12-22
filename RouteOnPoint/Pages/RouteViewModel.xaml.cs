@@ -78,8 +78,8 @@ namespace RouteOnPoint.Pages
             if (!GPSReader.created)
             {           
                 GPSReader.created = true;
-                await GPSReader.SetupGPS();
                 GPSReader.AddMap(myMap);
+                await GPSReader.SetupGPS();
 
 //                List<POI> points = new List<POI>();
 //                points.Add(new POI("shizzle", null, null, true, new BasicGeoposition() { Latitude = 51.584555, Longitude = 4.793667 }));
