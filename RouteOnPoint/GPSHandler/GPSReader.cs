@@ -409,7 +409,7 @@ namespace RouteOnPoint.GPSHandler
                 {
                     //Entered the geofence
                     case GeofenceState.Entered:
-                        Debug.WriteLine("Entered geofence");
+                        Debug.WriteLine("Entered geofence : " +geofence.Id);
                         if (!geofence.Id.Equals("InsideBreda"))
                         {
                             GeofenceMonitor.Current.Geofences.Remove(geofence);
