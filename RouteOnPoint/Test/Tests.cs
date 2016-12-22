@@ -1,4 +1,5 @@
 ﻿using RouteOnPoint.LanguageUtil;
+using RouteOnPoint.Pages;
 using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
+using Windows.UI.Xaml.Controls;
 
 namespace RouteOnPoint.Test
 {
@@ -33,6 +35,8 @@ namespace RouteOnPoint.Test
             POI punt2 = new POI("P_ZENKONEGODEVAERT_NAME", "P_ZENKONEGODEVAERT_INFO", null, false, b);
             RouteHandler save = new RouteHandler();
             save.SaveRouteWithState(GPSHandler.GPSReader.route, "RouteData.json");
+            Frame.Navigate(typeof (RouteViewModel));
+            
         }
     }
 }

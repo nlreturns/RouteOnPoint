@@ -80,7 +80,7 @@ namespace RouteOnPoint.Pages
                 GPSReader.created = true;
                 GPSReader.AddMap(myMap);
                 await GPSReader.SetupGPS();
-                GPSReader.AddMap(myMap);
+
                 
 
                 //                List<POI> points = new List<POI>();
