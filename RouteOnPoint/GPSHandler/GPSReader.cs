@@ -514,7 +514,8 @@ namespace RouteOnPoint.GPSHandler
                     MapRouteView viewOfRoute = new MapRouteView(result.Route);
                     MapElement[] tempList = new MapElement[Map.MapElements.Count];
                     Map.MapElements.CopyTo(tempList, 0);
-                    
+                    try
+                    {
                         foreach (var element in Map.MapElements)
                         {
                             if (element is MapIcon)
@@ -545,6 +546,8 @@ namespace RouteOnPoint.GPSHandler
                                 }
                             }
                         }
+                    }
+                    catch (Exception) { }
                     
                 }
             }
