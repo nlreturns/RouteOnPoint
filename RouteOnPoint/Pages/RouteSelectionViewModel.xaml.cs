@@ -103,13 +103,7 @@ namespace RouteOnPoint.Pages
             }
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 AppViewBackButtonVisibility.Visible;
-#if DEBUG
 
-            await MultiLang.setLanguage(MultiLang.LanguageEnum.Dutch);
-            Debug.WriteLine(MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME"));
-            await MultiLang.setLanguage(MultiLang.LanguageEnum.English);
-            Debug.WriteLine(MultiLang.GetContent("R_HISTORISCHEKILOMETER_NAME"));
-#endif
         }
     }
 }

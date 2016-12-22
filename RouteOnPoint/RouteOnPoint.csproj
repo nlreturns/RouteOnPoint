@@ -121,6 +121,7 @@
     <Compile Include="Route\RouteHandler.cs" />
     <Compile Include="Route\RouteHelper.cs" />
     <Compile Include="Route\UnitTestRoute.cs" />
+    <Compile Include="Test\Tests.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
