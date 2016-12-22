@@ -69,6 +69,7 @@ namespace RouteOnPoint
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+
 #if DEBUG
 #endif
 
@@ -92,6 +93,36 @@ namespace RouteOnPoint
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+            if (e.Kind == ActivationKind.ToastNotification)
+            {
+
+                    
+                    var arguments = e.Arguments;
+
+                    POI navigatePOI = null;
+
+                    foreach (POI p in GPSReader.route._points)
+                    {
+                        if (p._name == arguments)
+                        {
+                            navigatePOI = p;
+                        }
+                    }
+
+                    if (navigatePOI != null)
+                    {
+                        rootFrame = Window.Current.Content as Frame;
+                        if (rootFrame == null)
+                        {
+                            rootFrame = new Frame();
+                            Window.Current.Content = rootFrame;
+                        }
+                        rootFrame.Navigate(typeof(RouteViewModel), navigatePOI);
+                        Window.Current.Activate();
+                    }
+                
+
+            }
 
             if (e.PrelaunchActivated == false)
             {
@@ -105,6 +136,8 @@ namespace RouteOnPoint
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+
         }
 
         /// <summary>
