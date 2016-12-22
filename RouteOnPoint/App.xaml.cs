@@ -10,6 +10,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
+using RouteOnPoint.LanguageUtil;
 
 namespace RouteOnPoint
 {
@@ -103,7 +104,7 @@ namespace RouteOnPoint
 
                     foreach (POI p in GPSReader.route._points)
                     {
-                        if (p._name == arguments)
+                        if (MultiLang.GetContent(p._name) == arguments)
                         {
                             navigatePOI = p;
                         }
