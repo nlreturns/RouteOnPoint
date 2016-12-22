@@ -1,6 +1,7 @@
 ﻿using RouteOnPoint.LanguageUtil;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -50,6 +51,9 @@ namespace RouteOnPoint.Pages
             BluePOI.Text = MultiLang.GetContent("ASSISTVIEWMODEL_BLUEPOI_TEXT");
             OrangeLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_ORANGELINE_TEXT");
             GrayLine.Text = MultiLang.GetContent("ASSISTVIEWMODEL_GRAYLINE_TEXT");
+
+            Debug.WriteLine(MultiLang.GetContent("ASSISTVIEWMODEL_HEADER_TEXT"));
+                    
         }
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
