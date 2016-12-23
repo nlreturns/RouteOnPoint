@@ -320,8 +320,8 @@ namespace RouteOnPoint.GPSHandler
                    {
                        Latitude = e.Position.Coordinate.Latitude,
                        Longitude = e.Position.Coordinate.Longitude
-
                    });
+                   Debug.WriteLine(e.Position.Coordinate.Latitude + " - " + e.Position.Coordinate.Longitude)
     
                    
                    if (!Notification.IsPaused)
