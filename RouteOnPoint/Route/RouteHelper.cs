@@ -23,7 +23,7 @@ namespace RouteOnPoint.Route
             //Creates the route
             Route r = new Route("R_HISTORISCHEKILOMETER_NAME");
             //Adds points
-            r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/1.jpg", new BasicGeoposition() { Latitude = 51.594160, Longitude = 4.779408 });
+            r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.594160, Longitude = 4.779408 });
             r.addPoint("P_LIEFDESZUSTER_NAME", "P_LIEFDESZUSTER_INFO", "ms-appx:///Assets/3.jpg", new BasicGeoposition() { Latitude = 51.593024, Longitude = 4.779687 });
             r.addPoint("P_NASSAUBARONIEMONUMENT_NAME", "P_NASSAUBARONIEMONUMENT_INFO", "ms-appx:///Assets/4.jpg", new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467817 });            
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467633 });
