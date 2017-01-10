@@ -216,7 +216,7 @@ namespace RouteOnPoint.GPSHandler
                     {
                         await RegisterBackgroundTasks(s);
                     }
-                    catch { }
+                    catch (Exception e){ Notification.Critical(e.StackTrace); }
                     if (IsTaskRegistered(s))
                     {
                         // Define the fence location and radius.

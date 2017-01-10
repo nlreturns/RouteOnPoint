@@ -208,7 +208,11 @@ namespace RouteOnPoint
                 }
 
                 PlayMusic.Play();
-                await dialog.ShowAsync();
+                try
+                {
+                    await dialog.ShowAsync();
+                }
+                catch { }
             }
         }
 
