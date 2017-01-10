@@ -10,6 +10,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using RouteOnPoint.GPSHandler;
+using RouteOnPoint.LanguageUtil;
+using Windows.UI.Popups;
 
 namespace RouteOnPoint
 {
@@ -31,6 +33,37 @@ namespace RouteOnPoint
 
         }
 
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            if (args.Kind == ActivationKind.ToastNotification)
+            {
+                var toastArgs = args as ToastNotificationActivatedEventArgs;
+                var arguments = toastArgs.Argument;
+
+                POI navigatePOI = null;
+
+                foreach (POI p in GPSReader.route._points)
+                {
+                    if (p._name == arguments)
+                    {
+                        navigatePOI = p;
+                    }
+                }
+
+                if (navigatePOI != null)
+                {
+                    Frame rootFrame = Window.Current.Content as Frame;
+                    if (rootFrame == null)
+                    {
+                        rootFrame = new Frame();
+                        Window.Current.Content = rootFrame;
+                    }
+                    rootFrame.Navigate(typeof(RouteViewModel), navigatePOI);
+                    Window.Current.Activate();
+                }
+            }
+        }
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -38,10 +71,12 @@ namespace RouteOnPoint
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+
 #if DEBUG
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -60,6 +95,36 @@ namespace RouteOnPoint
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+            if (e.Kind == ActivationKind.ToastNotification)
+            {
+                MessageDialog m = new MessageDialog("Started from toast");
+                m.ShowAsync();
+                    var arguments = e.Arguments;
+
+                    POI navigatePOI = null;
+
+                    foreach (POI p in GPSReader.route._points)
+                    {
+                        if (MultiLang.GetContent(p._name) == arguments)
+                        {
+                            navigatePOI = p;
+                        }
+                    }
+
+                    if (navigatePOI != null)
+                    {
+                        rootFrame = Window.Current.Content as Frame;
+                        if (rootFrame == null)
+                        {
+                            rootFrame = new Frame();
+                            Window.Current.Content = rootFrame;
+                        }
+                        rootFrame.Navigate(typeof(RouteViewModel), navigatePOI);
+                        Window.Current.Activate();
+                    }
+                
+
+            }
 
             if (e.PrelaunchActivated == false)
             {
@@ -73,6 +138,8 @@ namespace RouteOnPoint
                 // Ensure the current window is active
                 Window.Current.Activate();
             }
+
+
         }
 
         /// <summary>

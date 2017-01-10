@@ -2,6 +2,7 @@
 using RouteOnPoint.Route;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,10 @@ using Windows.Phone.Devices.Notification;
 using Windows.Storage;
 using Windows.System.Profile;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.Foundation;
 using RouteOnPoint.GPSHandler;
 
 namespace RouteOnPoint
@@ -27,19 +30,31 @@ namespace RouteOnPoint
                 StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
                 Folder = await Folder.GetFolderAsync("Assets");
                 StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
-                MediaElement PlayMusic = new MediaElement();
-                PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+                MediaElement PlayMusic = null;
+                var file = await sf.OpenAsync(FileAccessMode.Read);
+                ContentDialog dialog = null;
+                await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+                        {
+                            VibrationDevice Vibration = VibrationDevice.GetDefault();
+                            Vibration.Vibrate(TimeSpan.FromSeconds(2));
+                        }
 
+                        PlayMusic = new MediaElement();
+                        PlayMusic.SetSource(file, sf.ContentType);
+                        dialog = new ContentDialog()
+                        {
+                            FontSize = 26,
+                            Title = "U bent buiten Breda",
+                            PrimaryButtonText = "Ok",
+                            SecondaryButtonText = "Pauzeer route"
+                        };
+                        dialog.SecondaryButtonClick += Pause;
+                        dialog.ShowAsync();
+                    }));
 
-
-                ContentDialog dialog = new ContentDialog()
-                {
-                    FontSize = 26,
-                    Title = "U bent buiten Breda",
-                    PrimaryButtonText = "Ok",
-                    SecondaryButtonText = "Pauzeer route"
-                };
-                dialog.SecondaryButtonClick += Pause;
 
                 if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                 {
@@ -47,11 +62,6 @@ namespace RouteOnPoint
                     Vibration.Vibrate(TimeSpan.FromSeconds(2));
                 }
 
-                PlayMusic.Play();
-
-               
-
-                await dialog.ShowAsync();
             }
         }
 
@@ -73,7 +83,9 @@ namespace RouteOnPoint
                 var file = await sf.OpenAsync(FileAccessMode.Read);
                 ContentDialog dialog = null;
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                        CoreDispatcherPriority.High, (() =>
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        try
                         {
                             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                             {
@@ -83,14 +95,27 @@ namespace RouteOnPoint
 
                             PlayMusic = new MediaElement();
                             PlayMusic.SetSource(file, sf.ContentType);
+                            PlayMusic.Play();
                             dialog = new ContentDialog()
                             {
                                 FontSize = 26,
                                 Title = "INFO: U nadert " + MultiLang.GetContent(poi._name),
                                 PrimaryButtonText = "Ok"
                             };
-                            dialog.ShowAsync();
-                        }));
+                            try
+                            {
+                                dialog.ShowAsync();
+                            }
+                            catch (Exception) { }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.StackTrace);
+                            throw;
+                        }
+
+
+                    }));
             }
             
         }
@@ -186,5 +211,7 @@ namespace RouteOnPoint
                 await dialog.ShowAsync();
             }
         }
+
+        
     }
 }

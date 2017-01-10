@@ -208,53 +208,6 @@
     <Content Include="Assets\9.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\B1.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B10.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B11.jpg" />
-    <Content Include="Assets\B12.jpg" />
-    <Content Include="Assets\B13.jpg" />
-    <Content Include="Assets\B14.jpg" />
-    <Content Include="Assets\B15.jpg" />
-    <Content Include="Assets\B16.jpg" />
-    <Content Include="Assets\B17.jpg" />
-    <Content Include="Assets\B18.jpg" />
-    <Content Include="Assets\B19.jpg" />
-    <Content Include="Assets\B2.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B20.jpg" />
-    <Content Include="Assets\B21.jpg" />
-    <Content Include="Assets\B22.jpg" />
-    <Content Include="Assets\B23.jpg" />
-    <Content Include="Assets\B24.jpg" />
-    <Content Include="Assets\B3.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B4.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B5.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B6.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B7.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B8.jpeg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B8.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\B9.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Assets\background.jpg" />
     <Content Include="Assets\Buttons\Back.png" />
     <Content Include="Assets\Buttons\Cross.png" />
@@ -282,6 +235,51 @@
     <Content Include="Assets\jingle-bells-sms.mp3">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\POI\BlindWalls\AkaCorleone.jpg" />
+    <Content Include="Assets\POI\BlindWalls\AntiHeld.jpg" />
+    <Content Include="Assets\POI\BlindWalls\AronVellekoop.jpeg" />
+    <Content Include="Assets\POI\BlindWalls\B1.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B10.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B11.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B12.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B13.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B14.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B15.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B16.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B17.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B18.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B19.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B2.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B20.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B21.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B22.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B23.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B24.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B3.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B4.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B5.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B6.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B7.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B8.jpeg" />
+    <Content Include="Assets\POI\BlindWalls\B8.jpg" />
+    <Content Include="Assets\POI\BlindWalls\B9.jpg" />
+    <Content Include="Assets\POI\BlindWalls\BruceTMC.jpg" />
+    <Content Include="Assets\POI\BlindWalls\Cranio.jpg" />
+    <Content Include="Assets\POI\BlindWalls\FRM.jpg" />
+    <Content Include="Assets\POI\BlindWalls\Hedof.jpg" />
+    <Content Include="Assets\POI\BlindWalls\Hedof2.jpg" />
+    <Content Include="Assets\POI\BlindWalls\IlseWeisfelt.jpg" />
+    <Content Include="Assets\POI\BlindWalls\IwanSmit.jpg" />
+    <Content Include="Assets\POI\BlindWalls\JohanMoorman.jpg" />
+    <Content Include="Assets\POI\BlindWalls\JorenJoshua.jpg" />
+    <Content Include="Assets\POI\BlindWalls\MCity.jpg" />
+    <Content Include="Assets\POI\BlindWalls\MikePerry.jpg" />
+    <Content Include="Assets\POI\BlindWalls\RutgerTermohlen.jpg" />
+    <Content Include="Assets\POI\BlindWalls\StayNiceScouting.jpg" />
+    <Content Include="Assets\POI\BlindWalls\StephenPowers.jpeg" />
+    <Content Include="Assets\POI\BlindWalls\teckelKMA.jpg" />
+    <Content Include="Assets\POI\BlindWalls\ThomasJurgen.jpg" />
+    <Content Include="Assets\POI\BlindWalls\ZenkOne.jpg" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\POI\Muur.PNG" />
     <Content Include="Assets\Routes\BlindWalls.PNG" />
@@ -387,6 +385,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BackGroundTask\BackGroundTask.csproj">
+      <Project>{2fd52f63-b3b3-4eda-9b44-210281ca2615}</Project>
+      <Name>BackGroundTask</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
