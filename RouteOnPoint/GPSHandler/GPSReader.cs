@@ -212,9 +212,11 @@ namespace RouteOnPoint.GPSHandler
                     string fenceId = poi._name;
 
                     string s = MultiLang.GetContent(fenceId);
-
-                    await RegisterBackgroundTasks(s);
-
+                    try
+                    {
+                        await RegisterBackgroundTasks(s);
+                    }
+                    catch { }
                     if (IsTaskRegistered(s))
                     {
                         // Define the fence location and radius.
