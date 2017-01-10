@@ -23,8 +23,9 @@ namespace RouteOnPoint.Route
             //Creates the route
             Route r = new Route("R_HISTORISCHEKILOMETER_NAME");
             //Adds points
-            r.addPoint("P_LIEFDESZUSTER_NAME", "P_LIEFDESZUSTER_INFO", "ms-appx:///Assets/3.jpg", new BasicGeoposition() { Latitude = 51.356967, Longitude = 4.467333 });
-            r.addPoint("P_NASSAUBARONIEMONUMENT_NAME", "P_NASSAUBARONIEMONUMENT_INFO", "ms-appx:///Assets/4.jpg", new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467817 });
+            r.addPoint("P_VVV_NAME", "P_VVV_INFO", "ms-appx:///Assets/2.jpg", new BasicGeoposition() { Latitude = 51.594160, Longitude = 4.779408 });
+            r.addPoint("P_LIEFDESZUSTER_NAME", "P_LIEFDESZUSTER_INFO", "ms-appx:///Assets/3.jpg", new BasicGeoposition() { Latitude = 51.593024, Longitude = 4.779687 });
+            r.addPoint("P_NASSAUBARONIEMONUMENT_NAME", "P_NASSAUBARONIEMONUMENT_INFO", "ms-appx:///Assets/4.jpg", new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467817 });            
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.355500, Longitude = 4.467633 });
             r.addPoint("P_THELIGHTHOUSE_NAME", "P_THELIGHTHOUSE_INFO", "ms-appx:///Assets/5.jpg", new BasicGeoposition() { Latitude = 51.355700, Longitude = 4.467083 });
             r.addPoint(null, null, null, new BasicGeoposition() { Latitude = 51.355600, Longitude = 4.466750 });
@@ -117,11 +118,9 @@ namespace RouteOnPoint.Route
             r.addPoint("P_SUPERA_NAME", "P_SUPERA_INFO", "ms-appx:///Assets/POI/BlindWalls/B20.jpg", new BasicGeoposition() { Latitude = 51.598942, Longitude = 4.766836 }, false, false);
             r.addPoint("P_ZENKONEVEILINGKADE_NAME", "P_ZENKONEVEILINGKADE_INFO", "ms-appx:///Assets/POI/BlindWalls/B19.jpg", new BasicGeoposition() { Latitude = 51.598891, Longitude = 4.766909 }, false, false);
             r.addPoint("P_STAYNICEBLOOS_NAME", "P_STAYNICEBLOOS_INFO", "ms-appx:///Assets/POI/BlindWalls/B18.jpg", new BasicGeoposition() { Latitude = 51.599398, Longitude = 4.770817 }, false, false);
-            r.addPoint("P_STAYNICEKOP_NAME", "P_STAYNICEKOP_INFO", "ms-appx:///Assets/POI/BlindWalls/B17.jpg", new BasicGeoposition() { Latitude = 51.599945, Longitude = 4.769521 }, false, false);
-            r.addPoint("P_ZENKONE2012_NAME", "P_ZENKONE2012_INFO", "ms-appx:///Assets/POI/BlindWalls/B16.jpg", new BasicGeoposition() { Latitude = 51.589169, Longitude = 4.780327 }, false, false);
+            r.addPoint("P_STAYNICEKOP_NAME", "P_STAYNICEKOP_INFO", "ms-appx:///Assets/POI/BlindWalls/B17.jpg", new BasicGeoposition() { Latitude = 51.599945, Longitude = 4.769521 }, false, false);         
             r.addPoint("P_COMBATSUPERMURAL_NAME", "P_COMBATSUPERMURAL_INFO", "ms-appx:///Assets/POI/BlindWalls/B14.jpg", new BasicGeoposition() { Latitude = 51.596109, Longitude = 4.766329 }, false, false);
-            r.addPoint("P_HEDOF2_NAME", "P_HEDOF2_INFO", "ms-appx:///Assets/POI/BlindWalls/Hedof2.jpg", new BasicGeoposition() { Latitude = 51.59216729521042, Longitude = 4.770898414758335 }, false, false);
-            r.addPoint("P_TECKELKMA_NAME", null, "ms-appx:///Assets/POI/BlindWalls/teckelKMA.jpg", new BasicGeoposition() { Latitude = 51.59018277245498, Longitude = 4.773666854492149 }, false, false);
+            r.addPoint("P_HEDOF2_NAME", "P_HEDOF2_INFO", "ms-appx:///Assets/POI/BlindWalls/Hedof2.jpg", new BasicGeoposition() { Latitude = 51.59216729521042, Longitude = 4.770898414758335 }, false, false);           
             r.addPoint("P_STAYNICE_NAME", "P_STAYNICE_INFO", "ms-appx:///Assets/POI/BlindWalls/StayNice.jpg", new BasicGeoposition() { Latitude = 51.59452899999999, Longitude = 4.778975299999956 }, false, false);
             r.addPoint("P_NOODLEINC_NAME", "P_NOODLEINC_INFO", "ms-appx:///Assets/POI/BlindWalls/B12.jpg", new BasicGeoposition() { Latitude = 51.588103, Longitude = 4.774052 }, false, false);
             r.addPoint("P_DAMIENPOULAINBOSCHSTRAAT_NAME", "P_DAMIENPOULAINBOSCHSTRAAT_INFO", "ms-appx:///Assets/POI/BlindWalls/B7.jpg", new BasicGeoposition() { Latitude = 51.591129, Longitude = 4.783754 }, false, false);
