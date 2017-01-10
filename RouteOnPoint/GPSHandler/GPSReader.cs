@@ -70,7 +70,7 @@ namespace RouteOnPoint.GPSHandler
                         }),
                         NormalizedAnchorPoint = new Point(0.5, 1.0),
                         Title = MultiLang.GetContent("GPSREADER_LOCATION_TEXT"),
-                        ZIndex = 0,
+                        ZIndex = -1,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
 
