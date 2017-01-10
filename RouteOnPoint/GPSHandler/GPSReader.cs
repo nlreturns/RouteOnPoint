@@ -70,7 +70,7 @@ namespace RouteOnPoint.GPSHandler
                         }),
                         NormalizedAnchorPoint = new Point(0.5, 1.0),
                         Title = MultiLang.GetContent("GPSREADER_LOCATION_TEXT"),
-                        ZIndex = 0,
+                        ZIndex = -1,
                         Image = RandomAccessStreamReference.CreateFromUri(myImageUri)
                     };
 
@@ -411,7 +411,7 @@ namespace RouteOnPoint.GPSHandler
                 {
                     //Entered the geofence
                     case GeofenceState.Entered:
-                        Debug.WriteLine("Entered geofence");
+                        Debug.WriteLine("Entered geofence : " +geofence.Id);
                         if (!geofence.Id.Equals("InsideBreda"))
                         {
                             GeofenceMonitor.Current.Geofences.Remove(geofence);

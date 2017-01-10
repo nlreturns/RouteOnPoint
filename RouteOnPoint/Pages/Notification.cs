@@ -34,34 +34,34 @@ namespace RouteOnPoint
                 var file = await sf.OpenAsync(FileAccessMode.Read);
                 ContentDialog dialog = null;
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                        CoreDispatcherPriority.High, (() =>
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                         {
-                            if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
-                            {
-                                VibrationDevice Vibration = VibrationDevice.GetDefault();
-                                Vibration.Vibrate(TimeSpan.FromSeconds(2));
-                            }
+                            VibrationDevice Vibration = VibrationDevice.GetDefault();
+                            Vibration.Vibrate(TimeSpan.FromSeconds(2));
+                        }
 
-                            PlayMusic = new MediaElement();
-                            PlayMusic.SetSource(file, sf.ContentType);
-                            dialog = new ContentDialog()
-                            {
-                                FontSize = 26,
-                                Title = "U bent buiten Breda",
-                                PrimaryButtonText = "Ok",
-                                SecondaryButtonText = "Pauzeer route"
-                            };
-                            dialog.SecondaryButtonClick += Pause;
-                            dialog.ShowAsync();
-                        }));
-                
+                        PlayMusic = new MediaElement();
+                        PlayMusic.SetSource(file, sf.ContentType);
+                        dialog = new ContentDialog()
+                        {
+                            FontSize = 26,
+                            Title = "U bent buiten Breda",
+                            PrimaryButtonText = "Ok",
+                            SecondaryButtonText = "Pauzeer route"
+                        };
+                        dialog.SecondaryButtonClick += Pause;
+                        dialog.ShowAsync();
+                    }));
+
 
                 if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                 {
                     VibrationDevice Vibration = VibrationDevice.GetDefault();
                     Vibration.Vibrate(TimeSpan.FromSeconds(2));
                 }
-                
+
             }
         }
 
@@ -83,7 +83,9 @@ namespace RouteOnPoint
                 var file = await sf.OpenAsync(FileAccessMode.Read);
                 ContentDialog dialog = null;
                 await Windows.ApplicationModel.Core.CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(
-                        CoreDispatcherPriority.High, (() =>
+                    CoreDispatcherPriority.High, (() =>
+                    {
+                        try
                         {
                             if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
                             {
@@ -93,6 +95,7 @@ namespace RouteOnPoint
 
                             PlayMusic = new MediaElement();
                             PlayMusic.SetSource(file, sf.ContentType);
+                            PlayMusic.Play();
                             dialog = new ContentDialog()
                             {
                                 FontSize = 26,
@@ -104,9 +107,15 @@ namespace RouteOnPoint
                                 dialog.ShowAsync();
                             }
                             catch (Exception) { }
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.StackTrace);
+                            throw;
+                        }
 
 
-                        }));
+                    }));
             }
             
         }

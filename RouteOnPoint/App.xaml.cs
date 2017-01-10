@@ -98,7 +98,7 @@ namespace RouteOnPoint
             if (e.Kind == ActivationKind.ToastNotification)
             {
                 MessageDialog m = new MessageDialog("Started from toast");
-                    
+                m.ShowAsync();
                     var arguments = e.Arguments;
 
                     POI navigatePOI = null;
