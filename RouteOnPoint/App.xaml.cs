@@ -162,7 +162,7 @@ namespace RouteOnPoint
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //@TODO test code 8)
+            //saves current route data in phone memory
             RouteHandler save = new RouteHandler();
             save.SaveRouteWithState(GPSReader.route, "RouteData.json");
             
