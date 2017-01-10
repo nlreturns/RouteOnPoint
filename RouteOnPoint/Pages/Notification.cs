@@ -86,7 +86,7 @@ namespace RouteOnPoint
                             dialog = new ContentDialog()
                             {
                                 FontSize = 26,
-                                Title = "U nadert " + MultiLang.GetContent(poi._name),
+                                Title = "INFO: U nadert " + MultiLang.GetContent(poi._name),
                                 PrimaryButtonText = "Ok"
                             };
                             dialog.ShowAsync();
@@ -110,7 +110,7 @@ namespace RouteOnPoint
                 ContentDialog dialog = new ContentDialog()
                 {
                     FontSize = 26,
-                    Title = "Error",
+                    Title = "WARNING",
                     Content = msg,
                     PrimaryButtonText = "Ok",
                 };
@@ -140,7 +140,38 @@ namespace RouteOnPoint
                 ContentDialog dialog = new ContentDialog()
                 {
                     FontSize = 26,
-                    Title = title,
+                    Title = "INFO: "+title,
+                    Content = msg,
+                    PrimaryButtonText = "Ok",
+
+                };
+                if (AnalyticsInfo.VersionInfo.DeviceFamily == "Windows.Mobile")
+                {
+                    VibrationDevice Vibration = VibrationDevice.GetDefault();
+                    Vibration.Vibrate(TimeSpan.FromSeconds(2));
+                }
+
+                PlayMusic.Play();
+                await dialog.ShowAsync();
+            }
+        }
+
+        //The notification that triggers when something needs to be notified that is none of the above
+        public static async void Critical(string msg)
+        {
+            if (!IsPaused)
+            {
+                StorageFolder Folder = Windows.ApplicationModel.Package.Current.InstalledLocation;
+                Folder = await Folder.GetFolderAsync("Assets");
+                StorageFile sf = await Folder.GetFileAsync("jingle-bells-sms.mp3");
+                MediaElement PlayMusic = new MediaElement();
+                PlayMusic.SetSource(await sf.OpenAsync(FileAccessMode.Read), sf.ContentType);
+
+
+                ContentDialog dialog = new ContentDialog()
+                {
+                    FontSize = 26,
+                    Title = "CRITICAL",
                     Content = msg,
                     PrimaryButtonText = "Ok",
 
